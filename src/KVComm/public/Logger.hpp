@@ -1,13 +1,13 @@
 #pragma once
 
-#include <KVComm/private/LogEntryIterator.hpp> // LogEntryIterator
-#include <KVComm/public/LoggerMathTypes.hpp>   // LoggableType
+#include <KVComm/private/LogEntryIterator.hpp>  // LogEntryIterator
+#include <KVComm/public/LoggerMathTypes.hpp>    // LoggableType
 
-#include <AH/STL/array> // std::array, size_t
-#include <string.h>     // strlen
+#include <AH/STL/array>  // std::array, size_t
+#include <string.h>      // strlen
 
 #ifndef ARDUINO
-#include <iosfwd> // std::ostream forward declaration
+#include <iosfwd>  // std::ostream forward declaration
 #endif
 
 /// @addtogroup logger
@@ -30,7 +30,7 @@ constexpr size_t LOGGER_BUFFER_SIZE = 2048;
 #define HEAP_LOGGER_BUFFER
 
 #ifdef HEAP_LOGGER_BUFFER
-#include <vector> // std::vector
+#include <vector>  // std::vector
 #endif
 
 /**
@@ -140,7 +140,7 @@ class Logger {
         if (data == nullptr && count != 0)
             return false;
         // Check if log entry already contains a value with this identifier
-        LogEntryIterator found = find(identifier);
+        LogEntryIterator::iterator found = find(identifier);
         if (found != LogEntryIterator::end())
             // if the logentry already contains an element with the same id
             return overwrite(found, data, count);
@@ -315,7 +315,7 @@ class Logger {
      */
     void clear() {
         bufferwritelocation = buffer;
-        maxLen = bufferSize;
+        maxLen              = bufferSize;
         std::fill(buffer, buffer + bufferSize, 0);
     }
 
@@ -337,7 +337,7 @@ class Logger {
      *          The stream to print to.
      */
     void printPython(std::ostream &os);
-#endif // ARDUINO
+#endif  // ARDUINO
 
   private:
     uint8_t *buffer;
@@ -365,7 +365,8 @@ class Logger {
     /// Returns false if the type or size doesn't match, and in that case,
     /// nothing is overwritten.
     template <class T>
-    bool overwrite(LogEntryIterator &existing, const T *data, size_t count);
+    bool overwrite(LogEntryIterator::iterator existing, const T *data,
+                   size_t count);
 
     /// (Over)write the data of a log element to the buffer.
     template <class T>
@@ -383,10 +384,10 @@ class Logger {
      * @param   key
      *          The unique identifier / key of the element to retreive.
      * @return  An iterator to the element with the given key, or a 
-     *          default-constructed LogEntryIterator if the key was not found in 
-     *          the log.
+     *          default-constructed LogEntryIterator::iterator if the key was 
+     *          not found in the log.
      */
-    LogEntryIterator find(const char *key) const;
+    LogEntryIterator::iterator find(const char *key) const;
 };
 
 /// Macro for easily logging variables with the variable name as the identifier.

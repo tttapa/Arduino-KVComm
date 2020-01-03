@@ -10,3 +10,4 @@ target_include_directories(logger
         src
         private
 )
+target_link_libraries(logger PUBLIC ArduinoMock)

@@ -60,12 +60,12 @@ TEST(Logger, logValue) {
     EXPECT_EQ(result, expected);
 
     ParsedLogEntry parsed = {data, length};
-    EXPECT_EQ(parsed["value1"].get<uint32_t>(), 0xDEADBEEF);
-    EXPECT_EQ(parsed["value2"].get<uint8_t>(), 0x3C);
-    EXPECT_EQ(parsed["value3"].get<float>(), 3.14f);
+    EXPECT_EQ(parsed["value1"].getAs<uint32_t>(), 0xDEADBEEF);
+    EXPECT_EQ(parsed["value2"].getAs<uint8_t>(), 0x3C);
+    EXPECT_EQ(parsed["value3"].getAs<float>(), 3.14f);
     EXPECT_EQ(parsed["key"].getString(), "value");
     EXPECT_EQ(parsed["🔑"].getString(), "λ");
-    EXPECT_EQ(parsed["bool"].get<bool>(), true);
+    EXPECT_EQ(parsed["bool"].getAs<bool>(), true);
 }
 
 TEST(Logger, logArray) {
@@ -104,13 +104,13 @@ TEST(Logger, logArray) {
 
     ParsedLogEntry parsed = {data, length};
     for (size_t i = 0; i < 3; ++i)
-        EXPECT_EQ(parsed["array1"].get<float>(i), array1[i]) << "i = " << i;
+        EXPECT_EQ(parsed["array1"].getAs<float>(i), array1[i]) << "i = " << i;
 
     for (size_t i = 0; i < 4; ++i)
-        EXPECT_EQ(parsed["array2"].get<double>(i), array2[i]) << "i = " << i;
+        EXPECT_EQ(parsed["array2"].getAs<double>(i), array2[i]) << "i = " << i;
 
     for (size_t i = 0; i < 4; ++i)
-        EXPECT_EQ(parsed["array3"].get<int>(i), 42 + i) << "i = " << i;
+        EXPECT_EQ(parsed["array3"].getAs<int>(i), 42 + i) << "i = " << i;
 
     std::array<float, 3> array1_expected;
     std::copy(std::begin(array1), std::end(array1), array1_expected.begin());
@@ -167,9 +167,9 @@ TEST(Logger, logValueReplace) {
     EXPECT_EQ(result, expected);
 
     ParsedLogEntry parsed = {data, length};
-    EXPECT_EQ(parsed["value1"].get<uint32_t>(), 0xDEADBEEF);
-    EXPECT_EQ(parsed["value2"].get<uint8_t>(), 0x40);
-    EXPECT_EQ(parsed["value3"].get<float>(), 3.14f);
+    EXPECT_EQ(parsed["value1"].getAs<uint32_t>(), 0xDEADBEEF);
+    EXPECT_EQ(parsed["value2"].getAs<uint8_t>(), 0x40);
+    EXPECT_EQ(parsed["value3"].getAs<float>(), 3.14f);
 }
 
 TEST(ParsedLogEntry, incorrectAccess) {
@@ -181,30 +181,33 @@ TEST(ParsedLogEntry, incorrectAccess) {
     size_t length         = logger.getLength();
     ParsedLogEntry parsed = {data, length};
 
+    using out_of_range = AH::ErrorException;
+    using logic_error  = AH::ErrorException;
+
     // Correct
-    EXPECT_NO_THROW(parsed["value1"].get<uint32_t>());
+    EXPECT_NO_THROW(parsed["value1"].getAs<uint32_t>());
     // Incorrect type
-    EXPECT_THROW(parsed["value1"].get<float>(), std::logic_error);
+    EXPECT_THROW(parsed["value1"].getAs<float>(), logic_error);
     // Incorrect type
-    EXPECT_THROW(parsed["value1"].getString(), std::logic_error);
+    EXPECT_THROW(parsed["value1"].getString(), logic_error);
     // Index out of bounds
-    EXPECT_THROW(parsed["value1"].get<uint32_t>(1), std::out_of_range);
+    EXPECT_THROW(parsed["value1"].getAs<uint32_t>(1), out_of_range);
     // Non-existing key
-    EXPECT_THROW(parsed["value4"].get<float>(), std::out_of_range);
+    EXPECT_THROW(parsed["value4"].getAs<float>(), std::out_of_range);
     // Correct
-    auto method0 = &ParsedLogEntry::LogElement::getArray<int, 4>;
+    auto method0 = &LogEntryIterator::KV::getArray<int, 4>;
     EXPECT_NO_THROW((parsed["array"].*method0)());
     // Incorrect type
-    auto method1 = &ParsedLogEntry::LogElement::getArray<float, 4>;
-    EXPECT_THROW((parsed["array"].*method1)(), std::logic_error);
+    auto method1 = &LogEntryIterator::KV::getArray<float, 4>;
+    EXPECT_THROW((parsed["array"].*method1)(), logic_error);
     // Incorrect size
-    auto method2 = &ParsedLogEntry::LogElement::getArray<int, 3>;
+    auto method2 = &LogEntryIterator::KV::getArray<int, 3>;
     EXPECT_THROW((parsed["array"].*method2)(), std::length_error);
     // Incorrect size
-    auto method3 = &ParsedLogEntry::LogElement::getArray<int, 5>;
+    auto method3 = &LogEntryIterator::KV::getArray<int, 5>;
     EXPECT_THROW((parsed["array"].*method3)(), std::length_error);
     // Incorrect type
-    EXPECT_THROW(parsed["array"].getVector<float>(), std::logic_error);
+    EXPECT_THROW(parsed["array"].getVector<float>(), logic_error);
 }
 
 TEST(Logger, clearAndReuse) {
@@ -306,14 +309,14 @@ TEST(Logger, logValueIntLongShort) {
     EXPECT_EQ(result, expected);
 
     ParsedLogEntry parsed = {data, length};
-    EXPECT_EQ(parsed["i"].get<decltype(i)>(), i);
-    EXPECT_EQ(parsed["u"].get<decltype(u)>(), u);
-    EXPECT_EQ(parsed["l"].get<decltype(l)>(), l);
-    EXPECT_EQ(parsed["ul"].get<decltype(ul)>(), ul);
-    EXPECT_EQ(parsed["s"].get<decltype(s)>(), s);
-    EXPECT_EQ(parsed["us"].get<decltype(us)>(), us);
-    EXPECT_EQ(parsed["i8"].get<decltype(i8)>(), i8);
-    EXPECT_EQ(parsed["u8"].get<decltype(u8)>(), u8);
+    EXPECT_EQ(parsed["i"].getAs<decltype(i)>(), i);
+    EXPECT_EQ(parsed["u"].getAs<decltype(u)>(), u);
+    EXPECT_EQ(parsed["l"].getAs<decltype(l)>(), l);
+    EXPECT_EQ(parsed["ul"].getAs<decltype(ul)>(), ul);
+    EXPECT_EQ(parsed["s"].getAs<decltype(s)>(), s);
+    EXPECT_EQ(parsed["us"].getAs<decltype(us)>(), us);
+    EXPECT_EQ(parsed["i8"].getAs<decltype(i8)>(), i8);
+    EXPECT_EQ(parsed["u8"].getAs<decltype(u8)>(), u8);
 }
 
 TEST(Logger, logValueAllLengths) {

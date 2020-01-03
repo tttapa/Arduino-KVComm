@@ -1,5 +1,9 @@
 #pragma once
 
+#include <AH/Error/Error.hpp>
+#include <AH/STL/iterator>
+#include <KVComm/private/LoggerHelpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/public/LoggerTypes.hpp>
 #include <cstddef>  // size_t
 #include <cstdint>  // uint8_t, uint16_t
 
@@ -12,47 +16,195 @@
 /// Class for iterating over the elements in the buffer of a LogEntry.
 class LogEntryIterator {
   public:
-    /// Default constructor. Used as "end" iterator.
-    LogEntryIterator();
-    /// Create LogEntryIterator that iterates over the elements in the buffer.
-    /// Only the pointer is saved, the buffer itself is not copied over, so its
-    /// lifetime must be longer than all iterators that point to it.
-    LogEntryIterator(const uint8_t *buffer, size_t length);
+    LogEntryIterator(const uint8_t *buffer, size_t length)
+        : buffer(buffer), bufferSize(length) {}
 
-    /// Advance the iterator.
-    LogEntryIterator &operator++();
-    /// Compare the iterator to the "end" iterator. (Only compares the remaining
-    /// buffer length, which is zero for the "end" iterator.)
-    bool operator!=(const LogEntryIterator &other);
+    class KV {
+      public:
+        /// Constructor
+        KV(const uint8_t *buffer) : buffer(buffer) {}
+        /// Get the type ID of the current element.
+        uint8_t getTypeID() const { return buffer[1]; }
+        /// Get the length of the identifier / key of the current element.
+        uint16_t getIDLength() const { return buffer[0]; }
+        /// Get the length of the data of the current element.
+        uint16_t getDataLength() const {
+            return (buffer[2] << 0) | (buffer[3] << 8);
+        }
+        /// Get a pointer to the beginning of the current element.
+        const uint8_t *getBuffer() const { return buffer; }
+        /// Get the identifier / key of the current element.
+        const char *getID() const { return (const char *) buffer + 4; }
+        /// Get a pointer to the data of the current element.
+        const uint8_t *getData() const {
+            return buffer + nextWord(getIDLength()) + 4;
+        }
 
-    LogEntryIterator &operator*() { return *this; }
-    const LogEntryIterator &operator*() const { return *this; }
-    LogEntryIterator *operator->() { return this; }
-    const LogEntryIterator *operator->() const { return this; }
+        /// Get the data as the given type.
+        template <class T>
+        void get(T &t, size_t index = 0) const {
+            if (!checkType<T>())
+                return;
+            if (index * LoggableType<T>::getLength() >= getDataLength()) {
+                ERROR(F("Index out of range"), 0x7564);
+                return;
+            }
+            auto readlocation =
+                getData() + LoggableType<T>::getLength() * index;
+            LoggableType<T>::readFromBuffer(t, readlocation);
+        }
 
-    LogEntryIterator begin() { return *this; }
-    static LogEntryIterator end() { return {}; }
+        template <class T>
+        T getAs(size_t index = 0) const {
+            T t;
+            get(t, index);
+            return t;
+        }
 
-    /// Get the type ID of the current element.
-    uint8_t getTypeID() const { return type; }
-    /// Get the length of the identifier / key of the current element.
-    uint16_t getIDLength() const { return idLength; }
-    /// Get the length of the data of the current element.
-    uint16_t getDataLength() const { return dataLength; }
-    /// Get a pointer to the beginning of the current element.
-    const uint8_t *getBuffer() const { return buffer; }
-    /// Get the identifier / key of the current element.
-    const char *getID() const { return (const char *) buffer + 4; }
-    /// Get a pointer to the data of the current element.
-    const uint8_t *getData() const;
+        /**
+             * @brief   Get the data of the element as a vector of the given type.
+             * 
+             * @tparam  T 
+             *          The type of the data. This must be the same as the dynamic
+             *          type of the data.
+             * @return  A vector containing the data of the element, converted to 
+             *          the correct type.
+             * @throw   std::logic_error
+             *          The dynamic type ID doesn't match the type @p T.
+             */
+        template <class T>
+        std::vector<T> getVector() const {
+            if (!checkType<T>())
+                return {};
+            size_t size = getDataLength() / LoggableType<T>::getLength();
+            std::vector<T> result(size);
+            auto readlocation = getData();
+            for (T &t : result) {
+                LoggableType<T>::readFromBuffer(t, readlocation);
+                readlocation += LoggableType<T>::getLength();
+            }
+            return result;
+        }
+
+        /**
+         * @brief   Get the data of the element as an array of the given type.
+         * 
+         * @tparam  T 
+         *          The type of the data. This must be the same as the dynamic
+         *          type of the data.
+         * @tparam  N
+         *          The number of elements in the array. This must be the same
+         *          as the length of the data.
+         * @return  An array containing the data of the element, converted to 
+         *          the correct type.
+         * @throw   std::logic_error
+         *          The dynamic type ID doesn't match the type @p T.
+         * @throw   std::length_error
+         *          The array size doesn't match the actual size of the element.
+         */
+        template <class T, size_t N>
+        std::array<T, N> getArray() const {
+            if (!checkType<T>())
+                return {{}};
+            if (N * LoggableType<T>::getLength() != getDataLength())
+                throw std::length_error("Incorrect length");
+            std::array<T, N> result;
+            auto readlocation = getData();
+            for (T &t : result) {
+                LoggableType<T>::readFromBuffer(t, readlocation);
+                readlocation += LoggableType<T>::getLength();
+            }
+            return result;
+        }
+
+#ifndef ARDUINO
+        /**
+         * @brief   Get the character array as an std::string.
+         * 
+         * @return  The character array as a string.
+         * @throw   std::logic_error
+         *          The dynamic type of the element is not @c char.
+         */
+        std::string getString() const;
+#else
+        //  String getString() const; // TODO
+#endif
+
+        /**
+         * @brief   Check if the type of this element is the same as the given 
+         *          type.
+         * 
+         * @tparam  T
+         *          The type to compare to the type of this element.
+         * @return  True if the types are the same, false otherwise.
+         */
+        template <class T>
+        bool hasType() const {
+            return this->getTypeID() == LoggableType<T>::getTypeID();
+        }
+
+      private:
+        template <class T>
+        bool checkType() const {
+            if (!hasType<T>()) {
+                ERROR(F("Type mismatch (typeid=")
+                          << getTypeID() << F(", conversion requested to ")
+                          << LoggableType<T>::getTypeID() << ')',
+                      0x7563);
+                return false;
+            }
+            return true;
+        }
+
+      private:
+        const uint8_t *buffer;
+    };
+
+    class iterator {
+      public:
+        /// Default constructor. Used as "end" iterator (sentinel).
+        iterator();
+        /// Create LogEntryIterator that iterates over the elements in the
+        /// buffer.
+        /// Only the pointer is saved, the buffer itself is not copied over, so
+        /// its lifetime must be longer than all iterators that point to it.
+        iterator(const uint8_t *buffer, size_t length);
+
+        /// Advance the iterator.
+        iterator &operator++();
+        /// Compare the iterator to the "end" iterator. (Only compares the
+        /// remaining buffer length, which is zero for the "end" iterator.)
+        bool operator==(const iterator &other) const;
+        /// Compare the iterator to the "end" iterator. (Only compares the
+        /// remaining buffer length, which is zero for the "end" iterator.)
+        bool operator!=(const iterator &other) const;
+
+        const KV &operator*() const { return kv; }
+        const KV *operator->() const { return &kv; }
+
+        using difference_type   = void;
+        using value_type        = KV;
+        using pointer           = KV *;
+        using reference         = KV &;
+        using iterator_category = std::input_iterator_tag;
+
+      private:
+        void checkLength();
+
+      private:
+        KV kv;
+        size_t remainingBufferLength;
+    };
+
+    iterator begin() const { return {buffer, bufferSize}; }
+    static iterator end() { return {}; }
+
+    /// Find the entry with the given key (iterates over entire log).
+    iterator find(const char *key) const;
 
   private:
     const uint8_t *buffer;
-    size_t remainingBufferLength;
-    const uint8_t *data;
-    uint16_t dataLength;
-    uint8_t idLength;
-    uint8_t type;
+    size_t bufferSize;
 
     /// Read the length and type of the element from the buffer.
     bool parse();

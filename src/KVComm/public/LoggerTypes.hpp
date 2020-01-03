@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdint.h> // uint#_t
-#include <string.h> // memcpy
+#include <stdint.h>  // uint#_t
+#include <string.h>  // memcpy
 
 /// @addtogroup logger
 /// @{
@@ -54,10 +54,8 @@ struct LoggableType {
         inline static void writeToBuffer(const type &t, uint8_t *buffer) {     \
             memcpy(buffer, &t, getLength());                                   \
         }                                                                      \
-        inline static type readFromBuffer(const uint8_t *buffer) {             \
-            type t;                                                            \
+        inline static void readFromBuffer(type &t, const uint8_t *buffer) {    \
             memcpy(&t, buffer, getLength());                                   \
-            return t;                                                          \
         }                                                                      \
     }
 

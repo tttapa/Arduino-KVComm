@@ -1,44 +1,57 @@
 #include <KVComm/private/LogEntryIterator.hpp>
 
-#include <KVComm/private/LoggerHelpers.hpp> // nextWord, roundUpToWordSizeMultiple
-#include <cassert>                          // assert
-#include <cstring>                          // strlen
+#include <AH/STL/algorithm>                  // find_if
+#include <KVComm/private/LoggerHelpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <assert.h>                          // assert
+#include <string.h>                          // strlen
 
-LogEntryIterator::LogEntryIterator()
-    : buffer(nullptr), remainingBufferLength(0) {}
+LogEntryIterator::iterator::iterator()
+    : kv(nullptr), remainingBufferLength(0) {}
 
-LogEntryIterator::LogEntryIterator(const uint8_t *buffer, size_t length)
-    : buffer(buffer), remainingBufferLength(length) {
-    if (!parse())
-        remainingBufferLength = 0;
+LogEntryIterator::iterator::iterator(const uint8_t *buffer, size_t length)
+    : kv(buffer), remainingBufferLength(length) {
+    checkLength();
 }
 
-LogEntryIterator &LogEntryIterator::operator++() {
-    size_t totalLength =
-        4 + nextWord(idLength) + roundUpToWordSizeMultiple(dataLength);
-    buffer += totalLength;
-    assert(totalLength <= remainingBufferLength); // TODO
+LogEntryIterator::iterator &LogEntryIterator::iterator::operator++() {
+    size_t totalLength = 4 + nextWord(kv.getIDLength()) +
+                         roundUpToWordSizeMultiple(kv.getDataLength());
+    assert(totalLength <= remainingBufferLength);  // TODO
     remainingBufferLength -= totalLength;
-    if (!parse())
-        remainingBufferLength = 0;
+    kv = kv.getBuffer() + totalLength;
+    checkLength();
     return *this;
 }
 
-bool LogEntryIterator::parse() {
-    if (remainingBufferLength == 0)
-        return false;
-    idLength = buffer[0];
-    if (idLength == 0) // No valid identifier / key
-        return false;
-    type = buffer[1];
-    dataLength = (buffer[2] << 0) | (buffer[3] << 8);
-    return true;
-}
-
-bool LogEntryIterator::operator!=(const LogEntryIterator &other) {
+bool LogEntryIterator::iterator::
+operator!=(const LogEntryIterator::iterator &other) const {
     return this->remainingBufferLength != other.remainingBufferLength;
 }
 
-const uint8_t *LogEntryIterator::getData() const {
-    return buffer + nextWord(idLength) + 4;
+bool LogEntryIterator::iterator::
+operator==(const LogEntryIterator::iterator &other) const {
+    return this->remainingBufferLength == other.remainingBufferLength;
+}
+
+void LogEntryIterator::iterator::checkLength() {
+    if (remainingBufferLength > 0 && kv.getIDLength() == 0) {
+        remainingBufferLength = 0;
+        kv                    = nullptr;
+    }
+}
+
+#ifndef ARDUINO
+std::string LogEntryIterator::KV::getString() const {
+    if (!checkType<char>())
+        return nullptr;
+    return std::string(getData(), getData() + getDataLength());
+}
+#else
+// TODO
+#endif
+
+LogEntryIterator::iterator LogEntryIterator::find(const char *key) const {
+    return std::find_if(begin(), end(), [key](LogEntryIterator::KV kv) {
+        return strcmp(kv.getID(), key) == 0;
+    });
 }

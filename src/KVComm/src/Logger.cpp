@@ -1,11 +1,11 @@
 #include <KVComm/public/Logger.hpp>
 
-#include <AH/STL/limits>                    // std::numeric_limits
-#include <KVComm/private/LoggerHelpers.hpp> // nextWord, roundUpToWordSizeMultiple
+#include <AH/STL/limits>                     // std::numeric_limits
+#include <KVComm/private/LoggerHelpers.hpp>  // nextWord, roundUpToWordSizeMultiple
 
 #ifndef ARDUINO
-#include <iomanip> // setw
-#include <ostream> // os
+#include <iomanip>  // setw
+#include <ostream>  // os
 #endif
 
 uint8_t *Logger::writeHeader(const char *identifier, uint8_t typeID,
@@ -23,14 +23,14 @@ uint8_t *Logger::writeHeader(const char *identifier, uint8_t typeID,
     bufferwritelocation[1] = typeID;
     bufferwritelocation[2] = length >> 0;
     bufferwritelocation[3] = length >> 8;
-    strcpy((char *)bufferwritelocation + 4, identifier);
+    strcpy((char *) bufferwritelocation + 4, identifier);
     size_t dataStartIndex = 4 + nextWord(idLen);
-    uint8_t *dataStart = bufferwritelocation + dataStartIndex;
-    size_t paddedLen = dataStartIndex + roundUpToWordSizeMultiple(length);
+    uint8_t *dataStart    = bufferwritelocation + dataStartIndex;
+    size_t paddedLen      = dataStartIndex + roundUpToWordSizeMultiple(length);
     maxLen -= paddedLen;
     bufferwritelocation += paddedLen;
     if (maxLen > 0)
-        bufferwritelocation[0] = 0x00; // Null terminate
+        bufferwritelocation[0] = 0x00;  // Null terminate
     return dataStart;
 }
 
@@ -54,7 +54,7 @@ void Logger::print(std::ostream &os) const {
         }
         os << "  ";
         for (unsigned int j = 0; j < 4; ++j) {
-            os << (isprint(buffer[i + j]) ? (char)buffer[i + j] : '.') << ' ';
+            os << (isprint(buffer[i + j]) ? (char) buffer[i + j] : '.') << ' ';
         }
         os << std::endl;
     }
@@ -74,11 +74,9 @@ void Logger::printPython(std::ostream &os) {
     os << "))" << std::endl;
 }
 
-#endif // ARDUINO
+#endif  // ARDUINO
 
-LogEntryIterator Logger::find(const char *key) const {
-    for (auto &element : LogEntryIterator(getBuffer(), getLength()))
-        if (strcmp(element.getID(), key) == 0)
-            return element;
-    return LogEntryIterator::end();
+LogEntryIterator::iterator Logger::find(const char *key) const {
+    LogEntryIterator log = {getBuffer(), getLength()};
+    return log.find(key);
 }

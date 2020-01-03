@@ -22,12 +22,12 @@ bool Logger::append(const char *identifier, const T *data, size_t count) {
 }
 
 template <class T>
-bool Logger::overwrite(LogEntryIterator &existing, const T *data,
+bool Logger::overwrite(LogEntryIterator::iterator existing, const T *data,
                        size_t count) {
-    if (existing.getTypeID() != LoggableType<T>::getTypeID() ||
-        existing.getDataLength() != LoggableType<T>::getLength() * count)
+    if (existing->getTypeID() != LoggableType<T>::getTypeID() ||
+        existing->getDataLength() != LoggableType<T>::getLength() * count)
         return false;
-    uint8_t *destination = (existing.getData() - buffer) + buffer;
+    uint8_t *destination = (existing->getData() - buffer) + buffer;
     overwrite(destination, data, count);
     return true;
 }

@@ -97,6 +97,7 @@ set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 # Build the source files and tests
 ################################################################################
 
+include_directories(src)
 add_subdirectory(gtest-wrappers)
 add_subdirectory(mock)
 add_subdirectory(src)

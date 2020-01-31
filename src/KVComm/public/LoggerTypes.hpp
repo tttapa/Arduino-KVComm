@@ -72,8 +72,7 @@ LOGGER_ADD_TRIVIAL_TYPE(double, 10);
 LOGGER_ADD_TRIVIAL_TYPE(bool, 11);
 LOGGER_ADD_TRIVIAL_TYPE(char, 12);
 
-// int and int32_t are different types on Zybo.
-#ifndef __x86_64__
+#if defined(__arm__)  // TODO
 LOGGER_ADD_TRIVIAL_TYPE(int, 5);
 LOGGER_ADD_TRIVIAL_TYPE(unsigned int, 6);
 #endif

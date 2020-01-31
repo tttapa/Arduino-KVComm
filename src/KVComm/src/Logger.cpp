@@ -1,6 +1,9 @@
 #include <KVComm/public/Logger.hpp>
 
+#include <AH/PrintStream/PrintStream.hpp>  // <<
+
 #include <AH/STL/limits>                     // std::numeric_limits
+#include <AH/STL/memory>                     // std::make_unique
 #include <KVComm/private/LoggerHelpers.hpp>  // nextWord, roundUpToWordSizeMultiple
 
 #ifndef ARDUINO
@@ -39,42 +42,73 @@ static inline char nibbleToHex(uint8_t val) {
     return val >= 10 ? val + 'A' - 10 : val + '0';
 }
 
-#ifndef ARDUINO
-
-static inline void printHex(std::ostream &os, uint8_t val) {
+template <class S>
+static inline void printHex(S &os, uint8_t val) {
     os << nibbleToHex(val >> 4) << nibbleToHex(val);
 }
 
-void Logger::print(std::ostream &os) const {
-    for (size_t i = 0; i < getLength(); i += 4) {
-        os << std::setw(4) << i << "   ";
-        for (unsigned int j = 0; j < 4; ++j) {
-            printHex(os, buffer[i + j]);
+template <class S>
+void printW(S &os, unsigned u, uint8_t w, char fill = ' ') {
+    auto str    = AH::make_unique<char[]>(w + 1);
+    str[w]      = '\0';
+    char *begin = &str[0];
+    char *end   = begin + w - 1;
+    do {
+        *end-- = u % 10 + '0';
+        u /= 10;
+    } while (u > 0 && end >= begin);
+    if (u > 0) {
+        end  = begin + w - 1;
+        fill = '*';
+    }
+    while (end >= begin) {
+        *end-- = fill;
+    }
+    os << begin;
+}
+
+template <class S>
+void print(const Logger &logger, S &os) {
+    for (size_t i = 0; i < logger.getLength(); i += 4) {
+        printW(os, i, 4, ' ');
+        os << "   ";
+        for (uint8_t j = 0; j < 4; ++j) {
+            printHex(os, logger.getBuffer()[i + j]);
             os << ' ';
         }
         os << "  ";
-        for (unsigned int j = 0; j < 4; ++j) {
-            os << (isprint(buffer[i + j]) ? (char) buffer[i + j] : '.') << ' ';
+        for (uint8_t j = 0; j < 4; ++j) {
+            char c = isprint(logger.getBuffer()[i + j])
+                         ? (char) logger.getBuffer()[i + j]
+                         : '.';
+            os << c << ' ';
         }
-        os << std::endl;
+        os << '\n';
     }
 }
 
-void Logger::printPython(std::ostream &os) {
+template <class S>
+void printPython(const Logger &logger, S &os) {
     os << "bytes((\n";
-    for (size_t i = 0; i < getLength(); i += 4) {
+    for (size_t i = 0; i < logger.getLength(); i += 4) {
         os << "   ";
-        for (unsigned int j = 0; j < 4; ++j) {
+        for (uint8_t j = 0; j < 4; ++j) {
             os << " 0x";
-            printHex(os, buffer[i + j]);
+            printHex(os, logger.getBuffer()[i + j]);
             os << ",";
         }
-        os << "\n";
+        os << '\n';
     }
-    os << "))" << std::endl;
+    os << "))" << '\n';
 }
 
-#endif  // ARDUINO
+#ifndef ARDUINO
+void Logger::print(std::ostream &os) const { ::print(*this, os); }
+void Logger::printPython(std::ostream &os) const { ::printPython(*this, os); }
+#endif
+
+void Logger::print(Print &os) const { ::print(*this, os); }
+void Logger::printPython(Print &os) const { ::printPython(*this, os); }
 
 LogEntryIterator::iterator Logger::find(const char *key) const {
     LogEntryIterator log = {getBuffer(), getLength()};

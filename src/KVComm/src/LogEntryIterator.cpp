@@ -34,7 +34,7 @@ operator==(const LogEntryIterator::iterator &other) const {
 }
 
 void LogEntryIterator::iterator::checkLength() {
-    if (remainingBufferLength > 0 && kv.getIDLength() == 0) {
+    if (!kv || kv.getIDLength() == 0) {
         remainingBufferLength = 0;
         kv                    = nullptr;
     }
@@ -47,7 +47,15 @@ std::string LogEntryIterator::KV::getString() const {
     return std::string(getData(), getData() + getDataLength());
 }
 #else
-// TODO
+String LogEntryIterator::KV::getString() const {
+    if (!checkType<char>())
+        return static_cast<const char *>(nullptr);
+    struct S : public String {
+        using String::copy;
+    } s;
+    s.copy(reinterpret_cast<const char *>(getData()), getDataLength());
+    return s;
+}
 #endif
 
 LogEntryIterator::iterator LogEntryIterator::find(const char *key) const {

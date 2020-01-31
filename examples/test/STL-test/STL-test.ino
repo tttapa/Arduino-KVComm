@@ -9,6 +9,7 @@
 #include <AH/STL/bitset>
 #include <AH/STL/cmath>
 #include <AH/STL/complex>
+#include <AH/STL/cstddef>
 #include <AH/STL/cstdint>
 #include <AH/STL/cstdlib>
 #include <AH/STL/initializer_list>
@@ -117,7 +118,7 @@ void setup() {
   vec.reserve(100);
   vec.resize(50);
   vec[1] = -2;
-  for (int i : vec) 
+  for (int i : vec)
     Serial.println(i);
 }
 

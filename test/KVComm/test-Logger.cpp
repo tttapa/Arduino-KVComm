@@ -183,6 +183,7 @@ TEST(ParsedLogEntry, incorrectAccess) {
 
     using out_of_range = AH::ErrorException;
     using logic_error  = AH::ErrorException;
+    using length_error = AH::ErrorException;
 
     // Correct
     EXPECT_NO_THROW(parsed["value1"].getAs<uint32_t>());
@@ -202,10 +203,10 @@ TEST(ParsedLogEntry, incorrectAccess) {
     EXPECT_THROW((parsed["array"].*method1)(), logic_error);
     // Incorrect size
     auto method2 = &LogEntryIterator::KV::getArray<int, 3>;
-    EXPECT_THROW((parsed["array"].*method2)(), std::length_error);
+    EXPECT_THROW((parsed["array"].*method2)(), length_error);
     // Incorrect size
     auto method3 = &LogEntryIterator::KV::getArray<int, 5>;
-    EXPECT_THROW((parsed["array"].*method3)(), std::length_error);
+    EXPECT_THROW((parsed["array"].*method3)(), length_error);
     // Incorrect type
     EXPECT_THROW(parsed["array"].getVector<float>(), logic_error);
 }

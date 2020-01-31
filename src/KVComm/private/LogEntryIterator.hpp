@@ -1,11 +1,17 @@
 #pragma once
 
 #include <AH/Error/Error.hpp>
+#include <AH/STL/array>
+#include <AH/STL/cstddef>  // size_t
+#include <AH/STL/cstdint>  // uint8_t, uint16_t
 #include <AH/STL/iterator>
+#include <AH/STL/vector>
 #include <KVComm/private/LoggerHelpers.hpp>  // nextWord, roundUpToWordSizeMultiple
 #include <KVComm/public/LoggerTypes.hpp>
-#include <cstddef>  // size_t
-#include <cstdint>  // uint8_t, uint16_t
+
+#ifdef ARDUINO
+#include <WString.h>
+#endif
 
 /**
  * @file  
@@ -39,10 +45,17 @@ class LogEntryIterator {
         const uint8_t *getData() const {
             return buffer + nextWord(getIDLength()) + 4;
         }
+        /// Check if the key-value pair is valid.
+        explicit operator bool() const { return buffer != nullptr; }
 
         /// Get the data as the given type.
         template <class T>
         void get(T &t, size_t index = 0) const {
+            if (!*this) {
+                ERROR(F("Trying to extract data from non-existent entry"),
+                      0x7566);
+                return;
+            }
             if (!checkType<T>())
                 return;
             if (index * LoggableType<T>::getLength() >= getDataLength()) {
@@ -62,18 +75,24 @@ class LogEntryIterator {
         }
 
         /**
-             * @brief   Get the data of the element as a vector of the given type.
-             * 
-             * @tparam  T 
-             *          The type of the data. This must be the same as the dynamic
-             *          type of the data.
-             * @return  A vector containing the data of the element, converted to 
-             *          the correct type.
-             * @throw   std::logic_error
-             *          The dynamic type ID doesn't match the type @p T.
-             */
+         * @brief   Get the data of the element as a vector of the given type.
+         * 
+         * @tparam  T 
+         *          The type of the data. This must be the same as the dynamic
+         *          type of the data.
+         * @return  A vector containing the data of the element, converted to 
+         *          the correct type.
+         * @throw   std::logic_error
+         *          The dynamic type ID doesn't match the type @p T.
+         */
         template <class T>
         std::vector<T> getVector() const {
+            DEBUGFN(hex << (uintptr_t) getBuffer());
+            if (!*this) {
+                ERROR(F("Trying to extract data from non-existent entry"),
+                      0x7566);
+                return {{}};
+            }
             if (!checkType<T>())
                 return {};
             size_t size = getDataLength() / LoggableType<T>::getLength();
@@ -104,10 +123,15 @@ class LogEntryIterator {
          */
         template <class T, size_t N>
         std::array<T, N> getArray() const {
+            if (!*this) {
+                ERROR(F("Trying to extract data from non-existent entry"),
+                      0x7566);
+                return {{}};
+            }
             if (!checkType<T>())
                 return {{}};
             if (N * LoggableType<T>::getLength() != getDataLength())
-                throw std::length_error("Incorrect length");
+                ERROR(F("Incorrect length"), 0x7565);
             std::array<T, N> result;
             auto readlocation = getData();
             for (T &t : result) {
@@ -127,7 +151,7 @@ class LogEntryIterator {
          */
         std::string getString() const;
 #else
-        //  String getString() const; // TODO
+        String getString() const;
 #endif
 
         /**
@@ -181,6 +205,9 @@ class LogEntryIterator {
 
         const KV &operator*() const { return kv; }
         const KV *operator->() const { return &kv; }
+
+        /// Check if the iterator is valid.
+        explicit operator bool() const { return !!kv; }
 
         using difference_type   = void;
         using value_type        = KV;

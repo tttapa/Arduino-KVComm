@@ -3,7 +3,10 @@
 #include <KVComm/private/LogEntryIterator.hpp>  // LogEntryIterator
 #include <KVComm/public/LoggerMathTypes.hpp>    // LoggableType
 
-#include <AH/STL/array>  // std::array, size_t
+#include <AH/STL/array>  // std::array
+#include <AH/STL/cstddef> // size_t
+#include <AH/STL/vector> // std::vector
+#include <AH/STL/initializer_list> // std::initializer_list
 #include <string.h>      // strlen
 
 #ifndef ARDUINO
@@ -22,16 +25,6 @@
  * @see @ref md_pages_Logging
  * @see @ref Logger-example.cpp
  */
-
-/// The maximum size of a LogEntry, in bytes.
-constexpr size_t LOGGER_BUFFER_SIZE = 2048;
-/// Save the logger buffers on the heap instead of on the stack.
-/// Uses the std::vector container instead of std::array.
-#define HEAP_LOGGER_BUFFER
-
-#ifdef HEAP_LOGGER_BUFFER
-#include <vector>  // std::vector
-#endif
 
 /**
  * @brief   A class for serializing key-value/array data for logging and 
@@ -246,6 +239,38 @@ class Logger {
 
     /**
      * @brief   Add a log element to the log, or update the existing element
+     *          with the same identifier. The data of the element is a list 
+     *          of values.
+     * 
+     * If the identifier can't be found in the LogEntry, the new element is 
+     * append%ed. If an element with the same identifier is found in the 
+     * LogEntry, and if the type and size are the same, the existing element is
+     * updated with the new value. If the type or size don't match, the log is
+     * not altered.
+     * 
+     * @tparam  T
+     *          The type of the values to log.
+     * @param   identifier 
+     *          The identifier / key for this element.
+     *          The maximum length is 255 characters.
+     * @param   list 
+     *          The list of values to log.
+     *          The maximum size is 65535 bytes.
+     * @retval  true
+     *          The element was added to the log successfully, or the existing 
+     *          element with the same identifier was updated with the new value. 
+     * @retval  false 
+     *          The buffer is full, the identifier or data length is too large, 
+     *          or the type and size don't match the ones of the existing 
+     *          element with the same identifier.
+     */
+    template <class T>
+    bool log(const char *identifier, std::initializer_list<T> list) {
+        return log(identifier, list.begin(), list.size());
+    }
+
+    /**
+     * @brief   Add a log element to the log, or update the existing element
      *          with the same identifier. The data of the element is an 
      *          std::array of values.
      * 
@@ -320,6 +345,10 @@ class Logger {
     }
 
 #ifndef ARDUINO
+    void print(std::ostream &os) const;
+    void printPython(std::ostream &os) const;
+#endif  // ARDUINO
+
     /**
      * @brief   Dump the log buffer to the given output stream in a 
      *          human-readable format (offset + hexadecimal + ASCII).
@@ -327,7 +356,7 @@ class Logger {
      * @param   os
      *          The stream to print to.
      */
-    void print(std::ostream &os) const;
+    void print(Print &os) const;
 
     /**
      * @brief   Dump the log buffer to the given output stream as a Python bytes
@@ -336,8 +365,7 @@ class Logger {
      * @param   os
      *          The stream to print to.
      */
-    void printPython(std::ostream &os);
-#endif  // ARDUINO
+    void printPython(Print &os) const;
 
   private:
     uint8_t *buffer;
@@ -374,9 +402,11 @@ class Logger {
 
   public:
     /// Get the buffer containing the logging data.
-    auto getBuffer() const -> const decltype(buffer) & { return buffer; }
+    const uint8_t *getBuffer() const { return buffer; }
+    /// Get the total size of the buffer.
+    size_t getBufferSize() const { return bufferSize; }
     /// Get the length of the used part of the buffer.
-    size_t getLength() const { return LOGGER_BUFFER_SIZE - maxLen; }
+    size_t getLength() const { return getBufferSize() - maxLen; }
 
     /** 
      * @brief   Get the element with the given key.

@@ -88,7 +88,8 @@
  * 
  * Structured data cannot be `memcpy`d, because the compiler doesn't necessarily
  * pack all of the data together, it's free to allow padding bytes where 
- * necessary. ([Wikipedia: Data structure alignment](https://en.wikipedia.org/wiki/Data_structure_alignment))
+ * necessary. 
+ * ([Wikipedia: Data structure alignment](https://en.wikipedia.org/wiki/Data_structure_alignment))
  */
 class Logger {
   public:

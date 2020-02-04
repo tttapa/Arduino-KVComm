@@ -16,7 +16,6 @@ LogEntryIterator::iterator::iterator(const uint8_t *buffer, size_t length)
 LogEntryIterator::iterator &LogEntryIterator::iterator::operator++() {
     size_t totalLength = 4 + nextWord(kv.getIDLength()) +
                          roundUpToWordSizeMultiple(kv.getDataLength());
-    assert(totalLength <= remainingBufferLength);  // TODO
     remainingBufferLength -= totalLength;
     kv = kv.getBuffer() + totalLength;
     checkLength();
@@ -25,12 +24,12 @@ LogEntryIterator::iterator &LogEntryIterator::iterator::operator++() {
 
 bool LogEntryIterator::iterator::
 operator!=(const LogEntryIterator::iterator &other) const {
-    return this->remainingBufferLength != other.remainingBufferLength;
+    return this->kv.getBuffer() != other.kv.getBuffer();
 }
 
 bool LogEntryIterator::iterator::
 operator==(const LogEntryIterator::iterator &other) const {
-    return this->remainingBufferLength == other.remainingBufferLength;
+    return this->kv.getBuffer() == other.kv.getBuffer();
 }
 
 void LogEntryIterator::iterator::checkLength() {

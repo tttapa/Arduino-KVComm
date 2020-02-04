@@ -197,10 +197,10 @@ class LogEntryIterator {
         /// Advance the iterator.
         iterator &operator++();
         /// Compare the iterator to the "end" iterator. (Only compares the
-        /// remaining buffer length, which is zero for the "end" iterator.)
+        /// buffer pointer, which is nullptr for the "end" iterator.)
         bool operator==(const iterator &other) const;
         /// Compare the iterator to the "end" iterator. (Only compares the
-        /// remaining buffer length, which is zero for the "end" iterator.)
+        /// buffer pointer, which is nullptr for the "end" iterator.)
         bool operator!=(const iterator &other) const;
 
         const KV &operator*() const { return kv; }

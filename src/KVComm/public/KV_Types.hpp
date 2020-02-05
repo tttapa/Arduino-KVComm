@@ -3,17 +3,16 @@
 #include <stdint.h>  // uint#_t
 #include <string.h>  // memcpy
 
-/// @addtogroup logger
-/// @{
-
 /**
  * @file  
- * @brief   Logger type definitions for fundamental types (int#_t, uint#_t, 
- *          float, double, bool, char) to make them loggable.
+ * @brief   KV_Type type definitions for fundamental types (int#_t, uint#_t, 
+ *          float, double, bool, char). These definitions specify how variables
+ *          of these types should be serialized and deserialized when writing
+ *          and reading them from/to the buffer.
  */
 
 /**
- * @brief   Template struct for making types loggable.
+ * @brief   Template struct for making types serializable.
  * 
  * Specializations should implement the following methods:
  *  - `static uint8_t getTypeID()`
@@ -35,20 +34,20 @@
  * structs.
  * 
  * @tparam  T
- *          The type to make loggable.
+ *          The type to make serializable.
  */
 template <class T>
-struct LoggableType {
+struct KV_Type {
     // static uint8_t getTypeID();
     // static size_t getLength();
     // static void writeToBuffer(const T &, uint8_t *buffer);
     // static T readFromBuffer(const uint8_t *buffer);
 };
 
-/// Add a type to the logger that can be logged by just `memcpy`ing.
-#define LOGGER_ADD_TRIVIAL_TYPE(type, typeid)                                  \
+/// Add a KV_Type definition that can be (de)serialized by just `memcpy`ing.
+#define KV_ADD_TRIVIAL_TYPE(type, typeid)                                      \
     template <>                                                                \
-    struct LoggableType<type> {                                                \
+    struct KV_Type<type> {                                                     \
         inline static uint8_t getTypeID() { return typeid; }                   \
         inline static size_t getLength() { return sizeof(type); }              \
         inline static void writeToBuffer(const type &t, uint8_t *buffer) {     \
@@ -59,22 +58,22 @@ struct LoggableType {
         }                                                                      \
     }
 
-LOGGER_ADD_TRIVIAL_TYPE(int8_t, 1);
-LOGGER_ADD_TRIVIAL_TYPE(uint8_t, 2);
-LOGGER_ADD_TRIVIAL_TYPE(int16_t, 3);
-LOGGER_ADD_TRIVIAL_TYPE(uint16_t, 4);
-LOGGER_ADD_TRIVIAL_TYPE(int32_t, 5);
-LOGGER_ADD_TRIVIAL_TYPE(uint32_t, 6);
-LOGGER_ADD_TRIVIAL_TYPE(int64_t, 7);
-LOGGER_ADD_TRIVIAL_TYPE(uint64_t, 8);
-LOGGER_ADD_TRIVIAL_TYPE(float, 9);
-LOGGER_ADD_TRIVIAL_TYPE(double, 10);
-LOGGER_ADD_TRIVIAL_TYPE(bool, 11);
-LOGGER_ADD_TRIVIAL_TYPE(char, 12);
+KV_ADD_TRIVIAL_TYPE(int8_t, 1);
+KV_ADD_TRIVIAL_TYPE(uint8_t, 2);
+KV_ADD_TRIVIAL_TYPE(int16_t, 3);
+KV_ADD_TRIVIAL_TYPE(uint16_t, 4);
+KV_ADD_TRIVIAL_TYPE(int32_t, 5);
+KV_ADD_TRIVIAL_TYPE(uint32_t, 6);
+KV_ADD_TRIVIAL_TYPE(int64_t, 7);
+KV_ADD_TRIVIAL_TYPE(uint64_t, 8);
+KV_ADD_TRIVIAL_TYPE(float, 9);
+KV_ADD_TRIVIAL_TYPE(double, 10);
+KV_ADD_TRIVIAL_TYPE(bool, 11);
+KV_ADD_TRIVIAL_TYPE(char, 12);
 
-#if defined(__arm__)  // TODO
-LOGGER_ADD_TRIVIAL_TYPE(int, 5);
-LOGGER_ADD_TRIVIAL_TYPE(unsigned int, 6);
+#if defined(__arm__)
+// TODO: integers are a separate data type on ARM
+// are there more platforms with this quirk?
+KV_ADD_TRIVIAL_TYPE(int, 5);
+KV_ADD_TRIVIAL_TYPE(unsigned int, 6);
 #endif
-
-/// @}

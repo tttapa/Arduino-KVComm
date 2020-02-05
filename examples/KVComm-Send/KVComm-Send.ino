@@ -4,11 +4,11 @@
 
 #include <KVComm.h>
 
-StaticLogger<256> logger;
+Static_KV_Builder<256> logger;
 
 void setup() {
   Serial.begin(115200);
-  logger.log("test", {1, 2, 3});
+  logger.add("test", {1, 2, 3});
   auto test = logger.find("test");
   logger.print(Serial);
   auto testvec = test->getVector<int>();

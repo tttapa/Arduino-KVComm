@@ -1,15 +1,15 @@
 #ifndef ARDUINO
 
-#include <KVComm/private/LogEntryIterator.hpp>  // LogEntryIterator
-#include <KVComm/public/ParsedLogEntry.hpp>     // ParsedLogEntry
+#include <KVComm/private/KV_Iterator.hpp>  // KV_Iterator
+#include <KVComm/public/KV_Parser.hpp>     // KV_Parser
 
 #include <cstring>   // strcmp
 #include <iostream>  // cout
 
-ParsedLogEntry::map_t ParsedLogEntry::parse(const uint8_t *buffer,
+KV_Parser::map_t KV_Parser::parse(const uint8_t *buffer,
                                             size_t length) {
     map_t parseResult{};
-    for (auto &entry : LogEntryIterator(buffer, length)) {
+    for (auto &entry : KV_Iterator(buffer, length)) {
         const char *identifier = entry.getID();
         // std::cout << entry.getBuffer() - buffer << '\t';
         parseResult.emplace(std::make_pair(identifier, entry));
@@ -19,7 +19,7 @@ ParsedLogEntry::map_t ParsedLogEntry::parse(const uint8_t *buffer,
     return parseResult;
 }
 
-bool ParsedLogEntry::strcmp::operator()(const char *a, const char *b) const {
+bool KV_Parser::strcmp::operator()(const char *a, const char *b) const {
     return std::strcmp(a, b) < 0;
 }
 

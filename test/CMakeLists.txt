@@ -4,7 +4,7 @@ add_executable(tests ${TESTS_SOURCES})
 target_include_directories(tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(tests
                       Arduino_Helpers
-                      logger
+                      kvcomm
                       googletest_wrappers)
 
 # Add tests

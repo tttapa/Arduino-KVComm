@@ -1,33 +1,33 @@
-#include <KVComm/public/Logger.hpp>
+#include <KVComm/public/KV_Builder.hpp>
 
 #include <AH/PrintStream/PrintStream.hpp>  // <<
 
-#include <AH/STL/limits>                     // std::numeric_limits
-#include <AH/STL/memory>                     // std::make_unique
-#include <KVComm/private/LoggerHelpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <AH/STL/limits>                  // std::numeric_limits
+#include <AH/STL/memory>                  // std::make_unique
+#include <KVComm/private/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
 
 #ifndef ARDUINO
 #include <iomanip>  // setw
 #include <ostream>  // os
 #endif
 
-uint8_t *Logger::writeHeader(const char *identifier, uint8_t typeID,
-                             size_t length) {
+uint8_t *KV_Builder::writeHeader(const char *key, uint8_t typeID,
+                                 size_t length) {
     if (length > std::numeric_limits<uint16_t>::max())
         return nullptr;
-    size_t idLen = strlen(identifier);
-    if (idLen == 0 || idLen > std::numeric_limits<uint8_t>::max())
+    size_t keyLen = strlen(key);
+    if (keyLen == 0 || keyLen > std::numeric_limits<uint8_t>::max())
         return nullptr;
-    size_t entryLen = roundUpToWordSizeMultiple(idLen + 1) + 4 +
+    size_t entryLen = roundUpToWordSizeMultiple(keyLen + 1) + 4 +
                       roundUpToWordSizeMultiple(length);
     if (entryLen > maxLen)
         return nullptr;
-    bufferwritelocation[0] = idLen;
+    bufferwritelocation[0] = keyLen;
     bufferwritelocation[1] = typeID;
     bufferwritelocation[2] = length >> 0;
     bufferwritelocation[3] = length >> 8;
-    strcpy((char *) bufferwritelocation + 4, identifier);
-    size_t dataStartIndex = 4 + nextWord(idLen);
+    strcpy((char *) bufferwritelocation + 4, key);
+    size_t dataStartIndex = 4 + nextWord(keyLen);
     uint8_t *dataStart    = bufferwritelocation + dataStartIndex;
     size_t paddedLen      = dataStartIndex + roundUpToWordSizeMultiple(length);
     maxLen -= paddedLen;
@@ -68,18 +68,18 @@ void printW(S &os, unsigned u, uint8_t w, char fill = ' ') {
 }
 
 template <class S>
-void print(const Logger &logger, S &os) {
-    for (size_t i = 0; i < logger.getLength(); i += 4) {
+void print(const KV_Builder &dict, S &os) {
+    for (size_t i = 0; i < dict.getLength(); i += 4) {
         printW(os, i, 4, ' ');
         os << "   ";
         for (uint8_t j = 0; j < 4; ++j) {
-            printHex(os, logger.getBuffer()[i + j]);
+            printHex(os, dict.getBuffer()[i + j]);
             os << ' ';
         }
         os << "  ";
         for (uint8_t j = 0; j < 4; ++j) {
-            char c = isprint(logger.getBuffer()[i + j])
-                         ? (char) logger.getBuffer()[i + j]
+            char c = isprint(dict.getBuffer()[i + j])
+                         ? (char) dict.getBuffer()[i + j]
                          : '.';
             os << c << ' ';
         }
@@ -88,13 +88,13 @@ void print(const Logger &logger, S &os) {
 }
 
 template <class S>
-void printPython(const Logger &logger, S &os) {
+void printPython(const KV_Builder &dict, S &os) {
     os << "bytes((\n";
-    for (size_t i = 0; i < logger.getLength(); i += 4) {
+    for (size_t i = 0; i < dict.getLength(); i += 4) {
         os << "   ";
         for (uint8_t j = 0; j < 4; ++j) {
             os << " 0x";
-            printHex(os, logger.getBuffer()[i + j]);
+            printHex(os, dict.getBuffer()[i + j]);
             os << ",";
         }
         os << '\n';
@@ -103,14 +103,16 @@ void printPython(const Logger &logger, S &os) {
 }
 
 #ifndef ARDUINO
-void Logger::print(std::ostream &os) const { ::print(*this, os); }
-void Logger::printPython(std::ostream &os) const { ::printPython(*this, os); }
+void KV_Builder::print(std::ostream &os) const { ::print(*this, os); }
+void KV_Builder::printPython(std::ostream &os) const {
+    ::printPython(*this, os);
+}
 #endif
 
-void Logger::print(Print &os) const { ::print(*this, os); }
-void Logger::printPython(Print &os) const { ::printPython(*this, os); }
+void KV_Builder::print(Print &os) const { ::print(*this, os); }
+void KV_Builder::printPython(Print &os) const { ::printPython(*this, os); }
 
-LogEntryIterator::iterator Logger::find(const char *key) const {
-    LogEntryIterator log = {getBuffer(), getLength()};
-    return log.find(key);
+KV_Iterator::iterator KV_Builder::find(const char *key) const {
+    KV_Iterator dict = {getBuffer(), getLength()};
+    return dict.find(key);
 }

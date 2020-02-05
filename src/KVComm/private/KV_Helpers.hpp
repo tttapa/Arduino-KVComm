@@ -4,8 +4,8 @@
 
 /**
  * @file  
- * @brief   Helpers for address manipulation used to layout log entries in 
- *          memory.
+ * @brief   Helpers for address manipulation used to layout dictionary entries 
+ *          in memory.
  */
 
 /// Get the offset of the next 4-byte word.

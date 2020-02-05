@@ -1,13 +1,13 @@
-add_library(logger
-    src/LogEntryIterator.cpp
-    src/Logger.cpp
-    src/ParsedLogEntry.cpp
+add_library(kvcomm
+    src/KV_Iterator.cpp
+    src/KV_Builder.cpp
+    src/KV_Parser.cpp
 )
-target_include_directories(logger 
+target_include_directories(kvcomm 
     PUBLIC
         public
     PRIVATE
         src
         private
 )
-target_link_libraries(logger PUBLIC ArduinoMock PRIVATE Arduino_Helpers)
+target_link_libraries(kvcomm PUBLIC ArduinoMock PRIVATE Arduino_Helpers)

@@ -1,19 +1,19 @@
-#include <KVComm/private/LogEntryIterator.hpp>
+#include <KVComm/private/KV_Iterator.hpp>
 
 #include <AH/STL/algorithm>                  // find_if
-#include <KVComm/private/LoggerHelpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/private/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
 #include <assert.h>                          // assert
 #include <string.h>                          // strlen
 
-LogEntryIterator::iterator::iterator()
+KV_Iterator::iterator::iterator()
     : kv(nullptr), remainingBufferLength(0) {}
 
-LogEntryIterator::iterator::iterator(const uint8_t *buffer, size_t length)
+KV_Iterator::iterator::iterator(const uint8_t *buffer, size_t length)
     : kv(buffer), remainingBufferLength(length) {
     checkLength();
 }
 
-LogEntryIterator::iterator &LogEntryIterator::iterator::operator++() {
+KV_Iterator::iterator &KV_Iterator::iterator::operator++() {
     size_t totalLength = 4 + nextWord(kv.getIDLength()) +
                          roundUpToWordSizeMultiple(kv.getDataLength());
     remainingBufferLength -= totalLength;
@@ -22,17 +22,17 @@ LogEntryIterator::iterator &LogEntryIterator::iterator::operator++() {
     return *this;
 }
 
-bool LogEntryIterator::iterator::
-operator!=(const LogEntryIterator::iterator &other) const {
+bool KV_Iterator::iterator::
+operator!=(const KV_Iterator::iterator &other) const {
     return this->kv.getBuffer() != other.kv.getBuffer();
 }
 
-bool LogEntryIterator::iterator::
-operator==(const LogEntryIterator::iterator &other) const {
+bool KV_Iterator::iterator::
+operator==(const KV_Iterator::iterator &other) const {
     return this->kv.getBuffer() == other.kv.getBuffer();
 }
 
-void LogEntryIterator::iterator::checkLength() {
+void KV_Iterator::iterator::checkLength() {
     if (!kv || kv.getIDLength() == 0) {
         remainingBufferLength = 0;
         kv                    = nullptr;
@@ -40,25 +40,26 @@ void LogEntryIterator::iterator::checkLength() {
 }
 
 #ifndef ARDUINO
-std::string LogEntryIterator::KV::getString() const {
+std::string KV_Iterator::KV::getString() const {
     if (!checkType<char>())
         return nullptr;
-    return std::string(getData(), getData() + getDataLength());
+    return std::string(getData(), getData() + getDataLength() - 1);
+    // -1 because getDataLength() includes null terminator
 }
 #else
-String LogEntryIterator::KV::getString() const {
+String KV_Iterator::KV::getString() const {
     if (!checkType<char>())
         return static_cast<const char *>(nullptr);
     struct S : public String {
         using String::copy;
     } s;
-    s.copy(reinterpret_cast<const char *>(getData()), getDataLength());
+    s.copy(reinterpret_cast<const char *>(getData()), getDataLength() - 1);
     return s;
 }
 #endif
 
-LogEntryIterator::iterator LogEntryIterator::find(const char *key) const {
-    return std::find_if(begin(), end(), [key](LogEntryIterator::KV kv) {
+KV_Iterator::iterator KV_Iterator::find(const char *key) const {
+    return std::find_if(begin(), end(), [key](KV_Iterator::KV kv) {
         return strcmp(kv.getID(), key) == 0;
     });
 }

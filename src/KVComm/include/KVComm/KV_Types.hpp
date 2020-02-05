@@ -3,6 +3,9 @@
 #include <stdint.h>  // uint#_t
 #include <string.h>  // memcpy
 
+/// @addtogroup KVComm
+/// @{
+
 /**
  * @file  
  * @brief   KV_Type type definitions for fundamental types (int#_t, uint#_t, 
@@ -38,11 +41,13 @@
  */
 template <class T>
 struct KV_Type {
-    // static uint8_t getTypeID();
-    // static size_t getLength();
-    // static void writeToBuffer(const T &, uint8_t *buffer);
-    // static T readFromBuffer(const uint8_t *buffer);
+    static uint8_t getTypeID();
+    static size_t getLength();
+    static void writeToBuffer(const T &, uint8_t *buffer);
+    static T readFromBuffer(const uint8_t *buffer);
 };
+
+/// @}
 
 /// Add a KV_Type definition that can be (de)serialized by just `memcpy`ing.
 #define KV_ADD_TRIVIAL_TYPE(type, typeid)                                      \
@@ -67,7 +72,7 @@ KV_ADD_TRIVIAL_TYPE(uint32_t, 6);
 KV_ADD_TRIVIAL_TYPE(int64_t, 7);
 KV_ADD_TRIVIAL_TYPE(uint64_t, 8);
 KV_ADD_TRIVIAL_TYPE(float, 9);
-KV_ADD_TRIVIAL_TYPE(double, 10);
+KV_ADD_TRIVIAL_TYPE(double, sizeof(double) == sizeof(float) ? 9 : 10);
 KV_ADD_TRIVIAL_TYPE(bool, 11);
 KV_ADD_TRIVIAL_TYPE(char, 12);
 

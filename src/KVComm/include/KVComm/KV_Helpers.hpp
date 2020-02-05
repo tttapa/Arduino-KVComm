@@ -2,6 +2,9 @@
 
 #include <stddef.h>  // size_t
 
+/// @addtogroup KVComm
+/// @{
+
 /**
  * @file  
  * @brief   Helpers for address manipulation used to layout dictionary entries 
@@ -21,3 +24,5 @@ inline size_t nextWord(size_t i) { return i - (i % 4) + 4; }
 inline size_t roundUpToWordSizeMultiple(size_t i) {
     return i + 3 - ((i + 3) % 4);
 }
+
+/// @}

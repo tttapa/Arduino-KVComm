@@ -1,0 +1,4 @@
+/**
+ * @defgroup KVComm KVComm
+ * @brief   Key-Value pair communication library. 
+ */

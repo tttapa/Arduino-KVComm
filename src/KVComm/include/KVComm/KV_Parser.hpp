@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef ARDUINO
+#if !defined(ARDUINO) || defined(DOXYGEN)
 
 #include <KVComm/KV_Types.hpp>  // KV_Type
 
@@ -9,6 +9,9 @@
 #include <stdexcept>  // std::logic_error, std::out_of_range, std::length_error
 #include <string>     // std::string
 #include <vector>     // std::vector
+
+/// @addtogroup KVComm
+/// @{
 
 /**
  * @file  
@@ -100,5 +103,7 @@ class KV_Parser {
      */
     map_t parse(const uint8_t *buffer, size_t length);
 };
+
+/// @}
 
 #endif  // ARDUINO

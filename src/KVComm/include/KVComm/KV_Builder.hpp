@@ -2,29 +2,32 @@
 
 #ifdef ARDUINO
 
-#include <KVComm/include/KVComm/KV_Iterator.hpp>  // KV_Iterator
+#include <KVComm/include/KVComm/KV_Iterator.hpp> // KV_Iterator
 
-#include <AH/STL/array>             // std::array
-#include <AH/STL/cstddef>           // size_t
-#include <AH/STL/initializer_list>  // std::initializer_list
-#include <AH/STL/vector>            // std::vector
-#include <string.h>                 // strlen
+#include <AH/STL/array>            // std::array
+#include <AH/STL/cstddef>          // size_t
+#include <AH/STL/initializer_list> // std::initializer_list
+#include <AH/STL/vector>           // std::vector
+#include <string.h>                // strlen
 
 #else
 
-#include <KVComm/KV_Iterator.hpp>  // KV_Iterator
+#include <KVComm/KV_Iterator.hpp> // KV_Iterator
 
-#include <array>             // std::array
-#include <cstddef>           // size_t
-#include <cstring>           // strlen
-#include <initializer_list>  // std::initializer_list
-#include <iosfwd>            // std::ostream forward declaration
-#include <vector>            // std::vector
+#include <array>            // std::array
+#include <cstddef>          // size_t
+#include <cstring>          // strlen
+#include <initializer_list> // std::initializer_list
+#include <iosfwd>           // std::ostream forward declaration
+#include <vector>           // std::vector
 #endif
 
 #if defined(ARDUINO) || defined(ARDUINO_TEST)
 #include <Print.h>
 #endif
+
+/// @addtogroup KVComm
+/// @{
 
 /**
  * @file  
@@ -57,7 +60,7 @@
  * the type of the data, the length of the key (in bytes) and the length of the 
  * data (in bytes). 
  *     
- *          0        1        2        3
+ *          0         1         2         3
  *     +---------+---------+---------+---------+
  *     | key len |  type   |    data length    |
  *     +---------+---------+---------+---------+
@@ -355,12 +358,12 @@ class KV_Builder {
         std::fill(buffer, buffer + bufferSize, 0);
     }
 
-#ifndef ARDUINO
+#if !defined(ARDUINO) || defined(DOXYGEN)
     void print(std::ostream &os) const;
     void printPython(std::ostream &os) const;
-#endif  // ARDUINO
+#endif // ARDUINO
 
-#if defined(ARDUINO) || defined(ARDUINO_TEST)
+#if defined(ARDUINO) || defined(ARDUINO_TEST) || defined(DOXYGEN)
     /**
      * @brief   Dump the dictionary buffer to the given output stream in a 
      *          human-readable format (offset + hexadecimal + ASCII).
@@ -390,6 +393,7 @@ class KV_Builder {
     /// A pointer to the first free/unused byte in the buffer.
     uint8_t *bufferwritelocation = buffer;
 
+  private:
     /// Write the header of a new element into the buffer, advance the write
     /// pointer, and return a pointer to where the data should be written.
     /// Returns a null pointer if the element is too large for the buffer, and
@@ -420,6 +424,14 @@ class KV_Builder {
     /// Get the length of the used part of the buffer.
     size_t getLength() const { return getBufferSize() - maxLen; }
 
+    /// Replace the buffer.
+    void changeBuffer(uint8_t *buffer, size_t size) {
+        this->buffer              = buffer;
+        this->bufferwritelocation = buffer;
+        this->bufferSize          = size;
+        this->maxLen              = size;
+    }
+
     /** 
      * @brief   Get the element with the given key.
      * 
@@ -439,10 +451,14 @@ class KV_Builder {
 template <size_t N>
 class Static_KV_Builder : public KV_Builder {
   public:
-    Static_KV_Builder() : KV_Builder(buffer.data(), N) {}
+    Static_KV_Builder() : KV_Builder(nullptr, 0) {
+        changeBuffer(buffer.data(), N);
+    }
 
   private:
     std::array<uint8_t, N> buffer = {{}};
 };
+
+/// @}
 
 #include "KV_Builder.ipp"

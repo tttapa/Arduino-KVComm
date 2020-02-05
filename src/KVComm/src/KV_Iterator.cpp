@@ -1,18 +1,18 @@
 #ifdef ARDUINO
 
-#include <KVComm/include/KVComm/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/include/KVComm/KV_Helpers.hpp> // nextWord, roundUpToWordSizeMultiple
 #include <KVComm/include/KVComm/KV_Iterator.hpp>
 
-#include <AH/STL/algorithm>  // find_if
-#include <string.h>          // strlen
+#include <AH/STL/algorithm> // find_if
+#include <string.h>         // strlen
 
 #else
 
-#include <KVComm/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/KV_Helpers.hpp> // nextWord, roundUpToWordSizeMultiple
 #include <KVComm/KV_Iterator.hpp>
 
-#include <algorithm>  // find_if
-#include <cstring>    // strlen
+#include <algorithm> // find_if
+#include <cstring>   // strlen
 
 #endif
 
@@ -49,17 +49,17 @@ void KV_Iterator::iterator::checkLength() {
     }
 }
 
-#ifndef ARDUINO
+#if !defined(ARDUINO) || defined(DOXYGEN)
 std::string KV_Iterator::KV::getString() const {
     if (!checkType<char>())
-        return nullptr;
+        return nullptr; // LCOV_EXCL_LINE
     return std::string(getData(), getData() + getDataLength() - 1);
     // -1 because getDataLength() includes null terminator
 }
 #else
 String KV_Iterator::KV::getString() const {
     if (!checkType<char>())
-        return static_cast<const char *>(nullptr);
+        return static_cast<const char *>(nullptr); // LCOV_EXCL_LINE
     struct S : public String {
         using String::copy;
     } s;

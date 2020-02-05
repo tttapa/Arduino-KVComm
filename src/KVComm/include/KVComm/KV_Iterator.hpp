@@ -2,34 +2,34 @@
 
 #ifdef ARDUINO
 
-#include <KVComm/include/KVComm/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
-#include <KVComm/include/KVComm/KV_Error.hpp>     // KV_ERROR
-#include <KVComm/include/KVComm/KV_Types.hpp>     // KV_Type<T>
+#include <KVComm/include/KVComm/KV_Error.hpp> // KV_ERROR
+#include <KVComm/include/KVComm/KV_Helpers.hpp> // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/include/KVComm/KV_Types.hpp> // KV_Type<T>
 
-#include <AH/STL/array>     // std::array
-#include <AH/STL/cstddef>   // size_t
-#include <AH/STL/cstdint>   // uint8_t, uint16_t
-#include <AH/STL/iterator>  // iterator traits
-#include <AH/STL/vector>    // std::vector
+#include <AH/STL/array>    // std::array
+#include <AH/STL/cstddef>  // size_t
+#include <AH/STL/cstdint>  // uint8_t, uint16_t
+#include <AH/STL/iterator> // iterator traits
+#include <AH/STL/vector>   // std::vector
 
 #include <WString.h>
 
 #else
 
-#include <KVComm/KV_Error.hpp>    // KV_ERROR
-#include <KVComm/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
-#include <KVComm/KV_Types.hpp>    // KV_Type<T>
+#include <KVComm/KV_Error.hpp>   // KV_ERROR
+#include <KVComm/KV_Helpers.hpp> // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/KV_Types.hpp>   // KV_Type<T>
 
-#include <array>     // std::array
-#include <cstddef>   // size_t
-#include <cstdint>   // uint8_t, uint16_t
-#include <iterator>  // iterator traits
-#include <vector>    // std::vector
+#include <array>    // std::array
+#include <cstddef>  // size_t
+#include <cstdint>  // uint8_t, uint16_t
+#include <iterator> // iterator traits
+#include <vector>   // std::vector
 
 #endif
 
-#ifdef ARDUINO
-#endif
+/// @addtogroup KVComm
+/// @{
 
 /**
  * @file  
@@ -80,7 +80,7 @@ class KV_Iterator {
          * 
          * @throw   0x7566
          *          Trying to extract data from non-existent entry.
-         * @thow    0x7563
+         * @throw   0x7563
          *          Type mismatch: The dynamic type ID doesn't match the type ID
          *          of `T`.
          * @throw   0x7564
@@ -91,13 +91,13 @@ class KV_Iterator {
             if (!*this) {
                 KV_ERROR(F("Trying to extract data from non-existent entry"),
                          0x7566);
-                return;
+                return; // LCOV_EXCL_LINE
             }
             if (!checkType<T>())
-                return;
+                return; // LCOV_EXCL_LINE
             if (index * KV_Type<T>::getLength() >= getDataLength()) {
                 KV_ERROR(F("Index out of range"), 0x7564);
-                return;
+                return; // LCOV_EXCL_LINE
             }
             auto readlocation = getData() + KV_Type<T>::getLength() * index;
             KV_Type<T>::readFromBuffer(t, readlocation);
@@ -116,7 +116,7 @@ class KV_Iterator {
          * 
          * @throw   0x7566
          *          Trying to extract data from non-existent entry.
-         * @thow    0x7563
+         * @throw   0x7563
          *          Type mismatch: The dynamic type ID doesn't match the type ID
          *          of `T`.
          * @throw   0x7564
@@ -140,7 +140,7 @@ class KV_Iterator {
          * 
          * @throw   0x7566
          *          Trying to extract data from non-existent entry.
-         * @thow    0x7563
+         * @throw   0x7563
          *          Type mismatch: The dynamic type ID doesn't match the type ID
          *          of `T`.
          */
@@ -149,10 +149,10 @@ class KV_Iterator {
             if (!*this) {
                 KV_ERROR(F("Trying to extract data from non-existent entry"),
                          0x7566);
-                return {{}};
+                return {}; // LCOV_EXCL_LINE
             }
             if (!checkType<T>())
-                return {};
+                return {}; // LCOV_EXCL_LINE
             size_t size = getDataLength() / KV_Type<T>::getLength();
             std::vector<T> result(size);
             auto readlocation = getData();
@@ -176,7 +176,7 @@ class KV_Iterator {
          *          the correct type.
          * @throw   0x7566
          *          Trying to extract data from non-existent entry.
-         * @thow    0x7563
+         * @throw   0x7563
          *          Type mismatch: The dynamic type ID doesn't match the type ID
          *          of `T`.
          * @throw   0x7565
@@ -188,12 +188,14 @@ class KV_Iterator {
             if (!*this) {
                 KV_ERROR(F("Trying to extract data from non-existent entry"),
                          0x7566);
-                return {{}};
+                return {{}}; // LCOV_EXCL_LINE
             }
             if (!checkType<T>())
-                return {{}};
-            if (N * KV_Type<T>::getLength() != getDataLength())
+                return {{}}; // LCOV_EXCL_LINE
+            if (N * KV_Type<T>::getLength() != getDataLength()) {
                 KV_ERROR(F("Incorrect length"), 0x7565);
+                return {{}}; // LCOV_EXCL_LINE
+            }
             std::array<T, N> result;
             auto readlocation = getData();
             for (T &t : result) {
@@ -203,15 +205,18 @@ class KV_Iterator {
             return result;
         }
 
-#ifndef ARDUINO
+#if !defined(ARDUINO) || defined(DOXYGEN)
         /**
          * @brief   Get the character array as an std::string.
          * 
          * @return  The character array as a string.
          * 
+         * @note    Returns an Arduino `String` instead of an `std::string` on 
+         *          Arduino.
+         * 
          * @throw   0x7566
          *          Trying to extract data from non-existent entry.
-         * @thow    0x7563
+         * @throw   0x7563
          *          Type mismatch: The dynamic type ID doesn't match the type ID
          *          of `char`.
          */
@@ -245,7 +250,7 @@ class KV_Iterator {
                              << getTypeID() << F(", conversion requested to ")
                              << KV_Type<T>::getTypeID() << ')',
                          0x7563);
-                return false;
+                return false; // LCOV_EXCL_LINE
             }
             return true;
         }
@@ -305,3 +310,5 @@ class KV_Iterator {
     const uint8_t *buffer;
     size_t bufferSize;
 };
+
+/// @}

@@ -28,29 +28,41 @@ using std::make_unique;
 
 uint8_t *KV_Builder::writeHeader(const char *key, uint8_t typeID,
                                  size_t length) {
+
+    // Ensure that the length is not too large
     if (length > std::numeric_limits<uint16_t>::max())
         return nullptr;
+    // Get the length of the key, and ensure it's not zero and not too large
     size_t keyLen = strlen(key);
     if (keyLen == 0 || keyLen > std::numeric_limits<uint8_t>::max())
         return nullptr;
+    // Calculate the length of the entire key-value pair
     size_t entryLen = roundUpToWordSizeMultiple(keyLen + 1) + 4 +
                       roundUpToWordSizeMultiple(length);
+    // Ensure that the entry isn't larger than the buffer
     if (entryLen > maxLen)
         return nullptr;
+    // Write the metadata
     bufferwritelocation[0] = keyLen;
     bufferwritelocation[1] = typeID;
     bufferwritelocation[2] = length >> 0;
     bufferwritelocation[3] = length >> 8;
+    // Write the key
     strcpy((char *) bufferwritelocation + 4, key);
+    // Compute the index where the data is to be written
     size_t dataStartIndex = 4 + nextWord(keyLen);
     uint8_t *dataStart    = bufferwritelocation + dataStartIndex;
-    size_t paddedLen      = dataStartIndex + roundUpToWordSizeMultiple(length);
-    maxLen -= paddedLen;
-    bufferwritelocation += paddedLen;
+    // Update the buffer length and pointer
+    maxLen -= entryLen;
+    bufferwritelocation += entryLen;
+    // Write the sentinel null byte if the buffer is not full yet
     if (maxLen > 0)
         bufferwritelocation[0] = 0x00; // Null terminate
+    // Return the address to write the data to
     return dataStart;
 }
+
+// LCOV_EXCL_START
 
 static inline char nibbleToHex(uint8_t val) {
     val &= 0x0F;
@@ -117,7 +129,7 @@ void printPython(const KV_Builder &dict, S &os) {
     os << "))" << '\n';
 }
 
-#ifndef ARDUINO
+#if !defined(ARDUINO) || defined(DOXYGEN)
 void KV_Builder::print(std::ostream &os) const { ::print(*this, os); }
 void KV_Builder::printPython(std::ostream &os) const {
     ::printPython(*this, os);
@@ -128,6 +140,8 @@ void KV_Builder::printPython(std::ostream &os) const {
 void KV_Builder::print(Print &os) const { ::print(*this, os); }
 void KV_Builder::printPython(Print &os) const { ::printPython(*this, os); }
 #endif
+
+// LCOV_EXCL_END
 
 KV_Iterator::iterator KV_Builder::find(const char *key) const {
     KV_Iterator dict = {getBuffer(), getLength()};

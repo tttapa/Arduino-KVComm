@@ -1,4 +1,4 @@
-#ifndef ARDUINO
+#if !defined(ARDUINO) || defined(DOXYGEN)
 
 #include <KVComm/KV_Iterator.hpp>  // KV_Iterator
 #include <KVComm/KV_Parser.hpp>    // KV_Parser

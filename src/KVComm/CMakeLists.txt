@@ -42,6 +42,7 @@ install(TARGETS kvcomm
     # Add the kvcomm library to the "export-set"
     EXPORT KVCommTargets
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
     PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/KVComm" COMPONENT dev)
 
 # Add all targets to the build-tree export set

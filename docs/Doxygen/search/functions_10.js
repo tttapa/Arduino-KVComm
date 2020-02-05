@@ -1,5 +1,26 @@
 var searchData=
 [
-  ['timer_804',['Timer',['../dc/dea/classTimer.html#a601e4fc3c3d5fa54634192a88819ad5a',1,'Timer']]],
-  ['togglemode_805',['toggleMode',['../d1/d3e/classDotBarDisplayLEDs.html#a2ffa1ba1cd260f6e8ffd484452c3bab7',1,'DotBarDisplayLEDs']]]
+  ['safeindex_926',['safeIndex',['../d6/da4/classAH_1_1BitArray.html#a5bbaf7ad03623987aa03ff6a303ecd3e',1,'AH::BitArray']]],
+  ['send_927',['send',['../dd/de5/classAH_1_1MAX7219__Base.html#a3b696b4a472e9c4c8ac748231571eb89',1,'AH::MAX7219_Base']]],
+  ['sendraw_928',['sendRaw',['../dd/de5/classAH_1_1MAX7219__Base.html#a02c392648ff5ed7a20c2d65aee768777',1,'AH::MAX7219_Base']]],
+  ['set_929',['set',['../d6/da4/classAH_1_1BitArray.html#a03f454ba9118dabc871ae3dc43c6813e',1,'AH::BitArray::set(uint8_t bitIndex)'],['../d6/da4/classAH_1_1BitArray.html#af46b5a583344475c83cb8f6da0d54265',1,'AH::BitArray::set(uint8_t bitIndex, bool state)'],['../df/d06/classAH_1_1LEDs.html#af918f041a7389b7fe5322aa109977a9b',1,'AH::LEDs::set()']]],
+  ['setbase_930',['setbase',['../d8/d4b/group__AH__PrintStream.html#gaee7a50f938e43275899e6a531bd69ce4',1,'setbase(uint8_t base):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#gaee7a50f938e43275899e6a531bd69ce4',1,'setbase(uint8_t base):&#160;PrintStream.cpp']]],
+  ['setbytesep_931',['setbytesep',['../d8/d4b/group__AH__PrintStream.html#ga88e006aee1afa07615b3c00f7938d801',1,'setbytesep(char bytesep):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#ga88e006aee1afa07615b3c00f7938d801',1,'setbytesep(char bytesep):&#160;PrintStream.cpp']]],
+  ['setdebouncetime_932',['setDebounceTime',['../de/d0d/classAH_1_1Button.html#a4c842d71d208b8b1204fc6eb3799d4fd',1,'AH::Button']]],
+  ['setintensity_933',['setIntensity',['../dd/de5/classAH_1_1MAX7219__Base.html#acd75d5bb7a523d22f348f4617e595d8b',1,'AH::MAX7219_Base']]],
+  ['setinterval_934',['setInterval',['../d2/de5/classAH_1_1Timer.html#a74e6bf1a7e6209db803fe5ca30a5d4e6',1,'AH::Timer']]],
+  ['setmode_935',['setMode',['../d9/d89/classAH_1_1DotBarDisplayLEDs.html#a7acb8262e1b34ec0d41e6a80d3cc4e1c',1,'AH::DotBarDisplayLEDs']]],
+  ['setmuxaddress_936',['setMuxAddress',['../d2/d94/classAH_1_1AnalogMultiplex.html#af6fdf126c6e5ba7d52ee93e1c9724f8d',1,'AH::AnalogMultiplex']]],
+  ['setprecision_937',['setprecision',['../d8/d4b/group__AH__PrintStream.html#gaf7cf4b0e6244f6fab7b1e15c2523e4e7',1,'setprecision(int n):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#gaf7cf4b0e6244f6fab7b1e15c2523e4e7',1,'setprecision(int n):&#160;PrintStream.cpp']]],
+  ['setprevstate_938',['setPrevState',['../dd/d29/classAH_1_1ButtonMatrix.html#a21e0b2a81e51dba7661ea7128d9ee78d',1,'AH::ButtonMatrix']]],
+  ['setupadc_939',['setupADC',['../d3/d6e/classAH_1_1FilteredAnalog.html#a3cec68e11b712453289f34d1634f86b8',1,'AH::FilteredAnalog']]],
+  ['shiftout_940',['shiftOut',['../d7/d22/namespaceAH_1_1ExtIO.html#aeae5394d6ac8fa71365e0901c894016d',1,'AH::ExtIO::shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder, uint8_t val)'],['../d7/d22/namespaceAH_1_1ExtIO.html#a9b553f6793c042d88c2d1eb3f4023fe0',1,'AH::ExtIO::shiftOut(int dataPin, int clockPin, BitOrder_t bitOrder, uint8_t val)']]],
+  ['shiftregisterout_941',['ShiftRegisterOut',['../d0/dca/classAH_1_1ShiftRegisterOut.html#a6775fabb44f42b7d1c6170233c87921c',1,'AH::ShiftRegisterOut']]],
+  ['shiftregisteroutbase_942',['ShiftRegisterOutBase',['../dc/d0e/classAH_1_1ShiftRegisterOutBase.html#a5ad543fc1bffd4013ad3496f2d072f5b',1,'AH::ShiftRegisterOutBase']]],
+  ['showbase_943',['showbase',['../d8/d4b/group__AH__PrintStream.html#ga43ae2a66eb945be61773cbb24d9b6608',1,'showbase(Print &amp;printer):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#ga43ae2a66eb945be61773cbb24d9b6608',1,'showbase(Print &amp;printer):&#160;PrintStream.cpp']]],
+  ['slice_944',['slice',['../d0/d32/structAH_1_1Array.html#a6c08a0b8e3c45b3d12a27e558e4d6c50',1,'AH::Array::slice()'],['../d0/d32/structAH_1_1Array.html#aad6cd36f3664de3d3e4ede6bb480896d',1,'AH::Array::slice() const'],['../d2/dc9/classAH_1_1ArraySlice.html#aecaa84bf9fb556811f8c970d596e7b7f',1,'AH::ArraySlice::slice()']]],
+  ['spishiftregisterout_945',['SPIShiftRegisterOut',['../d5/d09/classAH_1_1SPIShiftRegisterOut.html#a3732a80bf2f4ebf4d0ac32a9d393fb73',1,'AH::SPIShiftRegisterOut']]],
+  ['stabletime_946',['stableTime',['../de/d0d/classAH_1_1Button.html#a1cbdae7abfef90d54889e98b100f4d53',1,'AH::Button::stableTime(unsigned long now) const'],['../de/d0d/classAH_1_1Button.html#adcebb54d1e901596c7ca14ac14aac43c',1,'AH::Button::stableTime() const']]],
+  ['static_5fkv_5fbuilder_947',['Static_KV_Builder',['../df/d12/classStatic__KV__Builder.html#af8b4af59cfdda96a8a16227e55cbd53c',1,'Static_KV_Builder']]],
+  ['staticsizeextendedioelement_948',['StaticSizeExtendedIOElement',['../d6/d57/classAH_1_1StaticSizeExtendedIOElement.html#abbbe5298f26889e0bffc0ab09e887aa4',1,'AH::StaticSizeExtendedIOElement']]]
 ];

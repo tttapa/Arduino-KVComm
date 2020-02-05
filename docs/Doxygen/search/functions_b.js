@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['nibble_5fto_5fhex_736',['nibble_to_hex',['../da/d69/PrintStream_8cpp.html#a7df4d5e824296b753f67be09e88593e3',1,'PrintStream.cpp']]],
-  ['noboolalpha_737',['noboolalpha',['../d8/d4b/group__AH__PrintStream.html#ga6f91d974c1da2e228efad12693a46386',1,'noboolalpha(Print &amp;printer):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#ga6f91d974c1da2e228efad12693a46386',1,'noboolalpha(Print &amp;printer):&#160;PrintStream.cpp']]],
-  ['node_5fiterator_738',['node_iterator',['../dd/d02/classDoublyLinkedList_1_1node__iterator.html#ada137d965190b4d74fdd449a6e14abb8',1,'DoublyLinkedList::node_iterator']]],
-  ['node_5fiterator_5fbase_739',['node_iterator_base',['../db/d52/classDoublyLinkedList_1_1node__iterator__base.html#aa1e1021a3c378cae4c2ed20d079074f0',1,'DoublyLinkedList::node_iterator_base']]],
-  ['noleadingzeros_740',['noleadingzeros',['../d8/d4b/group__AH__PrintStream.html#ga8c9f111e05c74acb9bdffce673ef5709',1,'noleadingzeros(Print &amp;printer):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#ga8c9f111e05c74acb9bdffce673ef5709',1,'noleadingzeros(Print &amp;printer):&#160;PrintStream.cpp']]],
-  ['noshowbase_741',['noshowbase',['../d8/d4b/group__AH__PrintStream.html#ga8ae8a20941a7cf9957efc590d5a56ef4',1,'noshowbase(Print &amp;printer):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#ga8ae8a20941a7cf9957efc590d5a56ef4',1,'noshowbase(Print &amp;printer):&#160;PrintStream.cpp']]],
-  ['nouppercase_742',['nouppercase',['../d8/d4b/group__AH__PrintStream.html#gaff5eada882f71bd90e0de66c48faaeb3',1,'nouppercase(Print &amp;printer):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#gaff5eada882f71bd90e0de66c48faaeb3',1,'nouppercase(Print &amp;printer):&#160;PrintStream.cpp']]]
+  ['makeunique_863',['MakeUnique',['../da/de8/group__AH__Containers.html#ga4b1cd1384e9dba06d00857ebb4c278a9',1,'AH']]],
+  ['map_864',['map',['../d3/d6e/classAH_1_1FilteredAnalog.html#a55537d6de64435f495f9eaac3985d7e8',1,'AH::FilteredAnalog']]],
+  ['max_865',['max',['../dd/d5e/group__AH__Math.html#ga9c976cf1a12d963c960d12808675e8a9',1,'AH']]],
+  ['max7219_866',['MAX7219',['../de/de9/classAH_1_1MAX7219.html#a96e02b943424214530e1f369120f850f',1,'AH::MAX7219']]],
+  ['max7219_5fbase_867',['MAX7219_Base',['../dd/de5/classAH_1_1MAX7219__Base.html#aecdc7954ee8ac04343b4b8a5d9ef6c64',1,'AH::MAX7219_Base']]],
+  ['max7219sevensegmentdisplay_868',['MAX7219SevenSegmentDisplay',['../d9/d72/classAH_1_1MAX7219SevenSegmentDisplay.html#a15e656e5392f7a6191411201dca132e9',1,'AH::MAX7219SevenSegmentDisplay']]],
+  ['min_869',['min',['../dd/d5e/group__AH__Math.html#ga5e07739c1fd7a29e6b2840237af7f1bc',1,'AH']]],
+  ['movedown_870',['moveDown',['../dd/d16/classDoublyLinkedList.html#a9750fc672c95b807b56b12b0a65542f8',1,'DoublyLinkedList']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: Debug.hpp File Reference</title>
+<title>Arduino KVComm: Debug.hpp File Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
-   &#160;<span id="projectnumber">1.0.0</span>
+   <div id="projectname">Arduino KVComm
+   &#160;<span id="projectnumber">master</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">Key-Value pair communication library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -87,14 +87,12 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Debug.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d1f/Debug_8hpp__incl.svg" width="1219" height="560"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d1f/Debug_8hpp__incl.svg" width="1219" height="560"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d5/d52/Debug_8hpp__dep__incl.svg" width="2320" height="710"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d5/d52/Debug_8hpp__dep__incl.svg" width="2096" height="710"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="../../df/dee/Debug_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -110,11 +108,11 @@ Macros</h2></td></tr>
 <tr class="separator:a8a6e9a76d67fbd228ee6bb2075ef65ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b1af4db37be4dd296aaf199038b27e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a6b1af4db37be4dd296aaf199038b27e1">DEBUG_STR</a>(x)&#160;&#160;&#160;<a class="el" href="../../df/dee/Debug_8hpp.html#a8a6e9a76d67fbd228ee6bb2075ef65ac">DEBUG_STR_HELPER</a>(x)</td></tr>
 <tr class="separator:a6b1af4db37be4dd296aaf199038b27e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a612bc94828e6e5e75f6ff978d6eb6f87"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a612bc94828e6e5e75f6ff978d6eb6f87">DEBUG_FUNC_LOCATION</a>&#160;&#160;&#160;'[' &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; F(&quot; @ line &quot; DEBUG_STR(__LINE__) &quot;]:\t&quot;)</td></tr>
+<tr class="memitem:a612bc94828e6e5e75f6ff978d6eb6f87"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a612bc94828e6e5e75f6ff978d6eb6f87">DEBUG_FUNC_LOCATION</a>&#160;&#160;&#160;'[' &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; <a class="el" href="../../d5/dbd/KV__Error_8hpp.html#a203d5b93e4077aa273c7013964a31f9e">F</a>(&quot; @ line &quot; DEBUG_STR(__LINE__) &quot;]:\t&quot;)</td></tr>
 <tr class="separator:a612bc94828e6e5e75f6ff978d6eb6f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a287b57d7cf8a3a20f97c91893d2ebace"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a287b57d7cf8a3a20f97c91893d2ebace">DEBUG_LOCATION</a>&#160;&#160;&#160;&quot;[&quot; __FILE__ &quot;:&quot; <a class="el" href="../../df/dee/Debug_8hpp.html#a6b1af4db37be4dd296aaf199038b27e1">DEBUG_STR</a>(__LINE__) &quot;]:\t&quot;</td></tr>
 <tr class="separator:a287b57d7cf8a3a20f97c91893d2ebace"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga35654913b4a1f9d9300f847fab14b3d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/da5/group__AH__Debug.html#ga35654913b4a1f9d9300f847fab14b3d3">NAMEDVALUE</a>(x)&#160;&#160;&#160;F(<a class="el" href="../../df/dee/Debug_8hpp.html#a6b1af4db37be4dd296aaf199038b27e1">DEBUG_STR</a>(x) &quot; = &quot;) &lt;&lt; x</td></tr>
+<tr class="memitem:ga35654913b4a1f9d9300f847fab14b3d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/da5/group__AH__Debug.html#ga35654913b4a1f9d9300f847fab14b3d3">NAMEDVALUE</a>(x)&#160;&#160;&#160;<a class="el" href="../../d5/dbd/KV__Error_8hpp.html#a203d5b93e4077aa273c7013964a31f9e">F</a>(<a class="el" href="../../df/dee/Debug_8hpp.html#a6b1af4db37be4dd296aaf199038b27e1">DEBUG_STR</a>(x) &quot; = &quot;) &lt;&lt; x</td></tr>
 <tr class="memdesc:ga35654913b4a1f9d9300f847fab14b3d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for printing an expression as a string, followed by its value.  <a href="../../d4/da5/group__AH__Debug.html#ga35654913b4a1f9d9300f847fab14b3d3">More...</a><br /></td></tr>
 <tr class="separator:ga35654913b4a1f9d9300f847fab14b3d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3dfa58b1c5c2943dd49d8aa1981d377d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/da5/group__AH__Debug.html#ga3dfa58b1c5c2943dd49d8aa1981d377d">DEBUG</a>(x)</td></tr>
@@ -216,7 +214,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define DEBUG_FUNC_LOCATION&#160;&#160;&#160;'[' &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; F(&quot; @ line &quot; DEBUG_STR(__LINE__) &quot;]:\t&quot;)</td>
+          <td class="memname">#define DEBUG_FUNC_LOCATION&#160;&#160;&#160;'[' &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; <a class="el" href="../../d5/dbd/KV__Error_8hpp.html#a203d5b93e4077aa273c7013964a31f9e">F</a>(&quot; @ line &quot; DEBUG_STR(__LINE__) &quot;]:\t&quot;)</td>
         </tr>
       </table>
 </div><div class="memdoc">

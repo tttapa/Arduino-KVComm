@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['bitorder_824',['bitOrder',['../d8/db4/classShiftRegisterOutBase.html#a4e460a68da9f4a4878ea5bf65fdcaedc',1,'ShiftRegisterOutBase']]],
-  ['bluebit_825',['blueBit',['../d5/d45/structShiftRegisterOutRGB.html#acfafcd5d8289f6ffc9ad09cb6ad5aadc',1,'ShiftRegisterOutRGB']]],
-  ['boolalphaprintstream_826',['boolalphaPrintStream',['../da/d69/PrintStream_8cpp.html#ac031ea43b717d6e00396a00c3caef6f2',1,'PrintStream.cpp']]],
-  ['buffer_827',['buffer',['../db/de9/classBitArray.html#a6a292007425eb6c5d4eb7d5eb2d1e0ed',1,'BitArray::buffer()'],['../dc/d19/classMAX7219.html#aa34c8c6d924621c8ccc675ae399b2733',1,'MAX7219::buffer()'],['../d8/db4/classShiftRegisterOutBase.html#a52f28b99ebaf530ae5b8219ccc6f4f81',1,'ShiftRegisterOutBase::buffer()']]],
-  ['bufferlength_828',['bufferLength',['../db/de9/classBitArray.html#a9d55ac509c001d869fee5a71a4302a0e',1,'BitArray']]],
-  ['button_829',['button',['../df/d38/classIncrementButton.html#aa56e877ca6a7524cf1e891c7435c3ace',1,'IncrementButton']]],
-  ['button_5fdebounce_5ftime_830',['BUTTON_DEBOUNCE_TIME',['../db/d02/Settings_8hpp.html#a838b0bb32d176701ae1362e3188c578d',1,'Settings.hpp']]],
-  ['byteseparatorprintstream_831',['byteSeparatorPrintStream',['../da/d69/PrintStream_8cpp.html#a643fcf8db7c14c0dc68d6ae017366506',1,'PrintStream.cpp']]]
+  ['bitorder_972',['bitOrder',['../dc/d0e/classAH_1_1ShiftRegisterOutBase.html#a4e460a68da9f4a4878ea5bf65fdcaedc',1,'AH::ShiftRegisterOutBase']]],
+  ['bluebit_973',['blueBit',['../d9/d82/structAH_1_1ShiftRegisterOutRGB.html#acfafcd5d8289f6ffc9ad09cb6ad5aadc',1,'AH::ShiftRegisterOutRGB']]],
+  ['boolalphaprintstream_974',['boolalphaPrintStream',['../da/d69/PrintStream_8cpp.html#ac031ea43b717d6e00396a00c3caef6f2',1,'PrintStream.cpp']]],
+  ['buffer_975',['buffer',['../d6/da4/classAH_1_1BitArray.html#a6a292007425eb6c5d4eb7d5eb2d1e0ed',1,'AH::BitArray::buffer()'],['../de/de9/classAH_1_1MAX7219.html#aa34c8c6d924621c8ccc675ae399b2733',1,'AH::MAX7219::buffer()'],['../dc/d0e/classAH_1_1ShiftRegisterOutBase.html#a52f28b99ebaf530ae5b8219ccc6f4f81',1,'AH::ShiftRegisterOutBase::buffer()'],['../d3/d45/classKV__Builder.html#a56ed84df35de10bdb65e72b184309497',1,'KV_Builder::buffer()'],['../df/d12/classStatic__KV__Builder.html#aaea25a9638d0f879da9db740e31e98f4',1,'Static_KV_Builder::buffer()'],['../dc/d10/classKV__Iterator_1_1KV.html#af8500b1faa0e15016736fd864b7b634d',1,'KV_Iterator::KV::buffer()'],['../d5/d65/classKV__Iterator.html#af8500b1faa0e15016736fd864b7b634d',1,'KV_Iterator::buffer()']]],
+  ['bufferlength_976',['bufferLength',['../d6/da4/classAH_1_1BitArray.html#a9d55ac509c001d869fee5a71a4302a0e',1,'AH::BitArray']]],
+  ['buffersize_977',['bufferSize',['../d3/d45/classKV__Builder.html#a7be887a2ca0a258cf6b368d32fd87487',1,'KV_Builder::bufferSize()'],['../d5/d65/classKV__Iterator.html#a7be887a2ca0a258cf6b368d32fd87487',1,'KV_Iterator::bufferSize()']]],
+  ['bufferwritelocation_978',['bufferwritelocation',['../d3/d45/classKV__Builder.html#a88790bdf7394b591db467f1306a377e3',1,'KV_Builder']]],
+  ['button_979',['button',['../d7/d83/classAH_1_1IncrementButton.html#aa56e877ca6a7524cf1e891c7435c3ace',1,'AH::IncrementButton']]],
+  ['button_5fdebounce_5ftime_980',['BUTTON_DEBOUNCE_TIME',['../dc/d69/namespaceAH.html#a838b0bb32d176701ae1362e3188c578d',1,'AH']]],
+  ['byteseparatorprintstream_981',['byteSeparatorPrintStream',['../da/d69/PrintStream_8cpp.html#a643fcf8db7c14c0dc68d6ae017366506',1,'PrintStream.cpp']]]
 ];

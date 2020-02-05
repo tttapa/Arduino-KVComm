@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: Error</title>
+<title>Arduino KVComm: Error</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
-   &#160;<span id="projectnumber">1.0.0</span>
+   <div id="projectname">Arduino KVComm
+   &#160;<span id="projectnumber">master</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">Key-Value pair communication library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -73,12 +73,17 @@ $(function() {
   <div class="summary">
 <a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">Error</div>  </div>
+<div class="title">Error<div class="ingroups"><a class="el" href="../../d7/d07/group__AH__group.html">Arduino Helpers</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Macros for handling and reporting both fatal and non-fatal errors.  
 <a href="#details">More...</a></p>
+<div class="dynheader">
+Collaboration diagram for Error:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d0/df7/group__AH__Error.svg" width="224" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -163,7 +168,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                                                                       \</div>
 <div class="line">        USING_AH_NAMESPACE;                                                    \</div>
-<div class="line">        DEBUGFN(F(<span class="stringliteral">&quot;Fatal Error: &quot;</span>) &lt;&lt; msg &lt;&lt; <span class="stringliteral">&quot; (0x&quot;</span> &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaa47b34b5f85fef7f8b050c0d0a715d2f">hex</a> &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#ga2b44e6ada22b1b5a703617123ebd0598">uppercase</a>        \</div>
+<div class="line">        DEBUGFN(<a class="code" href="../../d5/dbd/KV__Error_8hpp.html#a203d5b93e4077aa273c7013964a31f9e">F</a>(<span class="stringliteral">&quot;Fatal Error: &quot;</span>) &lt;&lt; msg &lt;&lt; <span class="stringliteral">&quot; (0x&quot;</span> &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaa47b34b5f85fef7f8b050c0d0a715d2f">hex</a> &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#ga2b44e6ada22b1b5a703617123ebd0598">uppercase</a>        \</div>
 <div class="line">                                   &lt;&lt; errc &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaa46b20141a495c428e33bcdcbf63c04e">dec</a> &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaff5eada882f71bd90e0de66c48faaeb3">nouppercase</a> &lt;&lt; <span class="charliteral">&#39;)&#39;</span>);      \</div>
 <div class="line">        fatalErrorExit();                                                      \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
@@ -185,6 +190,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <div class="ttc" id="agroup__AH__PrintStream_html_gaff5eada882f71bd90e0de66c48faaeb3"><div class="ttname"><a href="../../d8/d4b/group__AH__PrintStream.html#gaff5eada882f71bd90e0de66c48faaeb3">nouppercase</a></div><div class="ttdeci">Print &amp; nouppercase(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00038">PrintStream.cpp:38</a></div></div>
 <div class="ttc" id="agroup__AH__PrintStream_html_ga2b44e6ada22b1b5a703617123ebd0598"><div class="ttname"><a href="../../d8/d4b/group__AH__PrintStream.html#ga2b44e6ada22b1b5a703617123ebd0598">uppercase</a></div><div class="ttdeci">Print &amp; uppercase(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00033">PrintStream.cpp:33</a></div></div>
+<div class="ttc" id="aKV__Error_8hpp_html_a203d5b93e4077aa273c7013964a31f9e"><div class="ttname"><a href="../../d5/dbd/KV__Error_8hpp.html#a203d5b93e4077aa273c7013964a31f9e">F</a></div><div class="ttdeci">#define F(x)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/dbd/KV__Error_8hpp_source.html#l00038">KV_Error.hpp:38</a></div></div>
 <div class="ttc" id="agroup__AH__PrintStream_html_gaa47b34b5f85fef7f8b050c0d0a715d2f"><div class="ttname"><a href="../../d8/d4b/group__AH__PrintStream.html#gaa47b34b5f85fef7f8b050c0d0a715d2f">hex</a></div><div class="ttdeci">Print &amp; hex(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00060">PrintStream.cpp:60</a></div></div>
 <div class="ttc" id="agroup__AH__PrintStream_html_gaa46b20141a495c428e33bcdcbf63c04e"><div class="ttname"><a href="../../d8/d4b/group__AH__PrintStream.html#gaa46b20141a495c428e33bcdcbf63c04e">dec</a></div><div class="ttdeci">Print &amp; dec(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00075">PrintStream.cpp:75</a></div></div>
 <!-- start footer part -->

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['settings_1008',['Settings',['../d4/dc6/group__AH__Settings.html',1,'']]]
+  ['math_20utilities_1168',['Math Utilities',['../dd/d5e/group__AH__Math.html',1,'']]]
 ];

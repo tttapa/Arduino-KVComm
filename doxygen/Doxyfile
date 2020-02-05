@@ -32,19 +32,19 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = "Arduino Helpers"
+PROJECT_NAME           = "Arduino KVComm"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = 1.0.0
+PROJECT_NUMBER         = master
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = "Utility library for Arduino"
+PROJECT_BRIEF          = "Key-Value pair communication library for Arduino"
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
@@ -169,7 +169,7 @@ STRIP_FROM_PATH        =
 # specify the list of include paths that are normally passed to the compiler
 # using the -I flag.
 
-STRIP_FROM_INC_PATH    = ../src
+STRIP_FROM_INC_PATH    = ../src ../src/KVComm/include
 
 # If the SHORT_NAMES tag is set to YES, doxygen will generate much shorter (but
 # less readable) file names. This can be useful is your file systems doesn't
@@ -676,7 +676,7 @@ GENERATE_DEPRECATEDLIST= YES
 # sections, marked by \if <section_label> ... \endif and \cond <section_label>
 # ... \endcond blocks.
 
-ENABLED_SECTIONS       = AH_MAIN_LIBRARY
+ENABLED_SECTIONS       =
 
 # The MAX_INITIALIZER_LINES tag determines the maximum number of lines that the
 # initial value of a variable or macro / define can have for it to appear in the
@@ -2129,9 +2129,9 @@ PREDEFINED             = ARDUINO \
                          TEENSY_AUDIOUSB_ENABLED \
                          USE_MIDI_USB_INTERFACE \
                          PROGMEM= \
-                         BEGIN_AH_NAMESPACE= \
-                         END_AH_NAMESPACE= \
-                         USING_AH_NAMESPACE= \
+                         BEGIN_AH_NAMESPACE="namespace AH{" \
+                         END_AH_NAMESPACE="}" \
+                         USING_AH_NAMESPACE="using namespace AH;" \
                          AH_DIAGNOSTIC_WERROR=; \
                          AH_DIAGNOSTIC_POP=; \
                          AH_DIAGNOSTIC_EXTERNAL_HEADER=;

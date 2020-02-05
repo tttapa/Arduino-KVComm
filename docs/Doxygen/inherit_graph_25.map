@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$d5/d20/classIncrementDecrementButtons.html" title="A class for buttons that increment and decrement some counter or setting." alt="" coords="5,5,195,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,84,32"/>
+<area shape="rect" id="node2" href="$dc/d50/classKV__Exception.html" title="Custom exception for KVComm. Not used on Arduino." alt="" coords="132,5,237,32"/>
 </map>

@@ -2,7 +2,7 @@
 
 #ifdef ARDUINO
 
-#include <KVComm/include/KV_Iterator.hpp>  // KV_Iterator
+#include <KVComm/include/KVComm/KV_Iterator.hpp>  // KV_Iterator
 
 #include <AH/STL/array>             // std::array
 #include <AH/STL/cstddef>           // size_t
@@ -12,7 +12,7 @@
 
 #else
 
-#include <KV_Iterator.hpp>  // KV_Iterator
+#include <KVComm/KV_Iterator.hpp>  // KV_Iterator
 
 #include <array>             // std::array
 #include <cstddef>           // size_t
@@ -445,4 +445,4 @@ class Static_KV_Builder : public KV_Builder {
     std::array<uint8_t, N> buffer = {{}};
 };
 
-#include "../src/KV_Builder.ipp"
+#include "KV_Builder.ipp"

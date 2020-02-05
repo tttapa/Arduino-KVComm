@@ -1,7 +1,7 @@
 #ifndef ARDUINO
 
-#include <KV_Iterator.hpp>  // KV_Iterator
-#include <KV_Parser.hpp>    // KV_Parser
+#include <KVComm/KV_Iterator.hpp>  // KV_Iterator
+#include <KVComm/KV_Parser.hpp>    // KV_Parser
 
 #include <cstring>   // strcmp
 #include <iostream>  // cout

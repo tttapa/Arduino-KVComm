@@ -20,7 +20,7 @@ project(Arduino-KVComm)
 # Add Google Test
 ################################################################################
 
-add_subdirectory(googletest)
+add_subdirectory(googletest EXCLUDE_FROM_ALL)
 include_directories(${gmock_SOURCE_DIR}/include)
 include_directories(${gtest_SOURCE_DIR}/include)
 

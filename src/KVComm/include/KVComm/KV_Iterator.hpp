@@ -2,9 +2,9 @@
 
 #ifdef ARDUINO
 
-#include <KVComm/include/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
-#include <KVComm/include/KV_Error.hpp>     // KV_ERROR
-#include <KVComm/include/KV_Types.hpp>     // KV_Type<T>
+#include <KVComm/include/KVComm/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/include/KVComm/KV_Error.hpp>     // KV_ERROR
+#include <KVComm/include/KVComm/KV_Types.hpp>     // KV_Type<T>
 
 #include <AH/STL/array>     // std::array
 #include <AH/STL/cstddef>   // size_t
@@ -16,9 +16,9 @@
 
 #else
 
-#include <KV_Error.hpp>    // KV_ERROR
-#include <KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
-#include <KV_Types.hpp>    // KV_Type<T>
+#include <KVComm/KV_Error.hpp>    // KV_ERROR
+#include <KVComm/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/KV_Types.hpp>    // KV_Type<T>
 
 #include <array>     // std::array
 #include <cstddef>   // size_t

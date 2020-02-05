@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
-#include <KV_Helpers.hpp>
-#include <KV_Builder.hpp>
-#include <KV_Parser.hpp>
+#include <KVComm/KV_Helpers.hpp>
+#include <KVComm/KV_Builder.hpp>
+#include <KVComm/KV_Parser.hpp>
 
 #include <iostream>
 

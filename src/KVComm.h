@@ -1,4 +1,4 @@
 #pragma once
 
-#include <KVComm/public/KV_Types.hpp>
-#include <KVComm/public/KV_Builder.hpp>
+#include <KVComm/include/KVComm/KV_Types.hpp>
+#include <KVComm/include/KVComm/KV_Builder.hpp>

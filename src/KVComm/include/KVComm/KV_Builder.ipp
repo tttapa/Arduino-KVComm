@@ -1,12 +1,12 @@
 #ifdef ARDUINO
 
-#include <KVComm/include/KV_Builder.hpp>
-#include <KVComm/include/KV_Types.hpp>
+#include <KVComm/include/KVComm/KV_Builder.hpp>
+#include <KVComm/include/KVComm/KV_Types.hpp>
 
 #else
 
-#include <KV_Builder.hpp>
-#include <KV_Types.hpp>
+#include <KVComm/KV_Builder.hpp>
+#include <KVComm/KV_Types.hpp>
 
 #endif
 

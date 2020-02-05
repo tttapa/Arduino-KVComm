@@ -1,25 +1,29 @@
 #ifdef ARDUINO
 
-#include <KVComm/include/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
-#include <KVComm/include/KV_Builder.hpp>
+#include <KVComm/include/KVComm/KV_Builder.hpp>
+#include <KVComm/include/KVComm/KV_Helpers.hpp> // nextWord, roundUpToWordSizeMultiple
 
-#include <AH/STL/limits>  // std::numeric_limits
-#include <AH/STL/memory>  // std::make_unique
+#include <AH/STL/limits> // std::numeric_limits
+#include <AH/STL/memory> // std::make_unique
+
+using AH::make_unique;
 
 #else
 
-#include <KV_Builder.hpp>
-#include <KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/KV_Builder.hpp>
+#include <KVComm/KV_Helpers.hpp> // nextWord, roundUpToWordSizeMultiple
 
-#include <iomanip>  // setw
-#include <limits>   // std::numeric_limits
-#include <memory>   // std::make_unique
-#include <ostream>  // os
+#include <iomanip> // setw
+#include <limits>  // std::numeric_limits
+#include <memory>  // std::make_unique
+#include <ostream> // os
+
+using std::make_unique;
 
 #endif
 
 #if defined(ARDUINO) || defined(ARDUINO_TEST)
-#include <AH/PrintStream/PrintStream.hpp>  // <<
+#include <AH/PrintStream/PrintStream.hpp> // <<
 #endif
 
 uint8_t *KV_Builder::writeHeader(const char *key, uint8_t typeID,
@@ -44,7 +48,7 @@ uint8_t *KV_Builder::writeHeader(const char *key, uint8_t typeID,
     maxLen -= paddedLen;
     bufferwritelocation += paddedLen;
     if (maxLen > 0)
-        bufferwritelocation[0] = 0x00;  // Null terminate
+        bufferwritelocation[0] = 0x00; // Null terminate
     return dataStart;
 }
 
@@ -60,7 +64,7 @@ static inline void printHex(S &os, uint8_t val) {
 
 template <class S>
 void printW(S &os, unsigned u, uint8_t w, char fill = ' ') {
-    auto str    = std::make_unique<char[]>(w + 1);
+    auto str    = make_unique<char[]>(w + 1);
     str[w]      = '\0';
     char *begin = &str[0];
     char *end   = begin + w - 1;

@@ -1,15 +1,15 @@
 #ifdef ARDUINO
 
-#include <KVComm/include/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
-#include <KVComm/include/KV_Iterator.hpp>
+#include <KVComm/include/KVComm/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/include/KVComm/KV_Iterator.hpp>
 
 #include <AH/STL/algorithm>  // find_if
 #include <string.h>          // strlen
 
 #else
 
-#include <KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
-#include <KV_Iterator.hpp>
+#include <KVComm/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/KV_Iterator.hpp>
 
 #include <algorithm>  // find_if
 #include <cstring>    // strlen

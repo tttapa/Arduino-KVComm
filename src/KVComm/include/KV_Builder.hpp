@@ -1,6 +1,8 @@
 #pragma once
 
-#include <KVComm/private/KV_Iterator.hpp>  // KV_Iterator
+#ifdef ARDUINO
+
+#include <KVComm/include/KV_Iterator.hpp>  // KV_Iterator
 
 #include <AH/STL/array>             // std::array
 #include <AH/STL/cstddef>           // size_t
@@ -8,8 +10,20 @@
 #include <AH/STL/vector>            // std::vector
 #include <string.h>                 // strlen
 
-#ifndef ARDUINO
-#include <iosfwd>  // std::ostream forward declaration
+#else
+
+#include <KV_Iterator.hpp>  // KV_Iterator
+
+#include <array>             // std::array
+#include <cstddef>           // size_t
+#include <cstring>           // strlen
+#include <initializer_list>  // std::initializer_list
+#include <iosfwd>            // std::ostream forward declaration
+#include <vector>            // std::vector
+#endif
+
+#if defined(ARDUINO) || defined(ARDUINO_TEST)
+#include <Print.h>
 #endif
 
 /**
@@ -346,6 +360,7 @@ class KV_Builder {
     void printPython(std::ostream &os) const;
 #endif  // ARDUINO
 
+#if defined(ARDUINO) || defined(ARDUINO_TEST)
     /**
      * @brief   Dump the dictionary buffer to the given output stream in a 
      *          human-readable format (offset + hexadecimal + ASCII).
@@ -363,6 +378,7 @@ class KV_Builder {
      *          The stream to print to.
      */
     void printPython(Print &os) const;
+#endif
 
   private:
     uint8_t *buffer;
@@ -429,4 +445,4 @@ class Static_KV_Builder : public KV_Builder {
     std::array<uint8_t, N> buffer = {{}};
 };
 
-#include <KVComm/src/KV_Builder.ipp>
+#include "../src/KV_Builder.ipp"

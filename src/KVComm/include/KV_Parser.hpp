@@ -2,7 +2,7 @@
 
 #ifndef ARDUINO
 
-#include <KVComm/public/KV_Types.hpp>  // KV_Type
+#include <KV_Types.hpp>  // KV_Type
 
 #include <cstdint>    // uint8_t, uint32_t
 #include <map>        // std::map

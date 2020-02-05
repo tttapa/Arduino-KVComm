@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
-#include <KVComm/private/KV_Helpers.hpp>
-#include <KVComm/public/KV_Builder.hpp>
-#include <KVComm/public/KV_Parser.hpp>
+#include <KV_Helpers.hpp>
+#include <KV_Builder.hpp>
+#include <KV_Parser.hpp>
 
 #include <iostream>
 
@@ -181,9 +181,9 @@ TEST(KV_Parser, incorrectAccess) {
     size_t length         = logger.getLength();
     KV_Parser parsed = {data, length};
 
-    using out_of_range = AH::ErrorException;
-    using logic_error  = AH::ErrorException;
-    using length_error = AH::ErrorException;
+    using out_of_range = KV_Exception;
+    using logic_error  = KV_Exception;
+    using length_error = KV_Exception;
 
     // Correct
     EXPECT_NO_THROW(parsed["value1"].getAs<uint32_t>());

@@ -1,5 +1,14 @@
-#include <KVComm/public/KV_Builder.hpp>
-#include <KVComm/public/KV_Types.hpp>
+#ifdef ARDUINO
+
+#include <KVComm/include/KV_Builder.hpp>
+#include <KVComm/include/KV_Types.hpp>
+
+#else
+
+#include <KV_Builder.hpp>
+#include <KV_Types.hpp>
+
+#endif
 
 template <class T>
 void KV_Builder::overwrite(uint8_t *buffer, const T *data, size_t count) {

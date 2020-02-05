@@ -1,12 +1,22 @@
-#include <KVComm/private/KV_Iterator.hpp>
+#ifdef ARDUINO
 
-#include <AH/STL/algorithm>                  // find_if
-#include <KVComm/private/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
-#include <assert.h>                          // assert
-#include <string.h>                          // strlen
+#include <KVComm/include/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/include/KV_Iterator.hpp>
 
-KV_Iterator::iterator::iterator()
-    : kv(nullptr), remainingBufferLength(0) {}
+#include <AH/STL/algorithm>  // find_if
+#include <string.h>          // strlen
+
+#else
+
+#include <KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KV_Iterator.hpp>
+
+#include <algorithm>  // find_if
+#include <cstring>    // strlen
+
+#endif
+
+KV_Iterator::iterator::iterator() : kv(nullptr), remainingBufferLength(0) {}
 
 KV_Iterator::iterator::iterator(const uint8_t *buffer, size_t length)
     : kv(buffer), remainingBufferLength(length) {

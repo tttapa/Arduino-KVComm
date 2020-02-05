@@ -1,14 +1,25 @@
-#include <KVComm/public/KV_Builder.hpp>
+#ifdef ARDUINO
 
-#include <AH/PrintStream/PrintStream.hpp>  // <<
+#include <KVComm/include/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <KVComm/include/KV_Builder.hpp>
 
-#include <AH/STL/limits>                  // std::numeric_limits
-#include <AH/STL/memory>                  // std::make_unique
-#include <KVComm/private/KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+#include <AH/STL/limits>  // std::numeric_limits
+#include <AH/STL/memory>  // std::make_unique
 
-#ifndef ARDUINO
+#else
+
+#include <KV_Builder.hpp>
+#include <KV_Helpers.hpp>  // nextWord, roundUpToWordSizeMultiple
+
 #include <iomanip>  // setw
+#include <limits>   // std::numeric_limits
+#include <memory>   // std::make_unique
 #include <ostream>  // os
+
+#endif
+
+#if defined(ARDUINO) || defined(ARDUINO_TEST)
+#include <AH/PrintStream/PrintStream.hpp>  // <<
 #endif
 
 uint8_t *KV_Builder::writeHeader(const char *key, uint8_t typeID,
@@ -49,7 +60,7 @@ static inline void printHex(S &os, uint8_t val) {
 
 template <class S>
 void printW(S &os, unsigned u, uint8_t w, char fill = ' ') {
-    auto str    = AH::make_unique<char[]>(w + 1);
+    auto str    = std::make_unique<char[]>(w + 1);
     str[w]      = '\0';
     char *begin = &str[0];
     char *end   = begin + w - 1;
@@ -109,8 +120,10 @@ void KV_Builder::printPython(std::ostream &os) const {
 }
 #endif
 
+#if defined(ARDUINO) || defined(ARDUINO_TEST)
 void KV_Builder::print(Print &os) const { ::print(*this, os); }
 void KV_Builder::printPython(Print &os) const { ::printPython(*this, os); }
+#endif
 
 KV_Iterator::iterator KV_Builder::find(const char *key) const {
     KV_Iterator dict = {getBuffer(), getLength()};

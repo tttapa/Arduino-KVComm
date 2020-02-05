@@ -1,13 +1,12 @@
 #ifndef ARDUINO
 
-#include <KVComm/private/KV_Iterator.hpp>  // KV_Iterator
-#include <KVComm/public/KV_Parser.hpp>     // KV_Parser
+#include <KV_Iterator.hpp>  // KV_Iterator
+#include <KV_Parser.hpp>    // KV_Parser
 
 #include <cstring>   // strcmp
 #include <iostream>  // cout
 
-KV_Parser::map_t KV_Parser::parse(const uint8_t *buffer,
-                                            size_t length) {
+KV_Parser::map_t KV_Parser::parse(const uint8_t *buffer, size_t length) {
     map_t parseResult{};
     for (auto &entry : KV_Iterator(buffer, length)) {
         const char *identifier = entry.getID();

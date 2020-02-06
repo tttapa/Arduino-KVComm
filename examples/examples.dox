@@ -35,20 +35,24 @@
  */
 
 /**
- * @example   "STL-test.ino"
- * 
- * STL-test
- * ========
- *
- * @boards  AVR, AVR USB, Nano 33, Teensy 3.x, ESP8266, ESP32
- */
-
-/**
  * @example   "KVComm-Send.ino"
  * 
  * KVComm-Send
  * ===========
  *
  * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ */
+
+/**
+ * @example   "CRC-test.ino"
+ * 
+ * CRC-test
+ * ========
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Test for boost::crc Arduino port.
+ * 
+ * Example code from <https://www.boost.org/doc/libs/1_72_0/libs/crc/crc.html>.
  */
 

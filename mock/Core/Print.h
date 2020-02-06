@@ -20,14 +20,13 @@
 #ifndef Print_h
 #define Print_h
 
-#include <Arduino.h>
-
 #include <inttypes.h>
 #include <stdio.h> // for size_t
 
 #include <string.h>
 
 class Printable;
+struct __FlashStringHelper;
 
 #define DEC 10
 #define HEX 16

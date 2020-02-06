@@ -1,0 +1,6 @@
+/**
+ * @defgroup    SLIP SLIP
+ * @brief       Implementation of SLIP, a simple packet framing protocol.
+ * 
+ * [RFC 1055](https://tools.ietf.org/html/rfc1055)
+ */

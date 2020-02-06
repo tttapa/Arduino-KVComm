@@ -4,20 +4,19 @@
 
 // LCOV_EXCL_START
 
-#if not defined(ARDUINO_ARCH_ESP32) && not defined(ARDUINO_ARCH_SAM) &&        \
-    not defined(ARDUINO_API_VERSION)
+#if (defined(ESP8266) || defined(TEENSY)) && not defined(ARDUINO_API_VERSION)
 #define FLUSH
-#endif
+#endif // TODO
 
 /* #define OCT 8 */
 
-uint8_t formatPrintStream = DEC;
-bool boolalphaPrintStream = false;
-bool leadingZerosPrintStream = false;
-uint8_t precisionPrintStream = 2;
-char byteSeparatorPrintStream = '\0';
+uint8_t formatPrintStream                                          = DEC;
+bool boolalphaPrintStream                                          = false;
+bool leadingZerosPrintStream                                       = false;
+uint8_t precisionPrintStream                                       = 2;
+char byteSeparatorPrintStream                                      = '\0';
 enum : char { LOWERCASE = 0x7F, UPPERCASE = 0x5F } casePrintStream = LOWERCASE;
-bool showbasePrintStream = false;
+bool showbasePrintStream                                           = false;
 
 template <class T>
 Print &printIntegral(Print &printer, T i);
@@ -192,7 +191,7 @@ void printHex(Print &printer, T val) {
         printer.print("0x");
     bool nonZero = false;
     for (int i = sizeof(val) - 1; i >= 0; i--) {
-        uint8_t currByte = ((uint8_t *)&val)[i];
+        uint8_t currByte = ((uint8_t *) &val)[i];
         if (currByte != 0 || i == 0)
             nonZero = true;
         if (leadingZerosPrintStream || nonZero) {
@@ -210,7 +209,7 @@ void printBin(Print &printer, T val) {
         printer.print("0b");
     bool nonZero = false;
     for (int i = sizeof(val) - 1; i >= 0; i--) {
-        uint8_t currByte = ((uint8_t *)&val)[i];
+        uint8_t currByte = ((uint8_t *) &val)[i];
         for (int j = 7; j >= 0; j--) {
             uint8_t currBit = currByte & 0x80;
             if (currBit != 0 || (i == 0 && j == 0))

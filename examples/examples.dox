@@ -1,4 +1,40 @@
 /**
+ * @example   "SLIP-Receive.ino"
+ * 
+ * SLIP-Receive
+ * ============
+ *
+ * Receives SLIP packages over Serial.
+ * 
+ * @see     @ref SLIP-Send.ino
+ * 
+ * Written by PieterP, 2020-02-06  
+ * https://github.com/tttapa/Arduino-KVComm
+ */
+
+/**
+ * @example   "SLIP-Send.ino"
+ * 
+ * SLIP-Send
+ * =========
+ *
+ * Send a SLIP package over the serial port every 5 seconds.
+ * 
+ * 1. Upload this sketch to one Arduino.
+ * 2. Upload the @ref SLIP-Receive.ino sketch to a second Arduino.
+ * 3. Connect the TX pin of this Arduino to the RX pin of the second Arduino.
+ * 4. Open the Serial monitor of the second Arduino.
+ * 
+ * It should print the following:
+ * 
+ *     Received packet: 
+ *     Hello, world!
+ * 
+ * Written by PieterP, 2020-02-06  
+ * https://github.com/tttapa/Arduino-KVComm
+ */
+
+/**
  * @example   "BlinkWithoutDelay-Timer.ino"
  * 
  * BlinkWithoutDelay-Timer

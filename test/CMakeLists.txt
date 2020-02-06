@@ -5,6 +5,7 @@ target_include_directories(tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(tests
                       Arduino_Helpers
                       kvcomm_arduino
+                      slipstream
                       googletest_wrappers)
 
 # Add tests

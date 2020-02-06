@@ -75,52 +75,52 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md44">Installation without Git</a><ul><li class="level2"><a href="#autotoc_md45">1. Download</a></li>
-<li class="level2"><a href="#autotoc_md46">2. Install the Library in the Arduino IDE</a></li>
+<ul><li class="level1"><a href="#autotoc_md46">Installation without Git</a><ul><li class="level2"><a href="#autotoc_md47">1. Download</a></li>
+<li class="level2"><a href="#autotoc_md48">2. Install the Library in the Arduino IDE</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md47">Installation with Git</a><ul><li class="level2"><a href="#autotoc_md48">0. Install Git</a></li>
-<li class="level2"><a href="#autotoc_md49">1. Browse to your Arduino Libraries folder</a></li>
-<li class="level2"><a href="#autotoc_md50">2. Clone the Library</a></li>
-<li class="level2"><a href="#autotoc_md51">3. Updating to the latest version</a></li>
+<li class="level1"><a href="#autotoc_md49">Installation with Git</a><ul><li class="level2"><a href="#autotoc_md50">0. Install Git</a></li>
+<li class="level2"><a href="#autotoc_md51">1. Browse to your Arduino Libraries folder</a></li>
+<li class="level2"><a href="#autotoc_md52">2. Clone the Library</a></li>
+<li class="level2"><a href="#autotoc_md53">3. Updating to the latest version</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md52">Installing the C++ library</a></li>
+<li class="level1"><a href="#autotoc_md54">Installing the C++ library</a></li>
 </ul>
 </div>
 <div class="textblock"><p>This document assumes that the <b>Arduino IDE</b> is already installed, as well as the necessary hardware support packages, such as Teensyduino or the ESP32 Core, if you're not using a standard board. <br  />
  Here are some links to installation instructions for the Arduino IDE on <a href="https://tttapa.github.io/Pages/Ubuntu/Software-Installation/Arduino/Arduino-IDE.html"><b>Linux</b></a>, on <a href="https://www.arduino.cc/en/guide/windows"><b>Windows</b></a>, and on <a href="https://www.arduino.cc/en/guide/macOSX"><b>OSX</b></a>.</p>
 <p>If you want to keep up to date with the latest developments, or if you want an easy way to update, the Git install is recommended. Otherwise, the installation without Git will be fine as well.</p>
-<h1><a class="anchor" id="autotoc_md44"></a>
+<h1><a class="anchor" id="autotoc_md46"></a>
 Installation without Git</h1>
-<h2><a class="anchor" id="autotoc_md45"></a>
+<h2><a class="anchor" id="autotoc_md47"></a>
 1. Download</h2>
 <p>Download the repository as a ZIP archive by going to the <a href="https://github.com/tttapa/Arduino-KVComm">home page of the repository</a> and click the green <em>Clone or download</em> button on the top right.</p>
 <p>If you want to download the latest stable release, you can go to the <a href="https://github.com/tttapa/Arduino-KVComm/releases">Releases page</a> on GitHub.</p>
-<h2><a class="anchor" id="autotoc_md46"></a>
+<h2><a class="anchor" id="autotoc_md48"></a>
 2. Install the Library in the Arduino IDE</h2>
 <p>Open the Arduino IDE, and go to the <em>Sketch &gt; Include Library &gt; Add .ZIP Library</em> menu. <br  />
  Then navigate to your downloads directory where you just downloaded the library. <br  />
  Select it, and click <em>Ok</em>.</p>
-<h1><a class="anchor" id="autotoc_md47"></a>
+<h1><a class="anchor" id="autotoc_md49"></a>
 Installation with Git</h1>
-<h2><a class="anchor" id="autotoc_md48"></a>
+<h2><a class="anchor" id="autotoc_md50"></a>
 0. Install Git</h2>
 <p>If you haven't already, install Git from <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> or use your system's package manager.</p>
 <p>On Ubuntu and other Debian-based distros: </p><div class="fragment"><div class="line">sudo apt install git</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md49"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md51"></a>
 1. Browse to your Arduino Libraries folder</h2>
 <p>Open a terminal window and change the directory to your Arduino folder.</p>
 <p>In a Linux terminal or Git Bash: </p><div class="fragment"><div class="line">mkdir -p ~/Arduino/libraries &amp;&amp; cd $_</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md50"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md52"></a>
 2. Clone the Library</h2>
 <div class="fragment"><div class="line">git clone https://github.com/tttapa/Arduino-KVComm.git</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md51"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md53"></a>
 3. Updating to the latest version</h2>
 <p>If you installed the library using Git, you can easily update it when a new version comes out. <br  />
  To update to the latest <code>master</code> version:</p>
 <div class="fragment"><div class="line">git pull</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md52"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md54"></a>
 Installing the C++ library</h1>
 <p>After installing the Arduino library, you can also install the C++ library for your computer.</p>
 <p>Open the <code>Arduino-KVComm/build</code> folder in a terminal, and run the following commands to build, test, and install the library:</p>

@@ -1,3 +1,5 @@
+find_package(Boost REQUIRED)
+
 # Test executable compilation and linking
 file(GLOB_RECURSE TESTS_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 add_executable(tests ${TESTS_SOURCES})
@@ -6,7 +8,8 @@ target_link_libraries(tests
                       Arduino_Helpers
                       kvcomm_arduino
                       slipstream
-                      googletest_wrappers)
+                      googletest_wrappers
+                      Boost::boost)
 
 # Add tests
 gtest_discover_tests(tests)

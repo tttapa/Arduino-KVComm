@@ -7,6 +7,7 @@
 #include <AH/STL/algorithm>
 #include <AH/STL/array>
 #include <AH/STL/bitset>
+#include <AH/STL/climits>
 #include <AH/STL/cmath>
 #include <AH/STL/complex>
 #include <AH/STL/cstddef>

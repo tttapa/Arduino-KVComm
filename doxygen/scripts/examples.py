@@ -7,6 +7,7 @@ from pathlib import Path
 
 dirnm = os.path.dirname(os.path.realpath(__file__))
 doxydir = join(dirnm, '..')
+exclude = re.compile(r'examples/Arduino-Helpers/')
 
 template = """\
 /**
@@ -47,6 +48,9 @@ with open(join(doxydir, 'Doxyfile')) as doxy:
 output = ""
 
 for root, dirs, files in os.walk(exampledir):
+    if exclude is not None and re.search(exclude, root) is not None:
+        print('Excluding', root)
+        continue
     print('Scanning', root)
     for file in sorted(files):
         if file.endswith('.ino'):

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino KVComm: ButtonMatrix.hpp File Reference</title>
+<title>Arduino KVComm: CRC-test.ino</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -54,6 +54,7 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -68,47 +69,51 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_15b6432dff6a6d357bf70f8fbf2cdf14.html">AH</a></li><li class="navelem"><a class="el" href="../../dir_fe496568715fe26a65b354e6e2365ccd.html">Hardware</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">ButtonMatrix.hpp File Reference</div>  </div>
+<div class="title">CRC-test.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="../../d1/d65/Warnings_8hpp_source.html">AH/Settings/Warnings.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="../../d4/d35/Hardware-Types_8hpp_source.html">AH/Hardware/Hardware-Types.hpp</a>&gt;</code><br />
-<code>#include &quot;<a class="el" href="../../d5/d41/ButtonMatrix_8ipp_source.html">ButtonMatrix.ipp</a>&quot;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for ButtonMatrix.hpp:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d0/daf/ButtonMatrix_8hpp__incl.svg" width="1455" height="1038"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d9/dc5/ButtonMatrix_8hpp__dep__incl.svg" width="132" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-</div>
-<p><a href="../../d9/d4b/ButtonMatrix_8hpp_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d29/classAH_1_1ButtonMatrix.html">ButtonMatrix&lt; nb_rows, nb_cols &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class that reads the states of a button matrix.  <a href="../../dd/d29/classAH_1_1ButtonMatrix.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:dc/d69/namespaceAH"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d69/namespaceAH.html">AH</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<h1><a class="anchor" id="autotoc_md3"></a>
+CRC-test</h1>
+<dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32</dd></dl>
+<p>Test for boost::crc Arduino port.</p>
+<p>Example code from <a href="https://www.boost.org/doc/libs/1_72_0/libs/crc/crc.html">https://www.boost.org/doc/libs/1_72_0/libs/crc/crc.html</a>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../df/d37/KVComm_8h.html">KVComm.h</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;AH/STL/algorithm&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;assert.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;boost/crc.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> setup() {</div>
+<div class="line">  Serial.begin(115200);</div>
+<div class="line">  <span class="keywordflow">while</span> (!Serial);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// This is &quot;123456789&quot; in ASCII</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <span class="keyword">const</span> data[] = {0x31, 0x32, 0x33, 0x34, 0x35,</div>
+<div class="line">                                0x36, 0x37, 0x38, 0x39};</div>
+<div class="line">  std::size_t <span class="keyword">const</span> data_len = <span class="keyword">sizeof</span>(data) / <span class="keyword">sizeof</span>(data[0]);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The expected CRC for the given data</span></div>
+<div class="line">  boost::uint16_t <span class="keyword">const</span> expected = 0x29B1;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Simulate CRC-CCITT</span></div>
+<div class="line">  boost::crc_basic&lt;16&gt; crc_ccitt1(0x1021, 0xFFFF, 0, <span class="keyword">false</span>, <span class="keyword">false</span>);</div>
+<div class="line">  crc_ccitt1.process_bytes(data, data_len);</div>
+<div class="line">  assert(crc_ccitt1.checksum() == expected);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Repeat with the optimal version (assuming a 16-bit type exists)</span></div>
+<div class="line">  boost::crc_optimal&lt;16, 0x1021, 0xFFFF, 0, false, false&gt; crc_ccitt2;</div>
+<div class="line">  crc_ccitt2 = std::for_each(data, data + data_len, crc_ccitt2);</div>
+<div class="line">  assert(crc_ccitt2() == expected);</div>
+<div class="line"> </div>
+<div class="line">  Serial.println(<span class="stringliteral">&quot;All tests passed.&quot;</span>);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> loop() {}</div>
+</div><!-- fragment --> </div><!-- contents -->
+<div class="ttc" id="aKVComm_8h_html"><div class="ttname"><a href="../../df/d37/KVComm_8h.html">KVComm.h</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

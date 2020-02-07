@@ -30,12 +30,12 @@ TEST(SLIPSender, writePacketCRC) {
     std::vector<uint8_t> expected = {
         0xC0,                                                 // END
         0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, // data
-        0xB1, 0x29,                                           // Checksum
+        0x29, 0xB1,                                           // Checksum
         0xC0,                                                 // END
         0xFF,                                                 // Guard
         0xC0,                                                 // END
         0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, // data
-        0xB1, 0x29,                                           // Checksum
+        0x29, 0xB1,                                           // Checksum
         0xC0,                                                 // END
     };
     EXPECT_EQ(expected, buffer);

@@ -1,9 +1,10 @@
 #pragma once
 
-#include <AH/STL/utility> // std::forward
-#include <limits.h>       // CHAR_BIT
-#include <stddef.h>       // size_t
-#include <string.h>       // memcpy
+#include <AH/STL/algorithm> // std::reverse
+#include <AH/STL/utility>   // std::forward
+#include <limits.h>         // CHAR_BIT
+#include <stddef.h>         // size_t
+#include <string.h>         // memcpy
 
 #include <boost/integer.hpp> // boost::uint_t
 
@@ -33,17 +34,19 @@ class SLIPSenderCRC {
     SLIPSenderCRC(Sender &&sender, CRC &&crc)
         : sender(std::forward<Sender>(sender)), crc(std::forward<CRC>(crc)) {}
 
+    using checksum_t = typename boost::uint_t<CRC::bit_count>::least;
+
     size_t beginPacket() {
         this->crc.reset();
         return sender.beginPacket();
     }
 
     size_t endPacket() {
-        using checksum_t = typename boost::uint_t<CRC::bit_count>::least;
         constexpr size_t numChars = sizeof(checksum_t);
         uint8_t buffer[numChars];
         const checksum_t checksum = this->crc.checksum();
         memcpy(buffer, &checksum, numChars);
+        std::reverse(std::begin(buffer), std::end(buffer));
         return sender.write(buffer, numChars) + sender.endPacket();
     }
 

@@ -60,6 +60,7 @@ lcov \
     '*/ArduinoMock/*' '*/mock/*' \
     '*/googletest/*' \
     '*/test/*' \
+    '*/boost/*' \
     --output-file "$dest"/coverage_filtered.info \
     --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches

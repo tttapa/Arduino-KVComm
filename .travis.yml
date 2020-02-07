@@ -19,10 +19,10 @@ cache:
     - $HOME/.local
     - $HOME/Arduino
 
-before_install:
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-get update -q
-  - sudo apt-get install libstdc++6 -y
+# before_install:
+#   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+#   - sudo apt-get update -q
+#   - sudo apt-get install libstdc++6 -y
 
 install:
   - bash scripts/install-ci.sh

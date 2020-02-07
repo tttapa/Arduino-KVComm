@@ -15,18 +15,17 @@
  * https://github.com/tttapa/Arduino-KVComm
  */
 
-
 #include <KVComm.h>
 #include <SLIPStream/SLIPStream.hpp>
 
 SLIPStream slip = Serial;
 
 void setup() {
-    Serial.begin(115200);
+  Serial.begin(115200);
 }
 
 void loop() {
-    uint8_t data[] = "Hello, world!";
-    slip.writePacket(data, sizeof(data) - 1);
-    delay(5000);
+  uint8_t data[] = "Hello, world!";
+  slip.writePacket(data, sizeof(data) - 1);
+  delay(5000);
 }

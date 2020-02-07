@@ -1,5 +1,6 @@
 #pragma once
 
+#include <AH/STL/cstddef> // std::nullptr, size_t
 #include <AH/STL/utility> // std::forward
 #include <stddef.h>       // size_t
 
@@ -9,6 +10,13 @@
 
 class SLIPParser {
   public:
+    template <size_t N>
+    SLIPParser(uint8_t (&buffer)[N]) : SLIPParser(buffer, N) {}
+
+    SLIPParser() : SLIPParser(nullptr) {}
+
+    SLIPParser(std::nullptr_t) : SLIPParser(nullptr, 0) {}
+
     SLIPParser(uint8_t *buffer, size_t bufferSize)
         : buffer(buffer), bufferSize(bufferSize) {
         reset();

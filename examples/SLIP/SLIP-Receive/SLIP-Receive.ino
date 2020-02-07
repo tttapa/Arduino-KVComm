@@ -10,20 +10,22 @@
 #include <KVComm.h>
 #include <SLIPStream/SLIPStream.hpp>
 
-SLIPStream slip = Serial;
 uint8_t slipbuffer[256];
+SLIPStream slip = {
+  Serial,
+  slipbuffer,
+};
 
 void setup() {
-    Serial.begin(115200);
-    slip.setReadBuffer(slipbuffer, sizeof(slipbuffer));
+  Serial.begin(115200);
 }
 
 void loop() {
-    size_t packetSize = slip.readPacket();
-    if (packetSize > 0) {
-        Serial.println("Received packet: ");
-        Serial.write(slipbuffer, packetSize);
-        Serial.println();
-        Serial.println(slip.wasTruncated() ? "Packet was truncated\n" : "");
-    }
+  size_t packetSize = slip.readPacket();
+  if (packetSize > 0) {
+    Serial.println("Received packet: ");
+    Serial.write(slipbuffer, packetSize);
+    Serial.println();
+    Serial.println(slip.wasTruncated() ? "Packet was truncated\n" : "");
+  }
 }

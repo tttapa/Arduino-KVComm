@@ -16,6 +16,7 @@ class SLIPStream {
   public:
     SLIPStream(Stream &stream, const SLIPParser &parser)
         : stream(&stream), parser(parser) {}
+    SLIPStream(Stream &stream) : stream(&stream), parser(nullptr, 0) {}
 
     /**
      * @brief   Sends a packet.

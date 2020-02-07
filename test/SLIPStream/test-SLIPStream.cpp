@@ -329,7 +329,7 @@ TEST(SLIPStreamCRC, readWrongCRC) {
     EXPECT_FALSE(slipstream.wasTruncated());
 }
 
-TEST(SLIPStreamCRC, readTruncate) {
+TEST(SLIPStreamCRC, readTruncate1) {
     MockStream stream;
     std::vector<uint8_t> input = {
         0xC0,                                                 // END
@@ -343,9 +343,8 @@ TEST(SLIPStreamCRC, readTruncate) {
 
     using CRC = boost::crc_optimal<16, 0x1021, 0xFFFF, 0, false, false>;
 
-    std::vector<uint8_t> packetBuffer(10 + 2 + 1);
-    //                                 │   │   └── extra guard byte
-    //                                 │   └────── checksum
+    std::vector<uint8_t> packetBuffer(10 + 1);
+    //                                 │   └── extra guard byte
     //                                 └────────── data size - 1
     SLIPStreamCRC<CRC> slipstream = {
         stream,                                         // stream
@@ -366,7 +365,168 @@ TEST(SLIPStreamCRC, readTruncate) {
     packetBuffer.resize(size);
     EXPECT_EQ(packetBuffer, expected);
     EXPECT_EQ(slipstream.checksum(), 0);
+    EXPECT_EQ(slipstream.numTruncated(), 1);
     EXPECT_TRUE(slipstream.wasTruncated());
+}
+
+TEST(SLIPStreamCRC, readTruncate2) {
+    MockStream stream;
+    std::vector<uint8_t> input = {
+        0xC0,                                                 // END
+        0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, // data
+        0xDB, 0xDC, 0xDB, 0xDD,                               //
+        0x67, 0xC6,                                           // Checksum
+        0xC0,                                                 // END
+    };
+    stream.readBuffer = input.data();
+    stream.readLength = input.size();
+
+    using CRC = boost::crc_optimal<16, 0x1021, 0xFFFF, 0, false, false>;
+
+    std::vector<uint8_t> packetBuffer(9 + 1);
+    //                                │   └── extra guard byte
+    //                                └────────── data size - 2
+    SLIPStreamCRC<CRC> slipstream = {
+        stream,                                         // stream
+        CRC(),                                          // sender CRC
+        {packetBuffer.data(), packetBuffer.size() - 1}, // parser
+        CRC(),                                          // parser CRC
+    };
+    uint8_t guard       = 0111;
+    packetBuffer.back() = guard;
+
+    std::vector<uint8_t> expected = {
+        0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, // data
+        /* 0xC0, 0xDB, */                                     // truncated
+    };
+
+    size_t size = slipstream.readPacket();
+    EXPECT_EQ(packetBuffer.back(), guard);
+    packetBuffer.resize(size);
+    EXPECT_EQ(packetBuffer, expected);
+    EXPECT_EQ(slipstream.checksum(), 0);
+    EXPECT_EQ(slipstream.numTruncated(), 2);
+    EXPECT_TRUE(slipstream.wasTruncated());
+}
+
+TEST(SLIPStreamCRC, readAlmostTruncated1) {
+    MockStream stream;
+    std::vector<uint8_t> input = {
+        0xC0,                                                 // END
+        0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, // data
+        0xDB, 0xDC, 0xDB, 0xDD,                               //
+        0x67, 0xC6,                                           // Checksum
+        0xC0,                                                 // END
+    };
+    stream.readBuffer = input.data();
+    stream.readLength = input.size();
+
+    using CRC = boost::crc_optimal<16, 0x1021, 0xFFFF, 0, false, false>;
+
+    std::vector<uint8_t> packetBuffer(11 + 1);
+    //                                 │   └── extra guard byte
+    //                                 └────────── data size
+    SLIPStreamCRC<CRC> slipstream = {
+        stream,                                         // stream
+        CRC(),                                          // sender CRC
+        {packetBuffer.data(), packetBuffer.size() - 1}, // parser
+        CRC(),                                          // parser CRC
+    };
+    uint8_t guard       = 0111;
+    packetBuffer.back() = guard;
+
+    std::vector<uint8_t> expected = {
+        0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, // data
+        0xC0, 0xDB,
+    };
+
+    size_t size = slipstream.readPacket();
+    EXPECT_EQ(packetBuffer.back(), guard);
+    packetBuffer.resize(size);
+    EXPECT_EQ(packetBuffer, expected);
+    EXPECT_EQ(slipstream.checksum(), 0);
+    EXPECT_EQ(slipstream.numTruncated(), 0);
+    EXPECT_FALSE(slipstream.wasTruncated());
+}
+
+TEST(SLIPStreamCRC, readAlmostTruncated2) {
+    MockStream stream;
+    std::vector<uint8_t> input = {
+        0xC0,                                                 // END
+        0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, // data
+        0xDB, 0xDC, 0xDB, 0xDD,                               //
+        0x67, 0xC6,                                           // Checksum
+        0xC0,                                                 // END
+    };
+    stream.readBuffer = input.data();
+    stream.readLength = input.size();
+
+    using CRC = boost::crc_optimal<16, 0x1021, 0xFFFF, 0, false, false>;
+
+    std::vector<uint8_t> packetBuffer(12 + 1);
+    //                                 │   └── extra guard byte
+    //                                 └────────── data size + 1
+    SLIPStreamCRC<CRC> slipstream = {
+        stream,                                         // stream
+        CRC(),                                          // sender CRC
+        {packetBuffer.data(), packetBuffer.size() - 1}, // parser
+        CRC(),                                          // parser CRC
+    };
+    uint8_t guard       = 0111;
+    packetBuffer.back() = guard;
+
+    std::vector<uint8_t> expected = {
+        0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, // data
+        0xC0, 0xDB,
+    };
+
+    size_t size = slipstream.readPacket();
+    EXPECT_EQ(packetBuffer.back(), guard);
+    packetBuffer.resize(size);
+    EXPECT_EQ(packetBuffer, expected);
+    EXPECT_EQ(slipstream.checksum(), 0);
+    EXPECT_EQ(slipstream.numTruncated(), 0);
+    EXPECT_FALSE(slipstream.wasTruncated());
+}
+
+TEST(SLIPStreamCRC, readAlmostTruncated3) {
+    MockStream stream;
+    std::vector<uint8_t> input = {
+        0xC0,                                                 // END
+        0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, // data
+        0xDB, 0xDC, 0xDB, 0xDD,                               //
+        0x67, 0xC6,                                           // Checksum
+        0xC0,                                                 // END
+    };
+    stream.readBuffer = input.data();
+    stream.readLength = input.size();
+
+    using CRC = boost::crc_optimal<16, 0x1021, 0xFFFF, 0, false, false>;
+
+    std::vector<uint8_t> packetBuffer(13 + 1);
+    //                                 │   └── extra guard byte
+    //                                 └────────── data size + 2
+    SLIPStreamCRC<CRC> slipstream = {
+        stream,                                         // stream
+        CRC(),                                          // sender CRC
+        {packetBuffer.data(), packetBuffer.size() - 1}, // parser
+        CRC(),                                          // parser CRC
+    };
+    uint8_t guard       = 0111;
+    packetBuffer.back() = guard;
+
+    std::vector<uint8_t> expected = {
+        0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, // data
+        0xC0, 0xDB,
+    };
+
+    size_t size = slipstream.readPacket();
+    EXPECT_EQ(packetBuffer.back(), guard);
+    packetBuffer.resize(size);
+    EXPECT_EQ(packetBuffer, expected);
+    EXPECT_EQ(slipstream.checksum(), 0);
+    EXPECT_EQ(slipstream.numTruncated(), 0);
+    EXPECT_FALSE(slipstream.wasTruncated());
 }
 
 TEST(SLIPStreamCRC, readChunks) {

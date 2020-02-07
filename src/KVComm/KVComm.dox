@@ -1,4 +1,4 @@
 /**
- * @defgroup KVComm KVComm
- * @brief   Key-Value pair communication library. 
+ * @defgroup KVComm Key-Value data
+ * @brief   Key-Value, dictionary-like datastructure. 
  */

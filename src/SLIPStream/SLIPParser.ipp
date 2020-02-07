@@ -58,12 +58,12 @@ size_t SLIPParser::parse(uint8_t c, Callback callback) {
             auto writeSize = reinterpret_cast<uintptr_t>(write) -
                              reinterpret_cast<uintptr_t>(buffer);
             callback(c, writeSize);
+            if (writeSize == 0) // first byte of packet
+                truncated = 0;
             if (writeSize < bufferSize) {
-                if (writeSize == 0) // first byte of packet
-                    truncated = false;
                 *write++ = c;
             } else {
-                truncated = true;
+                truncated++;
             }
         }
     }

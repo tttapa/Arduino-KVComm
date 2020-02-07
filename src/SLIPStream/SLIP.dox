@@ -1,6 +1,13 @@
 /**
- * @defgroup    SLIP SLIP
+ * @defgroup    SLIP SLIP communication
  * @brief       Implementation of SLIP, a simple packet framing protocol.
  * 
- * [RFC 1055](https://tools.ietf.org/html/rfc1055)
+ * @see [**RFC 1055**](https://tools.ietf.org/html/rfc1055)
+ */
+/** 
+ * @defgroup    CRC CRC integrity checks
+ * @brief       Cyclic Redundancy Check for SLIP communication.
+ * @ingroup     SLIP
+ * 
+ * @see [**Boost::CRC**](https://www.boost.org/doc/libs/1_72_0/doc/html/crc.html)
  */

@@ -271,9 +271,11 @@ class KV_Iterator {
 
         /// Advance the iterator.
         iterator &operator++();
+#if 0
         /// Compare the iterator to the "end" iterator. (Only compares the
         /// buffer pointer, which is nullptr for the "end" iterator.)
         bool operator==(const iterator &other) const;
+#endif
         /// Compare the iterator to the "end" iterator. (Only compares the
         /// buffer pointer, which is nullptr for the "end" iterator.)
         bool operator!=(const iterator &other) const;

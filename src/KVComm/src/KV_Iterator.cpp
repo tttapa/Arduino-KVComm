@@ -37,13 +37,17 @@ operator!=(const KV_Iterator::iterator &other) const {
     return this->kv.getBuffer() != other.kv.getBuffer();
 }
 
+#if 0
 bool KV_Iterator::iterator::
 operator==(const KV_Iterator::iterator &other) const {
     return this->kv.getBuffer() == other.kv.getBuffer();
 }
+#endif
 
 void KV_Iterator::iterator::checkLength() {
-    if (!kv || kv.getIDLength() == 0) {
+    if (remainingBufferLength == 0) {
+        kv = nullptr;
+    } else if (!kv || kv.getIDLength() == 0) {
         remainingBufferLength = 0;
         kv                    = nullptr;
     }

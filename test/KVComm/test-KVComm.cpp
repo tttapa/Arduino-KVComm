@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include <KVComm/KV_Helpers.hpp>
 #include <KVComm/KV_Builder.hpp>
+#include <KVComm/KV_Helpers.hpp>
 #include <KVComm/KV_Parser.hpp>
 
 #include <iostream>
@@ -33,24 +33,24 @@ TEST(KV_Builder, logValue) {
     logger.add("bool", true);
 
     std::vector<uint8_t> expected = {
-        0x06, 0x06, 0x04, 0x00,                          // type 6, size 4
-        'v',  'a',  'l',  'u',  'e',  '1',  0x00, 0x00,  //
-        0xEF, 0xBE, 0xAD, 0xDE,                          // 0xDEADBEEF
-        0x06, 0x02, 0x01, 0x00,                          // type 2, size 1
-        'v',  'a',  'l',  'u',  'e',  '2',  0x00, 0x00,  //
-        0x3C, 0x00, 0x00, 0x00,                          // 0x3C
-        0x06, 0x09, 0x04, 0x00,                          // type 9, size 4
-        'v',  'a',  'l',  'u',  'e',  '3',  0x00, 0x00,  //
-        0xC3, 0xF5, 0x48, 0x40,                          // 3.14f
-        0x03, 0x0C, 0x06, 0x00,                          // type 12, size 6
-        'k',  'e',  'y',  0x00,                          //
-        'v',  'a',  'l',  'u',  'e',  0x00, 0x00, 0x00,  // value
-        0x04, 0x0C, 0x03, 0x00,                          // type 12, size 3
-        0xF0, 0x9F, 0x94, 0x91, 0x00, 0x00, 0x00, 0x00,  // 🔑
-        0xCE, 0xBB, 0x00, 0x00,                          // λ
-        0x04, 0x0B, 0x01, 0x00,                          // type 11, size 1
-        'b',  'o',  'o',  'l',  0x00, 0x00, 0x00, 0x00,  //
-        0x01, 0x00, 0x00, 0x00,                          // true
+        0x06, 0x06, 0x04, 0x00,                         // type 6, size 4
+        'v',  'a',  'l',  'u',  'e',  '1',  0x00, 0x00, //
+        0xEF, 0xBE, 0xAD, 0xDE,                         // 0xDEADBEEF
+        0x06, 0x02, 0x01, 0x00,                         // type 2, size 1
+        'v',  'a',  'l',  'u',  'e',  '2',  0x00, 0x00, //
+        0x3C, 0x00, 0x00, 0x00,                         // 0x3C
+        0x06, 0x09, 0x04, 0x00,                         // type 9, size 4
+        'v',  'a',  'l',  'u',  'e',  '3',  0x00, 0x00, //
+        0xC3, 0xF5, 0x48, 0x40,                         // 3.14f
+        0x03, 0x0C, 0x06, 0x00,                         // type 12, size 6
+        'k',  'e',  'y',  0x00,                         //
+        'v',  'a',  'l',  'u',  'e',  0x00, 0x00, 0x00, // value
+        0x04, 0x0C, 0x03, 0x00,                         // type 12, size 3
+        0xF0, 0x9F, 0x94, 0x91, 0x00, 0x00, 0x00, 0x00, // 🔑
+        0xCE, 0xBB, 0x00, 0x00,                         // λ
+        0x04, 0x0B, 0x01, 0x00,                         // type 11, size 1
+        'b',  'o',  'o',  'l',  0x00, 0x00, 0x00, 0x00, //
+        0x01, 0x00, 0x00, 0x00,                         // true
     };
     const uint8_t *data         = logger.getBuffer();
     size_t length               = logger.getLength();
@@ -58,6 +58,28 @@ TEST(KV_Builder, logValue) {
 
     logger.print(std::cout);
     EXPECT_EQ(result, expected);
+
+    KV_Parser parsed = {data, length};
+    EXPECT_EQ(parsed["value1"].getAs<uint32_t>(), 0xDEADBEEF);
+    EXPECT_EQ(parsed["value2"].getAs<uint8_t>(), 0x3C);
+    EXPECT_EQ(parsed["value3"].getAs<float>(), 3.14f);
+    EXPECT_EQ(parsed["key"].getString(), "value");
+    EXPECT_EQ(parsed["🔑"].getString(), "λ");
+    EXPECT_EQ(parsed["bool"].getAs<bool>(), true);
+}
+
+TEST(KV_Builder, logValueParseBufferLongerThanData) {
+    Static_KV_Builder<2048> logger;
+    logger.add("value1", (uint32_t) 0xDEADBEEF);
+    logger.add("value2", (uint8_t) 0x3C);
+    logger.add("value3", (float) 3.14);
+    logger.add("key", "value");
+    logger.add("🔑", "λ");
+    logger.add("bool", true);
+
+    const uint8_t *data         = logger.getBuffer();
+    size_t length               = logger.getBufferSize(); // longer than data!
+    std::vector<uint8_t> result = {data, data + length};
 
     KV_Parser parsed = {data, length};
     EXPECT_EQ(parsed["value1"].getAs<uint32_t>(), 0xDEADBEEF);
@@ -77,23 +99,23 @@ TEST(KV_Builder, logArray) {
     logger.add<int>("array3", {42, 43, 44, 45});
 
     std::vector<uint8_t> expected = {
-        0x06, 0x09, 0x0C, 0x00,                          //
-        'a',  'r',  'r',  'a',  'y',  '1',  0x00, 0x00,  //
-        0x00, 0x00, 0x80, 0x3F,                          //
-        0x00, 0x00, 0x00, 0x40,                          //
-        0x00, 0x00, 0x40, 0x40,                          //
-        0x06, 0x0A, 0x20, 0x00,                          //
-        'a',  'r',  'r',  'a',  'y',  '2',  0x00, 0x00,  //
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0xBF,  //
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0,  //
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0xC0,  //
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0xC0,  //
-        0x06, 0x05, 0x10, 0x00,                          //
-        'a',  'r',  'r',  'a',  'y',  '3',  0x00, 0x00,  //
-        0x2A, 0x00, 0x00, 0x00,                          //
-        0x2B, 0x00, 0x00, 0x00,                          //
-        0x2C, 0x00, 0x00, 0x00,                          //
-        0x2D, 0x00, 0x00, 0x00,                          //
+        0x06, 0x09, 0x0C, 0x00,                         //
+        'a',  'r',  'r',  'a',  'y',  '1',  0x00, 0x00, //
+        0x00, 0x00, 0x80, 0x3F,                         //
+        0x00, 0x00, 0x00, 0x40,                         //
+        0x00, 0x00, 0x40, 0x40,                         //
+        0x06, 0x0A, 0x20, 0x00,                         //
+        'a',  'r',  'r',  'a',  'y',  '2',  0x00, 0x00, //
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0xBF, //
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, //
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0xC0, //
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0xC0, //
+        0x06, 0x05, 0x10, 0x00,                         //
+        'a',  'r',  'r',  'a',  'y',  '3',  0x00, 0x00, //
+        0x2A, 0x00, 0x00, 0x00,                         //
+        0x2B, 0x00, 0x00, 0x00,                         //
+        0x2C, 0x00, 0x00, 0x00,                         //
+        0x2D, 0x00, 0x00, 0x00,                         //
     };
     const uint8_t *data         = logger.getBuffer();
     size_t length               = logger.getLength();
@@ -143,21 +165,21 @@ TEST(KV_Builder, logValueReplace) {
     EXPECT_TRUE(logger.add("value1", (uint32_t) 0xDEADBEEF));
     EXPECT_TRUE(logger.add("value2", (uint8_t) 0x3C));
     EXPECT_TRUE(logger.add("value3", (float) 3.14));
-    EXPECT_TRUE(logger.add("value2", (uint8_t) 0x40));  // same id, same type
-    EXPECT_FALSE(logger.add("value2", (char) 0x41));    // different type
+    EXPECT_TRUE(logger.add("value2", (uint8_t) 0x40)); // same id, same type
+    EXPECT_FALSE(logger.add("value2", (char) 0x41));   // different type
     uint8_t array[] = {0x42, 0x43};
-    EXPECT_FALSE(logger.add("value2", array));  // different length
+    EXPECT_FALSE(logger.add("value2", array)); // different length
 
     std::vector<uint8_t> expected = {
-        0x06, 0x06, 0x04, 0x00,                        //
-        'v',  'a',  'l',  'u',  'e', '1', 0x00, 0x00,  //
-        0xEF, 0xBE, 0xAD, 0xDE,                        //
-        0x06, 0x02, 0x01, 0x00,                        //
-        'v',  'a',  'l',  'u',  'e', '2', 0x00, 0x00,  //
-        0x40, 0x00, 0x00, 0x00,                        //
-        0x06, 0x09, 0x04, 0x00,                        //
-        'v',  'a',  'l',  'u',  'e', '3', 0x00, 0x00,  //
-        0xC3, 0xF5, 0x48, 0x40,                        //
+        0x06, 0x06, 0x04, 0x00,                       //
+        'v',  'a',  'l',  'u',  'e', '1', 0x00, 0x00, //
+        0xEF, 0xBE, 0xAD, 0xDE,                       //
+        0x06, 0x02, 0x01, 0x00,                       //
+        'v',  'a',  'l',  'u',  'e', '2', 0x00, 0x00, //
+        0x40, 0x00, 0x00, 0x00,                       //
+        0x06, 0x09, 0x04, 0x00,                       //
+        'v',  'a',  'l',  'u',  'e', '3', 0x00, 0x00, //
+        0xC3, 0xF5, 0x48, 0x40,                       //
     };
     const uint8_t *data         = logger.getBuffer();
     size_t length               = logger.getLength();
@@ -177,9 +199,9 @@ TEST(KV_Parser, incorrectAccess) {
     EXPECT_TRUE(logger.add("value1", (uint32_t) 0xDEADBEEF));
     EXPECT_TRUE(logger.add<int>("array", {1, 2, 3, 4}));
 
-    const uint8_t *data   = logger.getBuffer();
-    size_t length         = logger.getLength();
-    KV_Parser parsed = {data, length};
+    const uint8_t *data = logger.getBuffer();
+    size_t length       = logger.getLength();
+    KV_Parser parsed    = {data, length};
 
     using out_of_range = KV_Exception;
     using logic_error  = KV_Exception;
@@ -209,6 +231,11 @@ TEST(KV_Parser, incorrectAccess) {
     EXPECT_THROW((parsed["array"].*method3)(), length_error);
     // Incorrect type
     EXPECT_THROW(parsed["array"].getVector<float>(), logic_error);
+    // End iterator
+    auto found = logger.find("nonexistent");
+    EXPECT_THROW(((*found).*method3)(), out_of_range);
+    EXPECT_THROW(found->getVector<uint32_t>(), out_of_range);
+    EXPECT_THROW(found->getAs<uint32_t>(), out_of_range);
 }
 
 TEST(KV_Builder, clearAndReuse) {
@@ -233,12 +260,12 @@ TEST(KV_Builder, clearAndReuse) {
     logger.add("🔑", "λ");
 
     expected = {
-        0x03, 0x0C, 0x06, 0x00,                          // type 12, size 6
-        'k',  'e',  'y',  0x00,                          //
-        'v',  'a',  'l',  'u',  'e',  0x00, 0x00, 0x00,  // value
-        0x04, 0x0C, 0x03, 0x00,                          // type 12, size 3
-        0xF0, 0x9F, 0x94, 0x91, 0x00, 0x00, 0x00, 0x00,  //
-        0xCE, 0xBB, 0x00, 0x00,                          // λ
+        0x03, 0x0C, 0x06, 0x00,                         // type 12, size 6
+        'k',  'e',  'y',  0x00,                         //
+        'v',  'a',  'l',  'u',  'e',  0x00, 0x00, 0x00, // value
+        0x04, 0x0C, 0x03, 0x00,                         // type 12, size 3
+        0xF0, 0x9F, 0x94, 0x91, 0x00, 0x00, 0x00, 0x00, //
+        0xCE, 0xBB, 0x00, 0x00,                         // λ
     };
     data   = logger.getBuffer();
     length = logger.getLength();
@@ -275,32 +302,32 @@ TEST(KV_Builder, logValueIntLongShort) {
     ADD_VAR(logger, u8);
 
     std::vector<uint8_t> expected = {
-        0x01, 0x05, 0x04, 0x00,  //
-        'i',  0x00, 0x00, 0x00,  //
-        0xBB, 0xCC, 0xDD, 0xEE,  //
-        0x01, 0x06, 0x04, 0x00,  //
-        'u',  0x00, 0x00, 0x00,  //
-        0x11, 0x22, 0x33, 0x44,  //
-        0x01, 0x07, 0x08, 0x00,  //
-        'l',  0x00, 0x00, 0x00,  //
-        0x77, 0x88, 0x99, 0xAA,  //
-        0xBB, 0xCC, 0xDD, 0xEE,  //
-        0x02, 0x08, 0x08, 0x00,  //
-        'u',  'l',  0x00, 0x00,  //
-        0x11, 0x22, 0x33, 0x44,  //
-        0x55, 0x66, 0x77, 0x88,  //
-        0x01, 0x03, 0x02, 0x00,  //
-        's',  0x00, 0x00, 0x00,  //
-        0xDD, 0xEE, 0x00, 0x00,  //
-        0x02, 0x04, 0x02, 0x00,  //
-        'u',  's',  0x00, 0x00,  //
-        0x88, 0x99, 0x00, 0x00,  //
-        0x02, 0x01, 0x01, 0x00,  //
-        'i',  '8',  0x00, 0x00,  //
-        0xBB, 0x00, 0x00, 0x00,  //
-        0x02, 0x02, 0x01, 0x00,  //
-        'u',  '8',  0x00, 0x00,  //
-        0xAA, 0x00, 0x00, 0x00,  //
+        0x01, 0x05, 0x04, 0x00, //
+        'i',  0x00, 0x00, 0x00, //
+        0xBB, 0xCC, 0xDD, 0xEE, //
+        0x01, 0x06, 0x04, 0x00, //
+        'u',  0x00, 0x00, 0x00, //
+        0x11, 0x22, 0x33, 0x44, //
+        0x01, 0x07, 0x08, 0x00, //
+        'l',  0x00, 0x00, 0x00, //
+        0x77, 0x88, 0x99, 0xAA, //
+        0xBB, 0xCC, 0xDD, 0xEE, //
+        0x02, 0x08, 0x08, 0x00, //
+        'u',  'l',  0x00, 0x00, //
+        0x11, 0x22, 0x33, 0x44, //
+        0x55, 0x66, 0x77, 0x88, //
+        0x01, 0x03, 0x02, 0x00, //
+        's',  0x00, 0x00, 0x00, //
+        0xDD, 0xEE, 0x00, 0x00, //
+        0x02, 0x04, 0x02, 0x00, //
+        'u',  's',  0x00, 0x00, //
+        0x88, 0x99, 0x00, 0x00, //
+        0x02, 0x01, 0x01, 0x00, //
+        'i',  '8',  0x00, 0x00, //
+        0xBB, 0x00, 0x00, 0x00, //
+        0x02, 0x02, 0x01, 0x00, //
+        'u',  '8',  0x00, 0x00, //
+        0xAA, 0x00, 0x00, 0x00, //
     };
     const uint8_t *data         = logger.getBuffer();
     size_t length               = logger.getLength();
@@ -331,30 +358,30 @@ TEST(KV_Builder, logValueAllLengths) {
     logger.add("check", 0xBADBABE);
 
     std::vector<uint8_t> expected = {
-        0x01, 0x02, 0x01, 0x00,  //
-        '1',  0x00, 0x00, 0x00,  //
-        0x11, 0x00, 0x00, 0x00,  //
-        0x02, 0x02, 0x02, 0x00,  //
-        '1',  '2',  0x00, 0x00,  //
-        0x11, 0x22, 0x00, 0x00,  //
-        0x03, 0x02, 0x03, 0x00,  //
-        '1',  '2',  '3',  0x00,  //
-        0x11, 0x22, 0x33, 0x00,  //
-        0x04, 0x02, 0x04, 0x00,  //
-        '1',  '2',  '3',  '4',   //
-        0x00, 0x00, 0x00, 0x00,  //
-        0x11, 0x22, 0x33, 0x44,  //
-        0x05, 0x02, 0x05, 0x00,  //
-        '1',  '2',  '3',  '4',   //
-        '5',  0x00, 0x00, 0x00,  //
-        0x11, 0x22, 0x33, 0x44,  //
-        0x55, 0x00, 0x00, 0x00,  //
-        0x01, 0x02, 0x00, 0x00,  //
-        '0',  0x00, 0x00, 0x00,  //
-        0x05, 0x05, 0x04, 0x00,  //
-        'c',  'h',  'e',  'c',   //
-        'k',  0x00, 0x00, 0x00,  //
-        0xBE, 0xBA, 0xAD, 0x0B,  //
+        0x01, 0x02, 0x01, 0x00, //
+        '1',  0x00, 0x00, 0x00, //
+        0x11, 0x00, 0x00, 0x00, //
+        0x02, 0x02, 0x02, 0x00, //
+        '1',  '2',  0x00, 0x00, //
+        0x11, 0x22, 0x00, 0x00, //
+        0x03, 0x02, 0x03, 0x00, //
+        '1',  '2',  '3',  0x00, //
+        0x11, 0x22, 0x33, 0x00, //
+        0x04, 0x02, 0x04, 0x00, //
+        '1',  '2',  '3',  '4',  //
+        0x00, 0x00, 0x00, 0x00, //
+        0x11, 0x22, 0x33, 0x44, //
+        0x05, 0x02, 0x05, 0x00, //
+        '1',  '2',  '3',  '4',  //
+        '5',  0x00, 0x00, 0x00, //
+        0x11, 0x22, 0x33, 0x44, //
+        0x55, 0x00, 0x00, 0x00, //
+        0x01, 0x02, 0x00, 0x00, //
+        '0',  0x00, 0x00, 0x00, //
+        0x05, 0x05, 0x04, 0x00, //
+        'c',  'h',  'e',  'c',  //
+        'k',  0x00, 0x00, 0x00, //
+        0xBE, 0xBA, 0xAD, 0x0B, //
     };
     const uint8_t *data         = logger.getBuffer();
     size_t length               = logger.getLength();
@@ -362,4 +389,74 @@ TEST(KV_Builder, logValueAllLengths) {
 
     logger.print(std::cout);
     EXPECT_EQ(result, expected);
+}
+
+TEST(KV_Builder, logKeyTooLong) {
+    Static_KV_Builder<2048> logger;
+    std::string key1(255, '*');
+    EXPECT_TRUE(logger.add(key1.c_str(), 0xDEADBEEF));
+    std::string key2(256, '*');
+    EXPECT_FALSE(logger.add(key2.c_str(), 0xDEADBEEF));
+}
+
+TEST(KV_Builder, logEmptyKey) {
+    Static_KV_Builder<2048> logger;
+    EXPECT_TRUE(logger.add(" ", 0xDEADBEEF));
+    EXPECT_FALSE(logger.add("", 0xDEADBEEF));
+    EXPECT_FALSE(logger.add(nullptr, 0xDEADBEEF));
+}
+
+TEST(KV_Builder, logDataTooLong) {
+    size_t maxsize = std::numeric_limits<uint16_t>::max();
+    std::vector<uint8_t> buffer(maxsize + 65ul);
+    std::vector<uint8_t> data(maxsize + 1ul);
+    std::fill(data.begin(), data.end(), 0xAA);
+    {
+        KV_Builder logger = {buffer.data(), buffer.size()};
+        EXPECT_TRUE(logger.add("1", data.data(), maxsize));
+    }
+    {
+        KV_Builder logger = {buffer.data(), buffer.size()};
+        EXPECT_FALSE(logger.add("2", data.data(), maxsize + 1));
+    }
+}
+
+TEST(KV_Builder, logDataTooLongForBuffer) {
+    size_t maxsize = 256;
+    std::vector<uint8_t> buffer(maxsize + 8ul); // message + 8 bytes header
+    std::vector<uint8_t> data(maxsize + 1ul);
+    std::fill(data.begin(), data.end(), 0xAA);
+    {
+        KV_Builder logger = {buffer.data(), buffer.size()};
+        EXPECT_TRUE(logger.add("1", data.data(), maxsize));
+    }
+    {
+        KV_Builder logger = {buffer.data(), buffer.size()};
+        EXPECT_FALSE(logger.add("2", data.data(), maxsize + 1));
+    }
+}
+
+TEST(KV_Builder, logNoData) {
+    std::vector<uint8_t> buffer(256);
+    KV_Builder logger = {buffer.data(), buffer.size()};
+    int i = 0;
+    EXPECT_TRUE(logger.add("1", &i, 1));
+    EXPECT_FALSE(logger.add("2", (const int *)nullptr, 1));
+}
+
+TEST(KV_Builder, logDataOverWriteWrongSize) {
+    std::vector<uint8_t> buffer(256);
+    KV_Builder logger = {buffer.data(), buffer.size()};
+    int i[2] = {};
+    EXPECT_TRUE(logger.add("1", i, 1));
+    EXPECT_FALSE(logger.add("1", i, 2));
+}
+
+TEST(KV_Builder, logDataOverWriteWrongType) {
+    std::vector<uint8_t> buffer(256);
+    KV_Builder logger = {buffer.data(), buffer.size()};
+    int16_t i = 0;
+    uint16_t u = 0;
+    EXPECT_TRUE(logger.add("1", i));
+    EXPECT_FALSE(logger.add("1", u));
 }

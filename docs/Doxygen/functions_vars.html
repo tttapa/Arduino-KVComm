@@ -103,6 +103,7 @@ $(function() {
 , <a class="el" href="d3/d45/classKV__Builder.html#a56ed84df35de10bdb65e72b184309497">KV_Builder</a>
 , <a class="el" href="d5/d65/classKV__Iterator.html#af8500b1faa0e15016736fd864b7b634d">KV_Iterator</a>
 , <a class="el" href="dc/d10/classKV__Iterator_1_1KV.html#af8500b1faa0e15016736fd864b7b634d">KV_Iterator::KV</a>
+, <a class="el" href="d9/db2/classSLIPParser.html#a56ed84df35de10bdb65e72b184309497">SLIPParser</a>
 , <a class="el" href="df/d12/classStatic__KV__Builder.html#aaea25a9638d0f879da9db740e31e98f4">Static_KV_Builder&lt; N &gt;</a>
 </li>
 <li>bufferLength
@@ -111,7 +112,7 @@ $(function() {
 <li>bufferSize
 : <a class="el" href="d3/d45/classKV__Builder.html#a7be887a2ca0a258cf6b368d32fd87487">KV_Builder</a>
 , <a class="el" href="d5/d65/classKV__Iterator.html#a7be887a2ca0a258cf6b368d32fd87487">KV_Iterator</a>
-, <a class="el" href="d1/d3f/classSLIPStream.html#a7be887a2ca0a258cf6b368d32fd87487">SLIPStream</a>
+, <a class="el" href="d9/db2/classSLIPParser.html#a7be887a2ca0a258cf6b368d32fd87487">SLIPParser</a>
 </li>
 <li>bufferwritelocation
 : <a class="el" href="d3/d45/classKV__Builder.html#a88790bdf7394b591db467f1306a377e3">KV_Builder</a>
@@ -128,6 +129,10 @@ $(function() {
 </li>
 <li>colPins
 : <a class="el" href="dd/d29/classAH_1_1ButtonMatrix.html#a9ac5156794b322950acdc745de570aac">ButtonMatrix&lt; nb_rows, nb_cols &gt;</a>
+</li>
+<li>crc
+: <a class="el" href="d8/d09/classSLIPParserCRC.html#a29a55fa6a9909f08a4a52eb8a24991b2">SLIPParserCRC&lt; CRC &gt;</a>
+, <a class="el" href="d0/dd8/classSLIPSenderCRC.html#a29a55fa6a9909f08a4a52eb8a24991b2">SLIPSenderCRC&lt; Sender, CRC &gt;</a>
 </li>
 </ul>
 
@@ -170,23 +175,11 @@ $(function() {
 <li>end
 : <a class="el" href="d2/dda/classAH_1_1ExtendedIOElement.html#a59a46e64fcf3bddba754c70b4cba8ae9">ExtendedIOElement</a>
 </li>
-<li>END
-: <a class="el" href="d1/d3f/classSLIPStream.html#a0a4b6c6ba55feababb4c5734d77466f7">SLIPStream</a>
-</li>
 <li>errorCode
 : <a class="el" href="dc/d50/classKV__Exception.html#a9a0df1ddcf5707d269190ce490878d2e">KV_Exception</a>
 </li>
-<li>ESC
-: <a class="el" href="d1/d3f/classSLIPStream.html#ac46ac2b7e4710fdcbf473d9fbeb23af6">SLIPStream</a>
-</li>
-<li>ESC_END
-: <a class="el" href="d1/d3f/classSLIPStream.html#a3ee1ea36330dbbc21c73070d2c36b5a3">SLIPStream</a>
-</li>
-<li>ESC_ESC
-: <a class="el" href="d1/d3f/classSLIPStream.html#ab0206b46f18353532047a3f1409563da">SLIPStream</a>
-</li>
 <li>escape
-: <a class="el" href="d1/d3f/classSLIPStream.html#a147a254077ae4109b7ca44c246c0b0d2">SLIPStream</a>
+: <a class="el" href="d9/db2/classSLIPParser.html#a147a254077ae4109b7ca44c246c0b0d2">SLIPParser</a>
 </li>
 </ul>
 
@@ -341,6 +334,11 @@ $(function() {
 <li>p
 : <a class="el" href="df/d0d/classAH_1_1UniquePtr.html#a37743b6c834995caf2efd0896844fa74">UniquePtr&lt; T &gt;</a>
 </li>
+<li>parser
+: <a class="el" href="d8/d09/classSLIPParserCRC.html#addb7dca2cafe96f2e97d87c2f7111c33">SLIPParserCRC&lt; CRC &gt;</a>
+, <a class="el" href="d1/d3f/classSLIPStream.html#addb7dca2cafe96f2e97d87c2f7111c33">SLIPStream</a>
+, <a class="el" href="df/d37/classSLIPStreamCRC.html#a1bc9fe5694a4d7fc4bca791688dfde99">SLIPStreamCRC&lt; CRC &gt;</a>
+</li>
 <li>parseResult
 : <a class="el" href="d4/ddc/classKV__Parser.html#a0409fc2e79e4e051c026d3f9d36a0577">KV_Parser</a>
 </li>
@@ -373,12 +371,6 @@ $(function() {
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
-<li>readBuffer
-: <a class="el" href="d1/d3f/classSLIPStream.html#a2af019740aa7585e80821484ed414cbc">SLIPStream</a>
-</li>
-<li>received
-: <a class="el" href="d1/d3f/classSLIPStream.html#aed62e6066fba34601c7422c0dd150fc2">SLIPStream</a>
-</li>
 <li>redBit
 : <a class="el" href="d9/d82/structAH_1_1ShiftRegisterOutRGB.html#ab44c8fa701f3fe39fb5249c6bae04f8d">ShiftRegisterOutRGB</a>
 </li>
@@ -395,6 +387,11 @@ $(function() {
 <li>SCANLIMIT
 : <a class="el" href="dd/de5/classAH_1_1MAX7219__Base.html#ab98b9cc58b2d16fb6deccc2f3db1b40c">MAX7219_Base</a>
 </li>
+<li>sender
+: <a class="el" href="d0/dc9/classSLIPSender.html#a3296e2217dd530ddb922f24a450fec82">SLIPSender&lt; Sender &gt;</a>
+, <a class="el" href="d0/dd8/classSLIPSenderCRC.html#a64678fc9a66da70c88a7e685d42aa57e">SLIPSenderCRC&lt; Sender, CRC &gt;</a>
+, <a class="el" href="df/d37/classSLIPStreamCRC.html#ad6415111264b1feb1e0f6e9202e53496">SLIPStreamCRC&lt; CRC &gt;</a>
+</li>
 <li>settings
 : <a class="el" href="dd/de5/classAH_1_1MAX7219__Base.html#abe759bf02debdd06813e7a7f800ea05e">MAX7219_Base</a>
 </li>
@@ -410,13 +407,15 @@ $(function() {
 </li>
 <li>stream
 : <a class="el" href="d1/d3f/classSLIPStream.html#aa389239b291c04103f4a5bece3539cad">SLIPStream</a>
+, <a class="el" href="df/d37/classSLIPStreamCRC.html#aa389239b291c04103f4a5bece3539cad">SLIPStreamCRC&lt; CRC &gt;</a>
+, <a class="el" href="db/d98/structSLIPStreamCRC_1_1StreamSender.html#aa389239b291c04103f4a5bece3539cad">SLIPStreamCRC&lt; CRC &gt;::StreamSender</a>
 </li>
 </ul>
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
 <li>truncated
-: <a class="el" href="d1/d3f/classSLIPStream.html#a98a9a1d08e00c3bab1b8efbc1c693be8">SLIPStream</a>
+: <a class="el" href="d9/db2/classSLIPParser.html#aa0eca1fec8219d77ffff22dd1a6ca86f">SLIPParser</a>
 </li>
 </ul>
 
@@ -431,6 +430,13 @@ $(function() {
 <h3><a id="index_v"></a>- v -</h3><ul>
 <li>value
 : <a class="el" href="d8/df6/classAH_1_1detail_1_1Incrementor.html#a4fc7f59e3113e19697159919a5aad095">Incrementor&lt; T, V &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_w"></a>- w -</h3><ul>
+<li>write
+: <a class="el" href="d9/db2/classSLIPParser.html#ab6219b8c7390f3fbe413b866245b8fb7">SLIPParser</a>
 </li>
 </ul>
 </div><!-- contents -->

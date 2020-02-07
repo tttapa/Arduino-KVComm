@@ -1,3 +1,4 @@
 <map id="SLIPStream" name="SLIPStream">
-<area shape="rect" id="node1" title="Class that implements SLIP, a simple packet framing protocol." alt="" coords="5,5,132,273"/>
+<area shape="rect" id="node1" title="Class that implements SLIP, a simple packet framing protocol." alt="" coords="6,321,130,457"/>
+<area shape="rect" id="node2" href="$d9/db2/classSLIPParser.html" title="Class for parsing SLIP packets." alt="" coords="5,5,131,259"/>
 </map>

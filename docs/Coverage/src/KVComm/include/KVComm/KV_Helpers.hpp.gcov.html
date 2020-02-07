@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - e14b740dea9000f1ae447adedfc9d25e5f608d2a - src/KVComm/include/KVComm/KV_Helpers.hpp</title>
+  <title>LCOV - da5d567e93d42dc295a755d10e3b03ad93389ab4 - src/KVComm/include/KVComm/KV_Helpers.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">e14b740dea9000f1ae447adedfc9d25e5f608d2a</td>
+            <td class="headerValue">da5d567e93d42dc295a755d10e3b03ad93389ab4</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">3</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-02-06 18:35:15</td>
+            <td class="headerValue">2020-02-07 16:38:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -85,14 +85,14 @@
 <a name="15"><span class="lineNum">      15 </span>            : ///</a>
 <a name="16"><span class="lineNum">      16 </span>            : ///     in:   0  1  2  3  4  5  6  7  8  ...</a>
 <a name="17"><span class="lineNum">      17 </span>            : ///     out:  4  4  4  4  8  8  8  8  12 ...</a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">        193 : inline size_t nextWord(size_t i) { return i - (i % 4) + 4; }</span></a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">        238 : inline size_t nextWord(size_t i) { return i - (i % 4) + 4; }</span></a>
 <a name="19"><span class="lineNum">      19 </span>            : </a>
 <a name="20"><span class="lineNum">      20 </span>            : /// Round up a size to a multiple of 4-byte words.</a>
 <a name="21"><span class="lineNum">      21 </span>            : ///</a>
 <a name="22"><span class="lineNum">      22 </span>            : ///     in:   0  1  2  3  4  5  6  7  8  9  ...</a>
 <a name="23"><span class="lineNum">      23 </span>            : ///     out:  0  4  4  4  4  8  8  8  8  12 ...</a>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">        187 : inline size_t roundUpToWordSizeMultiple(size_t i) {</span></a>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">        187 :     return i + 3 - ((i + 3) % 4);</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">        239 : inline size_t roundUpToWordSizeMultiple(size_t i) {</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">        239 :     return i + 3 - ((i + 3) % 4);</span></a>
 <a name="26"><span class="lineNum">      26 </span>            : }</a>
 <a name="27"><span class="lineNum">      27 </span>            : </a>
 <a name="28"><span class="lineNum">      28 </span>            : /// @}</a>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - e14b740dea9000f1ae447adedfc9d25e5f608d2a - src/KVComm/include/KVComm/KV_Builder.hpp</title>
+  <title>LCOV - da5d567e93d42dc295a755d10e3b03ad93389ab4 - src/KVComm/include/KVComm/KV_Builder.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">e14b740dea9000f1ae447adedfc9d25e5f608d2a</td>
+            <td class="headerValue">da5d567e93d42dc295a755d10e3b03ad93389ab4</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">42</td>
             <td class="headerCovTableEntry">44</td>
-            <td class="headerCovTableEntryHi">95.5 %</td>
+            <td class="headerCovTableEntry">44</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-02-06 18:35:15</td>
+            <td class="headerValue">2020-02-07 16:38:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">36</td>
@@ -176,8 +176,8 @@
 <a name="106"><span class="lineNum">     106 </span>            :  */</a>
 <a name="107"><span class="lineNum">     107 </span>            : class KV_Builder {</a>
 <a name="108"><span class="lineNum">     108 </span>            :   public:</a>
-<a name="109"><span class="lineNum">     109 </span><span class="lineCov">          7 :     KV_Builder(uint8_t *buffer, size_t bufferSize)</span></a>
-<a name="110"><span class="lineNum">     110 </span><span class="lineCov">         14 :         : buffer(buffer), bufferSize(bufferSize) {}</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineCov">         17 :     KV_Builder(uint8_t *buffer, size_t bufferSize)</span></a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineCov">         34 :         : buffer(buffer), bufferSize(bufferSize) {}</span></a>
 <a name="111"><span class="lineNum">     111 </span>            : </a>
 <a name="112"><span class="lineNum">     112 </span>            :     /**</a>
 <a name="113"><span class="lineNum">     113 </span>            :      * @brief   Add a key-value pair to the dictionary, or update the existing</a>
@@ -209,22 +209,22 @@
 <a name="139"><span class="lineNum">     139 </span>            :      *          element with the same key.</a>
 <a name="140"><span class="lineNum">     140 </span>            :      */</a>
 <a name="141"><span class="lineNum">     141 </span>            :     template &lt;class T&gt;</a>
-<a name="142"><span class="lineNum">     142 </span><span class="lineCov">         39 :     bool add(const char *key, const T *data, size_t count) {</span></a>
+<a name="142"><span class="lineNum">     142 </span><span class="lineCov">         60 :     bool add(const char *key, const T *data, size_t count) {</span></a>
 <a name="143"><span class="lineNum">     143 </span>            :         // don't allow empty keys</a>
-<a name="144"><span class="lineNum">     144 </span><span class="lineCov">         39 :         if (key == nullptr || key[0] == '\0')</span></a>
-<a name="145"><span class="lineNum">     145 </span><span class="lineNoCov">          0 :             return false;</span></a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineCov">         60 :         if (key == nullptr || key[0] == '\0')</span></a>
+<a name="145"><span class="lineNum">     145 </span><span class="lineCov">          2 :             return false;</span></a>
 <a name="146"><span class="lineNum">     146 </span>            :         // don't allow null data</a>
-<a name="147"><span class="lineNum">     147 </span><span class="lineCov">         39 :         if (data == nullptr &amp;&amp; count != 0)</span></a>
-<a name="148"><span class="lineNum">     148 </span><span class="lineNoCov">          0 :             return false;</span></a>
+<a name="147"><span class="lineNum">     147 </span><span class="lineCov">         58 :         if (data == nullptr &amp;&amp; count != 0)</span></a>
+<a name="148"><span class="lineNum">     148 </span><span class="lineCov">          1 :             return false;</span></a>
 <a name="149"><span class="lineNum">     149 </span>            :         // Check if dictionary already contains a value with this key</a>
-<a name="150"><span class="lineNum">     150 </span><span class="lineCov">         39 :         KV_Iterator::iterator found = find(key);</span></a>
-<a name="151"><span class="lineNum">     151 </span><span class="lineCov">         39 :         if (found != KV_Iterator::end())</span></a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineCov">         57 :         KV_Iterator::iterator found = find(key);</span></a>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">         57 :         if (found != KV_Iterator::end())</span></a>
 <a name="152"><span class="lineNum">     152 </span>            :             // if the dictionary already contains an element with the same key</a>
-<a name="153"><span class="lineNum">     153 </span><span class="lineCov">          3 :             return overwrite(found, data, count);</span></a>
+<a name="153"><span class="lineNum">     153 </span><span class="lineCov">          5 :             return overwrite(found, data, count);</span></a>
 <a name="154"><span class="lineNum">     154 </span>            :         else</a>
 <a name="155"><span class="lineNum">     155 </span>            :             // this is a new key</a>
-<a name="156"><span class="lineNum">     156 </span><span class="lineCov">         36 :             return append(key, data, count);</span></a>
-<a name="157"><span class="lineNum">     157 </span><span class="lineCov">         39 :     }</span></a>
+<a name="156"><span class="lineNum">     156 </span><span class="lineCov">         52 :             return append(key, data, count);</span></a>
+<a name="157"><span class="lineNum">     157 </span><span class="lineCov">         60 :     }</span></a>
 <a name="158"><span class="lineNum">     158 </span>            : </a>
 <a name="159"><span class="lineNum">     159 </span>            :     /**</a>
 <a name="160"><span class="lineNum">     160 </span>            :      * @brief   Add a key-value pair to the dictionary, or update the existing</a>
@@ -254,8 +254,8 @@
 <a name="184"><span class="lineNum">     184 </span>            :      *          element with the same key.</a>
 <a name="185"><span class="lineNum">     185 </span>            :      */</a>
 <a name="186"><span class="lineNum">     186 </span>            :     template &lt;class T&gt;</a>
-<a name="187"><span class="lineNum">     187 </span><span class="lineCov">         22 :     bool add(const char *key, const T &amp;value) {</span></a>
-<a name="188"><span class="lineNum">     188 </span><span class="lineCov">         22 :         return add(key, &amp;value, 1);</span></a>
+<a name="187"><span class="lineNum">     187 </span><span class="lineCov">         33 :     bool add(const char *key, const T &amp;value) {</span></a>
+<a name="188"><span class="lineNum">     188 </span><span class="lineCov">         33 :         return add(key, &amp;value, 1);</span></a>
 <a name="189"><span class="lineNum">     189 </span>            :     }</a>
 <a name="190"><span class="lineNum">     190 </span>            : </a>
 <a name="191"><span class="lineNum">     191 </span>            :     /**</a>
@@ -283,8 +283,8 @@
 <a name="213"><span class="lineNum">     213 </span>            :      *          or the type and size don't match the ones of the existing </a>
 <a name="214"><span class="lineNum">     214 </span>            :      *          element with the same key.</a>
 <a name="215"><span class="lineNum">     215 </span>            :      */</a>
-<a name="216"><span class="lineNum">     216 </span><span class="lineCov">          6 :     bool add(const char *key, const char *data) {</span></a>
-<a name="217"><span class="lineNum">     217 </span><span class="lineCov">          6 :         return add(key, data, strlen(data) + 1);</span></a>
+<a name="216"><span class="lineNum">     216 </span><span class="lineCov">          8 :     bool add(const char *key, const char *data) {</span></a>
+<a name="217"><span class="lineNum">     217 </span><span class="lineCov">          8 :         return add(key, data, strlen(data) + 1);</span></a>
 <a name="218"><span class="lineNum">     218 </span>            :     }</a>
 <a name="219"><span class="lineNum">     219 </span>            : </a>
 <a name="220"><span class="lineNum">     220 </span>            :     /**</a>
@@ -458,10 +458,10 @@
 <a name="388"><span class="lineNum">     388 </span>            :     size_t bufferSize;</a>
 <a name="389"><span class="lineNum">     389 </span>            :     /// The maximum remaining length that is still free.</a>
 <a name="390"><span class="lineNum">     390 </span>            :     /// Starts off as the buffer size, reaches zero when the buffer is full.</a>
-<a name="391"><span class="lineNum">     391 </span><span class="lineCov">          7 :     size_t maxLen = bufferSize;</span></a>
+<a name="391"><span class="lineNum">     391 </span><span class="lineCov">         17 :     size_t maxLen = bufferSize;</span></a>
 <a name="392"><span class="lineNum">     392 </span>            : </a>
 <a name="393"><span class="lineNum">     393 </span>            :     /// A pointer to the first free/unused byte in the buffer.</a>
-<a name="394"><span class="lineNum">     394 </span><span class="lineCov">          7 :     uint8_t *bufferwritelocation = buffer;</span></a>
+<a name="394"><span class="lineNum">     394 </span><span class="lineCov">         17 :     uint8_t *bufferwritelocation = buffer;</span></a>
 <a name="395"><span class="lineNum">     395 </span>            : </a>
 <a name="396"><span class="lineNum">     396 </span>            :   private:</a>
 <a name="397"><span class="lineNum">     397 </span>            :     /// Write the header of a new element into the buffer, advance the write</a>
@@ -488,19 +488,19 @@
 <a name="418"><span class="lineNum">     418 </span>            : </a>
 <a name="419"><span class="lineNum">     419 </span>            :   public:</a>
 <a name="420"><span class="lineNum">     420 </span>            :     /// Get the buffer containing the dictionary.</a>
-<a name="421"><span class="lineNum">     421 </span><span class="lineCov">       1133 :     const uint8_t *getBuffer() const { return buffer; }</span></a>
+<a name="421"><span class="lineNum">     421 </span><span class="lineCov">       1153 :     const uint8_t *getBuffer() const { return buffer; }</span></a>
 <a name="422"><span class="lineNum">     422 </span>            :     /// Get the total size of the buffer.</a>
-<a name="423"><span class="lineNum">     423 </span><span class="lineCov">        171 :     size_t getBufferSize() const { return bufferSize; }</span></a>
+<a name="423"><span class="lineNum">     423 </span><span class="lineCov">        191 :     size_t getBufferSize() const { return bufferSize; }</span></a>
 <a name="424"><span class="lineNum">     424 </span>            :     /// Get the length of the used part of the buffer.</a>
-<a name="425"><span class="lineNum">     425 </span><span class="lineCov">        171 :     size_t getLength() const { return getBufferSize() - maxLen; }</span></a>
+<a name="425"><span class="lineNum">     425 </span><span class="lineCov">        190 :     size_t getLength() const { return getBufferSize() - maxLen; }</span></a>
 <a name="426"><span class="lineNum">     426 </span>            : </a>
 <a name="427"><span class="lineNum">     427 </span>            :     /// Replace the buffer.</a>
-<a name="428"><span class="lineNum">     428 </span><span class="lineCov">          7 :     void changeBuffer(uint8_t *buffer, size_t size) {</span></a>
-<a name="429"><span class="lineNum">     429 </span><span class="lineCov">          7 :         this-&gt;buffer              = buffer;</span></a>
-<a name="430"><span class="lineNum">     430 </span><span class="lineCov">          7 :         this-&gt;bufferwritelocation = buffer;</span></a>
-<a name="431"><span class="lineNum">     431 </span><span class="lineCov">          7 :         this-&gt;bufferSize          = size;</span></a>
-<a name="432"><span class="lineNum">     432 </span><span class="lineCov">          7 :         this-&gt;maxLen              = size;</span></a>
-<a name="433"><span class="lineNum">     433 </span><span class="lineCov">          7 :     }</span></a>
+<a name="428"><span class="lineNum">     428 </span><span class="lineCov">         10 :     void changeBuffer(uint8_t *buffer, size_t size) {</span></a>
+<a name="429"><span class="lineNum">     429 </span><span class="lineCov">         10 :         this-&gt;buffer              = buffer;</span></a>
+<a name="430"><span class="lineNum">     430 </span><span class="lineCov">         10 :         this-&gt;bufferwritelocation = buffer;</span></a>
+<a name="431"><span class="lineNum">     431 </span><span class="lineCov">         10 :         this-&gt;bufferSize          = size;</span></a>
+<a name="432"><span class="lineNum">     432 </span><span class="lineCov">         10 :         this-&gt;maxLen              = size;</span></a>
+<a name="433"><span class="lineNum">     433 </span><span class="lineCov">         10 :     }</span></a>
 <a name="434"><span class="lineNum">     434 </span>            : </a>
 <a name="435"><span class="lineNum">     435 </span>            :     /** </a>
 <a name="436"><span class="lineNum">     436 </span>            :      * @brief   Get the element with the given key.</a>
@@ -521,12 +521,12 @@
 <a name="451"><span class="lineNum">     451 </span>            : template &lt;size_t N&gt;</a>
 <a name="452"><span class="lineNum">     452 </span>            : class Static_KV_Builder : public KV_Builder {</a>
 <a name="453"><span class="lineNum">     453 </span>            :   public:</a>
-<a name="454"><span class="lineNum">     454 </span><span class="lineCov">          7 :     Static_KV_Builder() : KV_Builder(nullptr, 0) {</span></a>
-<a name="455"><span class="lineNum">     455 </span><span class="lineCov">          7 :         changeBuffer(buffer.data(), N);</span></a>
-<a name="456"><span class="lineNum">     456 </span><span class="lineCov">          7 :     }</span></a>
+<a name="454"><span class="lineNum">     454 </span><span class="lineCov">         10 :     Static_KV_Builder() : KV_Builder(nullptr, 0) {</span></a>
+<a name="455"><span class="lineNum">     455 </span><span class="lineCov">         10 :         changeBuffer(buffer.data(), N);</span></a>
+<a name="456"><span class="lineNum">     456 </span><span class="lineCov">         10 :     }</span></a>
 <a name="457"><span class="lineNum">     457 </span>            : </a>
 <a name="458"><span class="lineNum">     458 </span>            :   private:</a>
-<a name="459"><span class="lineNum">     459 </span><span class="lineCov">          7 :     std::array&lt;uint8_t, N&gt; buffer = {{}};</span></a>
+<a name="459"><span class="lineNum">     459 </span><span class="lineCov">         10 :     std::array&lt;uint8_t, N&gt; buffer = {{}};</span></a>
 <a name="460"><span class="lineNum">     460 </span>            : };</a>
 <a name="461"><span class="lineNum">     461 </span>            : </a>
 <a name="462"><span class="lineNum">     462 </span>            : /// @}</a>

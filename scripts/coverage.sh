@@ -60,6 +60,7 @@ lcov \
     '*/ArduinoMock/*' '*/mock/*' \
     '*/googletest/*' \
     '*/test/*' \
+    '*/src/AH/*' \
     '*/KV_Error.hpp' \
     '*/boost/*' \
     --output-file "$dest"/coverage_filtered.info \

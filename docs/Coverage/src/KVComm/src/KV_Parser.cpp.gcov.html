@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - e14b740dea9000f1ae447adedfc9d25e5f608d2a - src/KVComm/src/KV_Parser.cpp</title>
+  <title>LCOV - da5d567e93d42dc295a755d10e3b03ad93389ab4 - src/KVComm/src/KV_Parser.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">e14b740dea9000f1ae447adedfc9d25e5f608d2a</td>
+            <td class="headerValue">da5d567e93d42dc295a755d10e3b03ad93389ab4</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-02-06 18:35:15</td>
+            <td class="headerValue">2020-02-07 16:38:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -70,29 +70,26 @@
 <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : #if !defined(ARDUINO) || defined(DOXYGEN)</a>
 <a name="2"><span class="lineNum">       2 </span>            : </a>
-<a name="3"><span class="lineNum">       3 </span>            : #include &lt;KVComm/KV_Iterator.hpp&gt;  // KV_Iterator</a>
-<a name="4"><span class="lineNum">       4 </span>            : #include &lt;KVComm/KV_Parser.hpp&gt;    // KV_Parser</a>
+<a name="3"><span class="lineNum">       3 </span>            : #include &lt;KVComm/KV_Iterator.hpp&gt; // KV_Iterator</a>
+<a name="4"><span class="lineNum">       4 </span>            : #include &lt;KVComm/KV_Parser.hpp&gt;   // KV_Parser</a>
 <a name="5"><span class="lineNum">       5 </span>            : </a>
-<a name="6"><span class="lineNum">       6 </span>            : #include &lt;cstring&gt;   // strcmp</a>
-<a name="7"><span class="lineNum">       7 </span>            : #include &lt;iostream&gt;  // cout</a>
+<a name="6"><span class="lineNum">       6 </span>            : #include &lt;cstring&gt;  // strcmp</a>
+<a name="7"><span class="lineNum">       7 </span>            : #include &lt;iostream&gt; // cout</a>
 <a name="8"><span class="lineNum">       8 </span>            : </a>
-<a name="9"><span class="lineNum">       9 </span><span class="lineCov">          7 : KV_Parser::map_t KV_Parser::parse(const uint8_t *buffer, size_t length) {</span></a>
-<a name="10"><span class="lineNum">      10 </span><span class="lineCov">          7 :     map_t parseResult{};</span></a>
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">         31 :     for (auto &amp;entry : KV_Iterator(buffer, length)) {</span></a>
-<a name="12"><span class="lineNum">      12 </span><span class="lineCov">         24 :         const char *identifier = entry.getID();</span></a>
-<a name="13"><span class="lineNum">      13 </span>            :         // std::cout &lt;&lt; entry.getBuffer() - buffer &lt;&lt; '\t';</a>
-<a name="14"><span class="lineNum">      14 </span><span class="lineCov">         24 :         parseResult.emplace(std::make_pair(identifier, entry));</span></a>
-<a name="15"><span class="lineNum">      15 </span>            :         // std::cout &lt;&lt; identifier &lt;&lt; '\t' &lt;&lt; +entry.getTypeID() &lt;&lt; '\t'</a>
-<a name="16"><span class="lineNum">      16 </span>            :         //           &lt;&lt; entry.getDataLength() &lt;&lt; std::endl;</a>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">         24 :     }</span></a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          7 :     return parseResult;</span></a>
-<a name="19"><span class="lineNum">      19 </span><span class="lineCov">          7 : }</span></a>
-<a name="20"><span class="lineNum">      20 </span>            : </a>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">        225 : bool KV_Parser::strcmp::operator()(const char *a, const char *b) const {</span></a>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">        225 :     return std::strcmp(a, b) &lt; 0;</span></a>
-<a name="23"><span class="lineNum">      23 </span>            : }</a>
-<a name="24"><span class="lineNum">      24 </span>            : </a>
-<a name="25"><span class="lineNum">      25 </span>            : #endif  // ARDUINO</a>
+<a name="9"><span class="lineNum">       9 </span><span class="lineCov">          8 : KV_Parser::map_t KV_Parser::parse(const uint8_t *buffer, size_t length) {</span></a>
+<a name="10"><span class="lineNum">      10 </span><span class="lineCov">          8 :     map_t parseResult{};</span></a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">         38 :     for (auto &amp;entry : KV_Iterator(buffer, length)) {</span></a>
+<a name="12"><span class="lineNum">      12 </span><span class="lineCov">         30 :         const char *identifier = entry.getID();</span></a>
+<a name="13"><span class="lineNum">      13 </span><span class="lineCov">         30 :         parseResult.emplace(std::make_pair(identifier, entry));</span></a>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">         30 :     }</span></a>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          8 :     return parseResult;</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          8 : }</span></a>
+<a name="17"><span class="lineNum">      17 </span>            : </a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">        266 : bool KV_Parser::strcmp::operator()(const char *a, const char *b) const {</span></a>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">        266 :     return std::strcmp(a, b) &lt; 0;</span></a>
+<a name="20"><span class="lineNum">      20 </span>            : }</a>
+<a name="21"><span class="lineNum">      21 </span>            : </a>
+<a name="22"><span class="lineNum">      22 </span>            : #endif // ARDUINO</a>
 </pre>
       </td>
     </tr>

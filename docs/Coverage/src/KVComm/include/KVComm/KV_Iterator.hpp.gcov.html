@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - e14b740dea9000f1ae447adedfc9d25e5f608d2a - src/KVComm/include/KVComm/KV_Iterator.hpp</title>
+  <title>LCOV - da5d567e93d42dc295a755d10e3b03ad93389ab4 - src/KVComm/include/KVComm/KV_Iterator.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,20 +28,20 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">e14b740dea9000f1ae447adedfc9d25e5f608d2a</td>
+            <td class="headerValue">da5d567e93d42dc295a755d10e3b03ad93389ab4</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">63</td>
             <td class="headerCovTableEntry">64</td>
-            <td class="headerCovTableEntryHi">98.4 %</td>
+            <td class="headerCovTableEntry">64</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-02-06 18:35:15</td>
+            <td class="headerValue">2020-02-07 16:38:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">68</td>
-            <td class="headerCovTableEntry">68</td>
+            <td class="headerCovTableEntry">69</td>
+            <td class="headerCovTableEntry">69</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -111,31 +111,31 @@
 <a name="41"><span class="lineNum">      41 </span>            : /// parsing and for checking if a key is already in the entry.</a>
 <a name="42"><span class="lineNum">      42 </span>            : class KV_Iterator {</a>
 <a name="43"><span class="lineNum">      43 </span>            :   public:</a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">         46 :     KV_Iterator(const uint8_t *buffer, size_t length)</span></a>
-<a name="45"><span class="lineNum">      45 </span><span class="lineCov">         46 :         : buffer(buffer), bufferSize(length) {}</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">         66 :     KV_Iterator(const uint8_t *buffer, size_t length)</span></a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">         66 :         : buffer(buffer), bufferSize(length) {}</span></a>
 <a name="46"><span class="lineNum">      46 </span>            : </a>
 <a name="47"><span class="lineNum">      47 </span>            :     class KV {</a>
 <a name="48"><span class="lineNum">      48 </span>            :       public:</a>
 <a name="49"><span class="lineNum">      49 </span>            :         /// Constructor</a>
-<a name="50"><span class="lineNum">      50 </span><span class="lineCov">        283 :         KV(const uint8_t *buffer) : buffer(buffer) {}</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">        383 :         KV(const uint8_t *buffer) : buffer(buffer) {}</span></a>
 <a name="51"><span class="lineNum">      51 </span>            :         /// Get the type ID of the current element.</a>
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">         52 :         uint8_t getTypeID() const { return buffer[1]; }</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">         60 :         uint8_t getTypeID() const { return buffer[1]; }</span></a>
 <a name="53"><span class="lineNum">      53 </span>            :         /// Get the length of the identifier / key of the current element.</a>
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">        307 :         uint16_t getIDLength() const { return buffer[0]; }</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">        323 :         uint16_t getIDLength() const { return buffer[0]; }</span></a>
 <a name="55"><span class="lineNum">      55 </span>            :         /// Get the length of the data of the current element.</a>
-<a name="56"><span class="lineNum">      56 </span><span class="lineCov">        152 :         uint16_t getDataLength() const {</span></a>
-<a name="57"><span class="lineNum">      57 </span><span class="lineCov">        152 :             return (buffer[2] &lt;&lt; 0) | (buffer[3] &lt;&lt; 8);</span></a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">        183 :         uint16_t getDataLength() const {</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">        183 :             return (buffer[2] &lt;&lt; 0) | (buffer[3] &lt;&lt; 8);</span></a>
 <a name="58"><span class="lineNum">      58 </span>            :         }</a>
 <a name="59"><span class="lineNum">      59 </span>            :         /// Get a pointer to the beginning of the current element.</a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">        497 :         const uint8_t *getBuffer() const { return buffer; }</span></a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">        645 :         const uint8_t *getBuffer() const { return buffer; }</span></a>
 <a name="61"><span class="lineNum">      61 </span>            :         /// Get the identifier / key of the current element.</a>
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">        112 :         const char *getID() const { return (const char *) buffer + 4; }</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">        138 :         const char *getID() const { return (const char *) buffer + 4; }</span></a>
 <a name="63"><span class="lineNum">      63 </span>            :         /// Get a pointer to the data of the current element.</a>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         43 :         const uint8_t *getData() const {</span></a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">         43 :             return buffer + nextWord(getIDLength()) + 4;</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         51 :         const uint8_t *getData() const {</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">         51 :             return buffer + nextWord(getIDLength()) + 4;</span></a>
 <a name="66"><span class="lineNum">      66 </span>            :         }</a>
 <a name="67"><span class="lineNum">      67 </span>            :         /// Check if the key-value pair is valid.</a>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">        195 :         explicit operator bool() const { return buffer != nullptr; }</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">        186 :         explicit operator bool() const { return buffer != nullptr; }</span></a>
 <a name="69"><span class="lineNum">      69 </span>            : </a>
 <a name="70"><span class="lineNum">      70 </span>            :         /**</a>
 <a name="71"><span class="lineNum">      71 </span>            :          * @brief   Get the data as the given type.</a>
@@ -157,21 +157,21 @@
 <a name="87"><span class="lineNum">      87 </span>            :          *          Index out of range.</a>
 <a name="88"><span class="lineNum">      88 </span>            :          */</a>
 <a name="89"><span class="lineNum">      89 </span>            :         template &lt;class T&gt;</a>
-<a name="90"><span class="lineNum">      90 </span><span class="lineCov">         29 :         void get(T &amp;t, size_t index = 0) const {</span></a>
-<a name="91"><span class="lineNum">      91 </span><span class="lineCov">         29 :             if (!*this) {</span></a>
-<a name="92"><span class="lineNum">      92 </span><span class="lineCov">          1 :                 KV_ERROR(F(&quot;Trying to extract data from non-existent entry&quot;),</span></a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">         34 :         void get(T &amp;t, size_t index = 0) const {</span></a>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">         34 :             if (!*this) {</span></a>
+<a name="92"><span class="lineNum">      92 </span><span class="lineCov">          2 :                 KV_ERROR(F(&quot;Trying to extract data from non-existent entry&quot;),</span></a>
 <a name="93"><span class="lineNum">      93 </span>            :                          0x7566);</a>
 <a name="94"><span class="lineNum">      94 </span>            :                 return; // LCOV_EXCL_LINE</a>
 <a name="95"><span class="lineNum">      95 </span>            :             }</a>
-<a name="96"><span class="lineNum">      96 </span><span class="lineCov">         29 :             if (!checkType&lt;T&gt;())</span></a>
+<a name="96"><span class="lineNum">      96 </span><span class="lineCov">         33 :             if (!checkType&lt;T&gt;())</span></a>
 <a name="97"><span class="lineNum">      97 </span>            :                 return; // LCOV_EXCL_LINE</a>
-<a name="98"><span class="lineNum">      98 </span><span class="lineCov">         28 :             if (index * KV_Type&lt;T&gt;::getLength() &gt;= getDataLength()) {</span></a>
+<a name="98"><span class="lineNum">      98 </span><span class="lineCov">         32 :             if (index * KV_Type&lt;T&gt;::getLength() &gt;= getDataLength()) {</span></a>
 <a name="99"><span class="lineNum">      99 </span><span class="lineCov">          1 :                 KV_ERROR(F(&quot;Index out of range&quot;), 0x7564);</span></a>
 <a name="100"><span class="lineNum">     100 </span>            :                 return; // LCOV_EXCL_LINE</a>
 <a name="101"><span class="lineNum">     101 </span>            :             }</a>
-<a name="102"><span class="lineNum">     102 </span><span class="lineCov">         27 :             auto readlocation = getData() + KV_Type&lt;T&gt;::getLength() * index;</span></a>
-<a name="103"><span class="lineNum">     103 </span><span class="lineCov">         27 :             KV_Type&lt;T&gt;::readFromBuffer(t, readlocation);</span></a>
-<a name="104"><span class="lineNum">     104 </span><span class="lineCov">         28 :         }</span></a>
+<a name="102"><span class="lineNum">     102 </span><span class="lineCov">         31 :             auto readlocation = getData() + KV_Type&lt;T&gt;::getLength() * index;</span></a>
+<a name="103"><span class="lineNum">     103 </span><span class="lineCov">         31 :             KV_Type&lt;T&gt;::readFromBuffer(t, readlocation);</span></a>
+<a name="104"><span class="lineNum">     104 </span><span class="lineCov">         33 :         }</span></a>
 <a name="105"><span class="lineNum">     105 </span>            : </a>
 <a name="106"><span class="lineNum">     106 </span>            :         /**</a>
 <a name="107"><span class="lineNum">     107 </span>            :          * @brief   Get the data as the given type.</a>
@@ -193,11 +193,11 @@
 <a name="123"><span class="lineNum">     123 </span>            :          *          Index out of range.</a>
 <a name="124"><span class="lineNum">     124 </span>            :          */</a>
 <a name="125"><span class="lineNum">     125 </span>            :         template &lt;class T&gt;</a>
-<a name="126"><span class="lineNum">     126 </span><span class="lineCov">         29 :         T getAs(size_t index = 0) const {</span></a>
-<a name="127"><span class="lineNum">     127 </span><span class="lineCov">         29 :             T t;</span></a>
-<a name="128"><span class="lineNum">     128 </span><span class="lineCov">         29 :             get(t, index);</span></a>
-<a name="129"><span class="lineNum">     129 </span><span class="lineCov">         58 :             return t;</span></a>
-<a name="130"><span class="lineNum">     130 </span><span class="lineCov">         29 :         }</span></a>
+<a name="126"><span class="lineNum">     126 </span><span class="lineCov">         34 :         T getAs(size_t index = 0) const {</span></a>
+<a name="127"><span class="lineNum">     127 </span><span class="lineCov">         34 :             T t;</span></a>
+<a name="128"><span class="lineNum">     128 </span><span class="lineCov">         34 :             get(t, index);</span></a>
+<a name="129"><span class="lineNum">     129 </span><span class="lineCov">         68 :             return t;</span></a>
+<a name="130"><span class="lineNum">     130 </span><span class="lineCov">         34 :         }</span></a>
 <a name="131"><span class="lineNum">     131 </span>            : </a>
 <a name="132"><span class="lineNum">     132 </span>            :         /**</a>
 <a name="133"><span class="lineNum">     133 </span>            :          * @brief   Get the data of the element as a vector of the given type.</a>
@@ -215,9 +215,9 @@
 <a name="145"><span class="lineNum">     145 </span>            :          *          of `T`.</a>
 <a name="146"><span class="lineNum">     146 </span>            :          */</a>
 <a name="147"><span class="lineNum">     147 </span>            :         template &lt;class T&gt;</a>
-<a name="148"><span class="lineNum">     148 </span><span class="lineCov">          4 :         std::vector&lt;T&gt; getVector() const {</span></a>
-<a name="149"><span class="lineNum">     149 </span><span class="lineCov">          4 :             if (!*this) {</span></a>
-<a name="150"><span class="lineNum">     150 </span><span class="lineNoCov">          0 :                 KV_ERROR(F(&quot;Trying to extract data from non-existent entry&quot;),</span></a>
+<a name="148"><span class="lineNum">     148 </span><span class="lineCov">          5 :         std::vector&lt;T&gt; getVector() const {</span></a>
+<a name="149"><span class="lineNum">     149 </span><span class="lineCov">          5 :             if (!*this) {</span></a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineCov">          1 :                 KV_ERROR(F(&quot;Trying to extract data from non-existent entry&quot;),</span></a>
 <a name="151"><span class="lineNum">     151 </span>            :                          0x7566);</a>
 <a name="152"><span class="lineNum">     152 </span>            :                 return {}; // LCOV_EXCL_LINE</a>
 <a name="153"><span class="lineNum">     153 </span>            :             }</a>
@@ -231,7 +231,7 @@
 <a name="161"><span class="lineNum">     161 </span><span class="lineCov">         11 :                 readlocation += KV_Type&lt;T&gt;::getLength();</span></a>
 <a name="162"><span class="lineNum">     162 </span><span class="lineCov">         11 :             }</span></a>
 <a name="163"><span class="lineNum">     163 </span><span class="lineCov">          3 :             return result;</span></a>
-<a name="164"><span class="lineNum">     164 </span><span class="lineCov">          3 :         }</span></a>
+<a name="164"><span class="lineNum">     164 </span><span class="lineCov">          4 :         }</span></a>
 <a name="165"><span class="lineNum">     165 </span>            : </a>
 <a name="166"><span class="lineNum">     166 </span>            :         /**</a>
 <a name="167"><span class="lineNum">     167 </span>            :          * @brief   Get the data of the element as an array of the given type.</a>
@@ -254,9 +254,9 @@
 <a name="184"><span class="lineNum">     184 </span>            :          *          the actual dynamic size of the element.</a>
 <a name="185"><span class="lineNum">     185 </span>            :          */</a>
 <a name="186"><span class="lineNum">     186 </span>            :         template &lt;class T, size_t N&gt;</a>
-<a name="187"><span class="lineNum">     187 </span><span class="lineCov">          7 :         std::array&lt;T, N&gt; getArray() const {</span></a>
-<a name="188"><span class="lineNum">     188 </span><span class="lineCov">          7 :             if (!*this) {</span></a>
-<a name="189"><span class="lineNum">     189 </span><span class="lineCov">          2 :                 KV_ERROR(F(&quot;Trying to extract data from non-existent entry&quot;),</span></a>
+<a name="187"><span class="lineNum">     187 </span><span class="lineCov">          8 :         std::array&lt;T, N&gt; getArray() const {</span></a>
+<a name="188"><span class="lineNum">     188 </span><span class="lineCov">          8 :             if (!*this) {</span></a>
+<a name="189"><span class="lineNum">     189 </span><span class="lineCov">          3 :                 KV_ERROR(F(&quot;Trying to extract data from non-existent entry&quot;),</span></a>
 <a name="190"><span class="lineNum">     190 </span>            :                          0x7566);</a>
 <a name="191"><span class="lineNum">     191 </span>            :                 return {{}}; // LCOV_EXCL_LINE</a>
 <a name="192"><span class="lineNum">     192 </span>            :             }</a>
@@ -273,7 +273,7 @@
 <a name="203"><span class="lineNum">     203 </span><span class="lineCov">         15 :                 readlocation += KV_Type&lt;T&gt;::getLength();</span></a>
 <a name="204"><span class="lineNum">     204 </span><span class="lineCov">         15 :             }</span></a>
 <a name="205"><span class="lineNum">     205 </span><span class="lineCov">          4 :             return result;</span></a>
-<a name="206"><span class="lineNum">     206 </span><span class="lineCov">          6 :         }</span></a>
+<a name="206"><span class="lineNum">     206 </span><span class="lineCov">          7 :         }</span></a>
 <a name="207"><span class="lineNum">     207 </span>            : </a>
 <a name="208"><span class="lineNum">     208 </span>            : #if !defined(ARDUINO) || defined(DOXYGEN)</a>
 <a name="209"><span class="lineNum">     209 </span>            :         /**</a>
@@ -307,23 +307,23 @@
 <a name="237"><span class="lineNum">     237 </span>            :          *          Otherwise.</a>
 <a name="238"><span class="lineNum">     238 </span>            :          */</a>
 <a name="239"><span class="lineNum">     239 </span>            :         template &lt;class T&gt;</a>
-<a name="240"><span class="lineNum">     240 </span><span class="lineCov">         45 :         bool hasType() const {</span></a>
-<a name="241"><span class="lineNum">     241 </span><span class="lineCov">         45 :             return this-&gt;getTypeID() == KV_Type&lt;T&gt;::getTypeID();</span></a>
+<a name="240"><span class="lineNum">     240 </span><span class="lineCov">         51 :         bool hasType() const {</span></a>
+<a name="241"><span class="lineNum">     241 </span><span class="lineCov">         51 :             return this-&gt;getTypeID() == KV_Type&lt;T&gt;::getTypeID();</span></a>
 <a name="242"><span class="lineNum">     242 </span>            :         }</a>
 <a name="243"><span class="lineNum">     243 </span>            : </a>
 <a name="244"><span class="lineNum">     244 </span>            :       private:</a>
 <a name="245"><span class="lineNum">     245 </span>            :         /// Assert that the type of this entry matches the given type `T`.</a>
 <a name="246"><span class="lineNum">     246 </span>            :         template &lt;class T&gt;</a>
-<a name="247"><span class="lineNum">     247 </span><span class="lineCov">         45 :         bool checkType() const {</span></a>
-<a name="248"><span class="lineNum">     248 </span><span class="lineCov">         45 :             if (!hasType&lt;T&gt;()) {</span></a>
+<a name="247"><span class="lineNum">     247 </span><span class="lineCov">         51 :         bool checkType() const {</span></a>
+<a name="248"><span class="lineNum">     248 </span><span class="lineCov">         51 :             if (!hasType&lt;T&gt;()) {</span></a>
 <a name="249"><span class="lineNum">     249 </span><span class="lineCov">          4 :                 KV_ERROR(F(&quot;Type mismatch (typeid=&quot;)</span></a>
 <a name="250"><span class="lineNum">     250 </span>            :                              &lt;&lt; getTypeID() &lt;&lt; F(&quot;, conversion requested to &quot;)</a>
 <a name="251"><span class="lineNum">     251 </span>            :                              &lt;&lt; KV_Type&lt;T&gt;::getTypeID() &lt;&lt; ')',</a>
 <a name="252"><span class="lineNum">     252 </span>            :                          0x7563);</a>
 <a name="253"><span class="lineNum">     253 </span>            :                 return false; // LCOV_EXCL_LINE</a>
 <a name="254"><span class="lineNum">     254 </span>            :             }</a>
-<a name="255"><span class="lineNum">     255 </span><span class="lineCov">         41 :             return true;</span></a>
-<a name="256"><span class="lineNum">     256 </span><span class="lineCov">         45 :         }</span></a>
+<a name="255"><span class="lineNum">     255 </span><span class="lineCov">         47 :             return true;</span></a>
+<a name="256"><span class="lineNum">     256 </span><span class="lineCov">         51 :         }</span></a>
 <a name="257"><span class="lineNum">     257 </span>            : </a>
 <a name="258"><span class="lineNum">     258 </span>            :       private:</a>
 <a name="259"><span class="lineNum">     259 </span>            :         const uint8_t *buffer;</a>
@@ -341,47 +341,49 @@
 <a name="271"><span class="lineNum">     271 </span>            : </a>
 <a name="272"><span class="lineNum">     272 </span>            :         /// Advance the iterator.</a>
 <a name="273"><span class="lineNum">     273 </span>            :         iterator &amp;operator++();</a>
-<a name="274"><span class="lineNum">     274 </span>            :         /// Compare the iterator to the &quot;end&quot; iterator. (Only compares the</a>
-<a name="275"><span class="lineNum">     275 </span>            :         /// buffer pointer, which is nullptr for the &quot;end&quot; iterator.)</a>
-<a name="276"><span class="lineNum">     276 </span>            :         bool operator==(const iterator &amp;other) const;</a>
-<a name="277"><span class="lineNum">     277 </span>            :         /// Compare the iterator to the &quot;end&quot; iterator. (Only compares the</a>
-<a name="278"><span class="lineNum">     278 </span>            :         /// buffer pointer, which is nullptr for the &quot;end&quot; iterator.)</a>
-<a name="279"><span class="lineNum">     279 </span>            :         bool operator!=(const iterator &amp;other) const;</a>
-<a name="280"><span class="lineNum">     280 </span>            : </a>
-<a name="281"><span class="lineNum">     281 </span><span class="lineCov">        112 :         const KV &amp;operator*() const { return kv; }</span></a>
-<a name="282"><span class="lineNum">     282 </span><span class="lineCov">          6 :         const KV *operator-&gt;() const { return &amp;kv; }</span></a>
-<a name="283"><span class="lineNum">     283 </span>            : </a>
-<a name="284"><span class="lineNum">     284 </span>            :         /// Check if the iterator is valid.</a>
-<a name="285"><span class="lineNum">     285 </span>            :         explicit operator bool() const { return !!kv; }</a>
-<a name="286"><span class="lineNum">     286 </span>            : </a>
-<a name="287"><span class="lineNum">     287 </span>            :         using difference_type   = void;</a>
-<a name="288"><span class="lineNum">     288 </span>            :         using value_type        = KV;</a>
-<a name="289"><span class="lineNum">     289 </span>            :         using pointer           = KV *;</a>
-<a name="290"><span class="lineNum">     290 </span>            :         using reference         = KV &amp;;</a>
-<a name="291"><span class="lineNum">     291 </span>            :         using iterator_category = std::input_iterator_tag;</a>
-<a name="292"><span class="lineNum">     292 </span>            : </a>
-<a name="293"><span class="lineNum">     293 </span>            :       private:</a>
-<a name="294"><span class="lineNum">     294 </span>            :         void checkLength();</a>
-<a name="295"><span class="lineNum">     295 </span>            : </a>
-<a name="296"><span class="lineNum">     296 </span>            :       private:</a>
-<a name="297"><span class="lineNum">     297 </span>            :         KV kv;</a>
-<a name="298"><span class="lineNum">     298 </span>            :         size_t remainingBufferLength;</a>
-<a name="299"><span class="lineNum">     299 </span>            :     };</a>
-<a name="300"><span class="lineNum">     300 </span>            : </a>
-<a name="301"><span class="lineNum">     301 </span>            :     /// Iterator to the first key-value entry of the dictionary.</a>
-<a name="302"><span class="lineNum">     302 </span><span class="lineCov">         46 :     iterator begin() const { return {buffer, bufferSize}; }</span></a>
-<a name="303"><span class="lineNum">     303 </span>            :     /// End/sentinel iterator.</a>
-<a name="304"><span class="lineNum">     304 </span><span class="lineCov">         85 :     static iterator end() { return {}; }</span></a>
-<a name="305"><span class="lineNum">     305 </span>            : </a>
-<a name="306"><span class="lineNum">     306 </span>            :     /// Find the entry with the given key (iterates over entire dictionary).</a>
-<a name="307"><span class="lineNum">     307 </span>            :     iterator find(const char *key) const;</a>
-<a name="308"><span class="lineNum">     308 </span>            : </a>
-<a name="309"><span class="lineNum">     309 </span>            :   private:</a>
-<a name="310"><span class="lineNum">     310 </span>            :     const uint8_t *buffer;</a>
-<a name="311"><span class="lineNum">     311 </span>            :     size_t bufferSize;</a>
-<a name="312"><span class="lineNum">     312 </span>            : };</a>
-<a name="313"><span class="lineNum">     313 </span>            : </a>
-<a name="314"><span class="lineNum">     314 </span>            : /// @}</a>
+<a name="274"><span class="lineNum">     274 </span>            : #if 0</a>
+<a name="275"><span class="lineNum">     275 </span>            :         /// Compare the iterator to the &quot;end&quot; iterator. (Only compares the</a>
+<a name="276"><span class="lineNum">     276 </span>            :         /// buffer pointer, which is nullptr for the &quot;end&quot; iterator.)</a>
+<a name="277"><span class="lineNum">     277 </span>            :         bool operator==(const iterator &amp;other) const;</a>
+<a name="278"><span class="lineNum">     278 </span>            : #endif</a>
+<a name="279"><span class="lineNum">     279 </span>            :         /// Compare the iterator to the &quot;end&quot; iterator. (Only compares the</a>
+<a name="280"><span class="lineNum">     280 </span>            :         /// buffer pointer, which is nullptr for the &quot;end&quot; iterator.)</a>
+<a name="281"><span class="lineNum">     281 </span>            :         bool operator!=(const iterator &amp;other) const;</a>
+<a name="282"><span class="lineNum">     282 </span>            : </a>
+<a name="283"><span class="lineNum">     283 </span><span class="lineCov">        139 :         const KV &amp;operator*() const { return kv; }</span></a>
+<a name="284"><span class="lineNum">     284 </span><span class="lineCov">         11 :         const KV *operator-&gt;() const { return &amp;kv; }</span></a>
+<a name="285"><span class="lineNum">     285 </span>            : </a>
+<a name="286"><span class="lineNum">     286 </span>            :         /// Check if the iterator is valid.</a>
+<a name="287"><span class="lineNum">     287 </span>            :         explicit operator bool() const { return !!kv; }</a>
+<a name="288"><span class="lineNum">     288 </span>            : </a>
+<a name="289"><span class="lineNum">     289 </span>            :         using difference_type   = void;</a>
+<a name="290"><span class="lineNum">     290 </span>            :         using value_type        = KV;</a>
+<a name="291"><span class="lineNum">     291 </span>            :         using pointer           = KV *;</a>
+<a name="292"><span class="lineNum">     292 </span>            :         using reference         = KV &amp;;</a>
+<a name="293"><span class="lineNum">     293 </span>            :         using iterator_category = std::input_iterator_tag;</a>
+<a name="294"><span class="lineNum">     294 </span>            : </a>
+<a name="295"><span class="lineNum">     295 </span>            :       private:</a>
+<a name="296"><span class="lineNum">     296 </span>            :         void checkLength();</a>
+<a name="297"><span class="lineNum">     297 </span>            : </a>
+<a name="298"><span class="lineNum">     298 </span>            :       private:</a>
+<a name="299"><span class="lineNum">     299 </span>            :         KV kv;</a>
+<a name="300"><span class="lineNum">     300 </span>            :         size_t remainingBufferLength;</a>
+<a name="301"><span class="lineNum">     301 </span>            :     };</a>
+<a name="302"><span class="lineNum">     302 </span>            : </a>
+<a name="303"><span class="lineNum">     303 </span>            :     /// Iterator to the first key-value entry of the dictionary.</a>
+<a name="304"><span class="lineNum">     304 </span><span class="lineCov">         66 :     iterator begin() const { return {buffer, bufferSize}; }</span></a>
+<a name="305"><span class="lineNum">     305 </span>            :     /// End/sentinel iterator.</a>
+<a name="306"><span class="lineNum">     306 </span><span class="lineCov">        123 :     static iterator end() { return {}; }</span></a>
+<a name="307"><span class="lineNum">     307 </span>            : </a>
+<a name="308"><span class="lineNum">     308 </span>            :     /// Find the entry with the given key (iterates over entire dictionary).</a>
+<a name="309"><span class="lineNum">     309 </span>            :     iterator find(const char *key) const;</a>
+<a name="310"><span class="lineNum">     310 </span>            : </a>
+<a name="311"><span class="lineNum">     311 </span>            :   private:</a>
+<a name="312"><span class="lineNum">     312 </span>            :     const uint8_t *buffer;</a>
+<a name="313"><span class="lineNum">     313 </span>            :     size_t bufferSize;</a>
+<a name="314"><span class="lineNum">     314 </span>            : };</a>
+<a name="315"><span class="lineNum">     315 </span>            : </a>
+<a name="316"><span class="lineNum">     316 </span>            : /// @}</a>
 </pre>
       </td>
     </tr>

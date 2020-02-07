@@ -39,7 +39,7 @@ class SLIPSenderCRC {
     }
 
     size_t endPacket() {
-        using checksum_t = typename boost::uint_t<this->crc.bit_count>::least;
+        using checksum_t = typename boost::uint_t<CRC::bit_count>::least;
         constexpr size_t numChars = sizeof(checksum_t);
         uint8_t buffer[numChars];
         const checksum_t checksum = this->crc.checksum();

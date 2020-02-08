@@ -74,11 +74,13 @@ $(function() {
 <div class="title">SLIP-Receive-CRC.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 SLIP-Receive-CRC</h1>
 <p>Receives SLIP packages with a CRC checksum over Serial.</p>
+<dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../da/d44/SLIP-Send-CRC_8ino-example.html">SLIP-Send-CRC.ino</a></dd></dl>
-<p>Written by PieterP, 2020-02-06 <a href="https://github.com/tttapa/Arduino-KVComm">https://github.com/tttapa/Arduino-KVComm</a></p>
+<p>Written by PieterP, 2020-02-06 <br  />
+ <a href="https://github.com/tttapa/Arduino-KVComm">https://github.com/tttapa/Arduino-KVComm</a></p>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../df/d37/KVComm_8h.html">KVComm.h</a>&gt;</span></div>
 <div class="line"> </div>
@@ -91,7 +93,7 @@ SLIP-Receive-CRC</h1>
 <div class="line"><span class="comment">// Buffer for saving the incoming packets</span></div>
 <div class="line">uint8_t slipbuffer[256];</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// The actual SLIP Stream: it sends and receives packets, adds framing </span></div>
+<div class="line"><span class="comment">// The actual SLIP Stream: it sends and receives packets, adds framing</span></div>
 <div class="line"><span class="comment">// bytes, and computes a checksum using the CRC specified above.</span></div>
 <div class="line"><a name="_a0"></a><a class="code" href="../../df/d37/classSLIPStreamCRC.html">SLIPStreamCRC&lt;CRC&gt;</a> slip = {</div>
 <div class="line">  Serial,     <span class="comment">// stream</span></div>
@@ -110,12 +112,10 @@ SLIP-Receive-CRC</h1>
 <div class="line">    Serial.print(<span class="stringliteral">&quot;Received packet: &quot;</span>);</div>
 <div class="line">    Serial.write(slipbuffer, packetSize);</div>
 <div class="line">    Serial.println();</div>
-<div class="line">    Serial.println(slip.<a name="a2"></a><a class="code" href="../../df/d37/classSLIPStreamCRC.html#a01a787481768263dbf3b91b25adab207">wasTruncated</a>() </div>
-<div class="line">                    ? <span class="stringliteral">&quot;Size:            Truncated&quot;</span> </div>
-<div class="line">                    : <span class="stringliteral">&quot;Size:            OK&quot;</span>);</div>
-<div class="line">    Serial.println(slip.<a name="a3"></a><a class="code" href="../../df/d37/classSLIPStreamCRC.html#a7e45550fd80d21c68ccbcd2fd1d28be0">checksum</a>() != 0 </div>
-<div class="line">                    ? <span class="stringliteral">&quot;Checksum:        Mismatch&quot;</span> </div>
-<div class="line">                    : <span class="stringliteral">&quot;Checksum:        OK&quot;</span>);</div>
+<div class="line">    Serial.println(slip.<a name="a2"></a><a class="code" href="../../df/d37/classSLIPStreamCRC.html#a01a787481768263dbf3b91b25adab207">wasTruncated</a>() ? <span class="stringliteral">&quot;Size:            Truncated&quot;</span></div>
+<div class="line">                                       : <span class="stringliteral">&quot;Size:            OK&quot;</span>);</div>
+<div class="line">    Serial.println(slip.<a name="a3"></a><a class="code" href="../../df/d37/classSLIPStreamCRC.html#a7e45550fd80d21c68ccbcd2fd1d28be0">checksum</a>() != 0 ? <span class="stringliteral">&quot;Checksum:        Mismatch&quot;</span></div>
+<div class="line">                                        : <span class="stringliteral">&quot;Checksum:        OK&quot;</span>);</div>
 <div class="line">    Serial.println();</div>
 <div class="line">  }</div>
 <div class="line">}</div>

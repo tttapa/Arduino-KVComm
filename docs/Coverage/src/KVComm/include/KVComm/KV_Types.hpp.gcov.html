@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 178dfdd72638ab9d70d690a79c9a269a7ad21ca6 - src/KVComm/include/KVComm/KV_Types.hpp</title>
+  <title>LCOV - 04a4e0b03c2d6adda93a2a461f41f0f62383f0a5 - src/KVComm/include/KVComm/KV_Types.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">178dfdd72638ab9d70d690a79c9a269a7ad21ca6</td>
+            <td class="headerValue">04a4e0b03c2d6adda93a2a461f41f0f62383f0a5</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">12</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-02-07 19:35:54</td>
+            <td class="headerValue">2020-02-08 02:17:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">47</td>
@@ -70,8 +70,8 @@
 <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : #pragma once</a>
 <a name="2"><span class="lineNum">       2 </span>            : </a>
-<a name="3"><span class="lineNum">       3 </span>            : #include &lt;stdint.h&gt;  // uint#_t</a>
-<a name="4"><span class="lineNum">       4 </span>            : #include &lt;string.h&gt;  // memcpy</a>
+<a name="3"><span class="lineNum">       3 </span>            : #include &lt;stdint.h&gt; // uint#_t</a>
+<a name="4"><span class="lineNum">       4 </span>            : #include &lt;string.h&gt; // memcpy</a>
 <a name="5"><span class="lineNum">       5 </span>            : </a>
 <a name="6"><span class="lineNum">       6 </span>            : /// @addtogroup KVComm</a>
 <a name="7"><span class="lineNum">       7 </span>            : /// @{</a>
@@ -111,8 +111,8 @@
 <a name="41"><span class="lineNum">      41 </span>            :  */</a>
 <a name="42"><span class="lineNum">      42 </span>            : template &lt;class T&gt;</a>
 <a name="43"><span class="lineNum">      43 </span>            : struct KV_Type {</a>
-<a name="44"><span class="lineNum">      44 </span>            :     static uint8_t getTypeID();</a>
-<a name="45"><span class="lineNum">      45 </span>            :     static size_t getLength();</a>
+<a name="44"><span class="lineNum">      44 </span>            :     constexpr static uint8_t getTypeID();</a>
+<a name="45"><span class="lineNum">      45 </span>            :     constexpr static size_t getLength();</a>
 <a name="46"><span class="lineNum">      46 </span>            :     static void writeToBuffer(const T &amp;, uint8_t *buffer);</a>
 <a name="47"><span class="lineNum">      47 </span>            :     static T readFromBuffer(const uint8_t *buffer);</a>
 <a name="48"><span class="lineNum">      48 </span>            : };</a>
@@ -123,8 +123,8 @@
 <a name="53"><span class="lineNum">      53 </span>            : #define KV_ADD_TRIVIAL_TYPE(type, typeid)                                      \</a>
 <a name="54"><span class="lineNum">      54 </span>            :     template &lt;&gt;                                                                \</a>
 <a name="55"><span class="lineNum">      55 </span>            :     struct KV_Type&lt;type&gt; {                                                     \</a>
-<a name="56"><span class="lineNum">      56 </span>            :         inline static uint8_t getTypeID() { return typeid; }                   \</a>
-<a name="57"><span class="lineNum">      57 </span>            :         inline static size_t getLength() { return sizeof(type); }              \</a>
+<a name="56"><span class="lineNum">      56 </span>            :         constexpr inline static uint8_t getTypeID() { return typeid; }         \</a>
+<a name="57"><span class="lineNum">      57 </span>            :         constexpr inline static size_t getLength() { return sizeof(type); }    \</a>
 <a name="58"><span class="lineNum">      58 </span>            :         inline static void writeToBuffer(const type &amp;t, uint8_t *buffer) {     \</a>
 <a name="59"><span class="lineNum">      59 </span>            :             memcpy(buffer, &amp;t, getLength());                                   \</a>
 <a name="60"><span class="lineNum">      60 </span>            :         }                                                                      \</a>

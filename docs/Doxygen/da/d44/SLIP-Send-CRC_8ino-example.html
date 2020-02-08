@@ -74,9 +74,10 @@ $(function() {
 <div class="title">SLIP-Send-CRC.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 SLIP-Send-CRC</h1>
 <p>Send a SLIP package over the serial port every 5 seconds.</p>
+<dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32</dd></dl>
 <ol type="1">
 <li>Upload this sketch to one Arduino.</li>
 <li>Upload the <a class="el" href="../../d3/d52/SLIP-Receive-CRC_8ino-example.html">SLIP-Receive-CRC.ino</a> sketch to a second Arduino.</li>
@@ -86,7 +87,8 @@ SLIP-Send-CRC</h1>
 <p>It should print the following: </p><pre class="fragment">Received packet: Hello, world!
 Size:            OK
 Checksum:        OK
-</pre><p>Written by PieterP, 2020-02-07 <br  />
+</pre><p>For boards where <code>Serial</code> is not a hardware UART, use <code>Serial1</code> as the stream for the <a class="el" href="../../d1/d3f/classSLIPStream.html" title="Class that implements SLIP, a simple packet framing protocol.">SLIPStream</a>.</p>
+<p>Written by PieterP, 2020-02-07 <br  />
  <a href="https://github.com/tttapa/Arduino-KVComm">https://github.com/tttapa/Arduino-KVComm</a></p>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../df/d37/KVComm_8h.html">KVComm.h</a>&gt;</span></div>

@@ -74,31 +74,73 @@ $(function() {
 <div class="title">KVComm-Send.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md2"></a>
+<h1><a class="anchor" id="autotoc_md3"></a>
 KVComm-Send</h1>
+<p>Send a SLIP package with a dictionary of key-value pairs over the serial port every 5 seconds.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32</dd></dl>
+<ol type="1">
+<li>Upload this sketch to one Arduino.</li>
+<li>Upload the <a class="el" href="../../db/ddc/KVComm-Receive_8ino-example.html">KVComm-Receive.ino</a> sketch to a second Arduino.</li>
+<li>Connect the TX pin of this Arduino to the RX pin of the second Arduino.</li>
+<li>Open the Serial monitor of the second Arduino.</li>
+</ol>
+<p>It should print the following:</p>
+<hr  />
+<p>abc: 1, 2, 3</p>
+<p>password: qwerty123</p>
+<p>analog0: 777</p>
+<p>seconds: 12.07</p>
+<hr  />
+<p>For boards where <code>Serial</code> is not a hardware UART, use <code>Serial1</code> as the stream for the <a class="el" href="../../d1/d3f/classSLIPStream.html" title="Class that implements SLIP, a simple packet framing protocol.">SLIPStream</a>.</p>
+<p>Written by PieterP, 2020-02-08 <br  />
+ <a href="https://github.com/tttapa/Arduino-KVComm">https://github.com/tttapa/Arduino-KVComm</a></p>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../df/d37/KVComm_8h.html">KVComm.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><a name="_a0"></a><a class="code" href="../../df/d12/classStatic__KV__Builder.html">Static_KV_Builder&lt;256&gt;</a> logger;</div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../da/dd2/SLIPStream_8hpp.html">SLIPStream/SLIPStream.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;boost/crc.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The CRC settings to use, must be the same as the receiver.</span></div>
+<div class="line"><span class="keyword">using</span> CRC = boost::crc_optimal&lt;16, 0x1021, 0xFFFF, 0, false, false&gt;;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The actual SLIP Stream: it sends and receives packets, adds framing</span></div>
+<div class="line"><span class="comment">// bytes, and computes a checksum using the CRC specified above.</span></div>
+<div class="line"><a name="_a0"></a><a class="code" href="../../df/d37/classSLIPStreamCRC.html">SLIPStreamCRC&lt;CRC&gt;</a> slip = {</div>
+<div class="line">  Serial,  <span class="comment">// stream</span></div>
+<div class="line">  CRC(),   <span class="comment">// sender CRC</span></div>
+<div class="line">  <span class="keyword">nullptr</span>, <span class="comment">// no parser</span></div>
+<div class="line">  CRC(),   <span class="comment">// parser CRC</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The dictionary with data to send.</span></div>
+<div class="line"><a name="_a1"></a><a class="code" href="../../df/d12/classStatic__KV__Builder.html">Static_KV_Builder&lt;256&gt;</a> dict;</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
 <div class="line">  Serial.begin(115200);</div>
-<div class="line">  logger.<a name="a1"></a><a class="code" href="../../d3/d45/classKV__Builder.html#aca39088b45e7dbdd7b4b8f97ae5274cf">add</a>(<span class="stringliteral">&quot;test&quot;</span>, {1, 2, 3});</div>
-<div class="line">  <span class="keyword">auto</span> test = logger.<a name="a2"></a><a class="code" href="../../d3/d45/classKV__Builder.html#acd9aa37b450c1e625069f831a969ac00">find</a>(<span class="stringliteral">&quot;test&quot;</span>);</div>
-<div class="line">  logger.<a name="a3"></a><a class="code" href="../../d3/d45/classKV__Builder.html#ae2910d69620d530f974b6ee1f94602b8">print</a>(Serial);</div>
-<div class="line">  <span class="keyword">auto</span> testvec = test-&gt;getVector&lt;<span class="keywordtype">int</span>&gt;();</div>
-<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span> el : testvec)</div>
-<div class="line">    Serial.println(el);</div>
+<div class="line">  <span class="comment">// Add some data to the dictionary.</span></div>
+<div class="line">  dict.<a name="a2"></a><a class="code" href="../../d3/d45/classKV__Builder.html#aca39088b45e7dbdd7b4b8f97ae5274cf">add</a>(<span class="stringliteral">&quot;abc&quot;</span>, {1, 2, 3});</div>
+<div class="line">  dict.<a class="code" href="../../d3/d45/classKV__Builder.html#aca39088b45e7dbdd7b4b8f97ae5274cf">add</a>(<span class="stringliteral">&quot;password&quot;</span>, <span class="stringliteral">&quot;qwerty123&quot;</span>);</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> loop() {}</div>
+<div class="line"><span class="keywordtype">void</span> loop() {</div>
+<div class="line">  <span class="comment">// The following will be overwritten on each iteration.</span></div>
+<div class="line">  dict.<a class="code" href="../../d3/d45/classKV__Builder.html#aca39088b45e7dbdd7b4b8f97ae5274cf">add</a>(<span class="stringliteral">&quot;analog0&quot;</span>, <a name="a3"></a><a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aa9e5896aa520b8b2d65e1828032ee6a2">analogRead</a>(A0));</div>
+<div class="line">  dict.<a class="code" href="../../d3/d45/classKV__Builder.html#aca39088b45e7dbdd7b4b8f97ae5274cf">add</a>(<span class="stringliteral">&quot;seconds&quot;</span>, millis() / 1000.0);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Send the buffer over the SLIPStream</span></div>
+<div class="line">  slip.<a name="a4"></a><a class="code" href="../../df/d37/classSLIPStreamCRC.html#a89708f58d0f7bf9f867dba87293cbcaa">writePacket</a>(dict.<a name="a5"></a><a class="code" href="../../d3/d45/classKV__Builder.html#a82234c8797554eec8dcde8906c695ab2">getBuffer</a>(), dict.<a name="a6"></a><a class="code" href="../../d3/d45/classKV__Builder.html#a2b6d58f963410c52b1e972b849617ff3">getLength</a>());</div>
+<div class="line">  delay(2000);</div>
+<div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="aKVComm_8h_html"><div class="ttname"><a href="../../df/d37/KVComm_8h.html">KVComm.h</a></div></div>
 <div class="ttc" id="aclassKV__Builder_html_aca39088b45e7dbdd7b4b8f97ae5274cf"><div class="ttname"><a href="../../d3/d45/classKV__Builder.html#aca39088b45e7dbdd7b4b8f97ae5274cf">KV_Builder::add</a></div><div class="ttdeci">bool add(const char *key, const T *data, size_t count)</div><div class="ttdoc">Add a key-value pair to the dictionary, or update the existing value with the same key.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d98/KV__Builder_8hpp_source.html#l00142">KV_Builder.hpp:142</a></div></div>
+<div class="ttc" id="aclassKV__Builder_html_a82234c8797554eec8dcde8906c695ab2"><div class="ttname"><a href="../../d3/d45/classKV__Builder.html#a82234c8797554eec8dcde8906c695ab2">KV_Builder::getBuffer</a></div><div class="ttdeci">const uint8_t * getBuffer() const</div><div class="ttdoc">Get the buffer containing the dictionary.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d98/KV__Builder_8hpp_source.html#l00421">KV_Builder.hpp:421</a></div></div>
+<div class="ttc" id="anamespaceAH_1_1ExtIO_html_aa9e5896aa520b8b2d65e1828032ee6a2"><div class="ttname"><a href="../../d7/d22/namespaceAH_1_1ExtIO.html#aa9e5896aa520b8b2d65e1828032ee6a2">AH::ExtIO::analogRead</a></div><div class="ttdeci">analog_t analogRead(pin_t pin)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00086">ExtendedInputOutput.cpp:86</a></div></div>
 <div class="ttc" id="aclassStatic__KV__Builder_html"><div class="ttname"><a href="../../df/d12/classStatic__KV__Builder.html">Static_KV_Builder</a></div><div class="ttdoc">KV_Builder with a static buffer.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d98/KV__Builder_8hpp_source.html#l00452">KV_Builder.hpp:452</a></div></div>
-<div class="ttc" id="aclassKV__Builder_html_acd9aa37b450c1e625069f831a969ac00"><div class="ttname"><a href="../../d3/d45/classKV__Builder.html#acd9aa37b450c1e625069f831a969ac00">KV_Builder::find</a></div><div class="ttdeci">KV_Iterator::iterator find(const char *key) const</div><div class="ttdoc">Get the element with the given key.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d1f/KV__Builder_8cpp_source.html#l00146">KV_Builder.cpp:146</a></div></div>
-<div class="ttc" id="aclassKV__Builder_html_ae2910d69620d530f974b6ee1f94602b8"><div class="ttname"><a href="../../d3/d45/classKV__Builder.html#ae2910d69620d530f974b6ee1f94602b8">KV_Builder::print</a></div><div class="ttdeci">void print(std::ostream &amp;os) const</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d1f/KV__Builder_8cpp_source.html#l00133">KV_Builder.cpp:133</a></div></div>
+<div class="ttc" id="aclassSLIPStreamCRC_html"><div class="ttname"><a href="../../df/d37/classSLIPStreamCRC.html">SLIPStreamCRC</a></div><div class="ttdoc">Class that implements SLIP, a simple packet framing protocol, and that uses cyclic redundancy checks ...</div><div class="ttdef"><b>Definition:</b> <a href="../../da/dd2/SLIPStream_8hpp_source.html#l00067">SLIPStream.hpp:67</a></div></div>
+<div class="ttc" id="aSLIPStream_8hpp_html"><div class="ttname"><a href="../../da/dd2/SLIPStream_8hpp.html">SLIPStream.hpp</a></div></div>
+<div class="ttc" id="aclassKV__Builder_html_a2b6d58f963410c52b1e972b849617ff3"><div class="ttname"><a href="../../d3/d45/classKV__Builder.html#a2b6d58f963410c52b1e972b849617ff3">KV_Builder::getLength</a></div><div class="ttdeci">size_t getLength() const</div><div class="ttdoc">Get the length of the used part of the buffer.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d98/KV__Builder_8hpp_source.html#l00425">KV_Builder.hpp:425</a></div></div>
+<div class="ttc" id="aclassSLIPStreamCRC_html_a89708f58d0f7bf9f867dba87293cbcaa"><div class="ttname"><a href="../../df/d37/classSLIPStreamCRC.html#a89708f58d0f7bf9f867dba87293cbcaa">SLIPStreamCRC::writePacket</a></div><div class="ttdeci">size_t writePacket(const uint8_t *data, size_t len)</div><div class="ttdoc">Sends a packet.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d61/SLIPStream_8ipp_source.html#l00006">SLIPStream.ipp:6</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

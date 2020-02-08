@@ -88,7 +88,8 @@ $(function() {
 <div class="dynheader">
 Collaboration diagram for KV_Iterator::KV:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d1/d23/classKV__Iterator_1_1KV__coll__graph.svg" width="138" height="294"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d1/d23/classKV__Iterator_1_1KV__coll__graph.svg" width="138" height="308"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -117,6 +118,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a67b76affb3b5d35fa419ac234144038b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d10/classKV__Iterator_1_1KV.html#a67b76affb3b5d35fa419ac234144038b">operator bool</a> () const</td></tr>
 <tr class="memdesc:a67b76affb3b5d35fa419ac234144038b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the key-value pair is valid.  <a href="../../dc/d10/classKV__Iterator_1_1KV.html#a67b76affb3b5d35fa419ac234144038b">More...</a><br /></td></tr>
 <tr class="separator:a67b76affb3b5d35fa419ac234144038b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abda92dbd6c70ecab17a4be43e7d734d1"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:abda92dbd6c70ecab17a4be43e7d734d1"><td class="memTemplItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../dc/d10/classKV__Iterator_1_1KV.html#abda92dbd6c70ecab17a4be43e7d734d1">getArraySize</a> () const</td></tr>
+<tr class="memdesc:abda92dbd6c70ecab17a4be43e7d734d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of elements in the array of data.  <a href="../../dc/d10/classKV__Iterator_1_1KV.html#abda92dbd6c70ecab17a4be43e7d734d1">More...</a><br /></td></tr>
+<tr class="separator:abda92dbd6c70ecab17a4be43e7d734d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0fc78c4202d20bff9493d98f49df76e"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:ae0fc78c4202d20bff9493d98f49df76e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../dc/d10/classKV__Iterator_1_1KV.html#ae0fc78c4202d20bff9493d98f49df76e">get</a> (T &amp;t, size_t index=0) const</td></tr>
 <tr class="memdesc:ae0fc78c4202d20bff9493d98f49df76e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the data as the given type.  <a href="../../dc/d10/classKV__Iterator_1_1KV.html#ae0fc78c4202d20bff9493d98f49df76e">More...</a><br /></td></tr>
@@ -154,7 +159,9 @@ Private Attributes</h2></td></tr>
 <tr class="separator:af8500b1faa0e15016736fd864b7b634d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
+<div class="textblock"><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../db/ddc/KVComm-Receive_8ino-example.html#_a4">KVComm-Receive.ino</a>.</dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00047">47</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aebed2f854e17f16627aa9e90395e8561"></a>
@@ -212,6 +219,8 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the type ID of the current element. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../db/ddc/KVComm-Receive_8ino-example.html#a10">KVComm-Receive.ino</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00052">52</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
 
@@ -328,6 +337,8 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the identifier / key of the current element. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../db/ddc/KVComm-Receive_8ino-example.html#a5">KVComm-Receive.ino</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00062">62</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
 
@@ -391,6 +402,37 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="abda92dbd6c70ecab17a4be43e7d734d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abda92dbd6c70ecab17a4be43e7d734d1">&#9670;&nbsp;</a></span>getArraySize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t getArraySize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the number of elements in the array of data. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../db/ddc/KVComm-Receive_8ino-example.html#a6">KVComm-Receive.ino</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00072">72</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ae0fc78c4202d20bff9493d98f49df76e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae0fc78c4202d20bff9493d98f49df76e">&#9670;&nbsp;</a></span>get()</h2>
 
@@ -448,7 +490,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00090">90</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00096">96</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -498,8 +540,10 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../db/ddc/KVComm-Receive_8ino-example.html#a7">KVComm-Receive.ino</a>.</dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00126">126</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00132">132</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -542,7 +586,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00148">148</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00154">154</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -587,7 +631,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00187">187</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -615,6 +659,8 @@ Private Attributes</h2></td></tr>
     <tr><td class="paramname">0x7563</td><td>Type mismatch: The dynamic type ID doesn't match the type ID of <code>char</code>. </td></tr>
   </table>
   </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../db/ddc/KVComm-Receive_8ino-example.html#a8">KVComm-Receive.ino</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="../../db/d5a/KV__Iterator_8cpp_source.html#l00057">57</a> of file <a class="el" href="../../db/d5a/KV__Iterator_8cpp_source.html">KV_Iterator.cpp</a>.</p>
@@ -659,7 +705,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00240">240</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00246">246</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -688,7 +734,7 @@ Private Attributes</h2></td></tr>
 
 <p>Assert that the type of this entry matches the given type <code>T</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00247">247</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00253">253</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
 
 </div>
 </div>
@@ -713,7 +759,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00259">259</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html#l00265">265</a> of file <a class="el" href="../../dc/d2c/KV__Iterator_8hpp_source.html">KV_Iterator.hpp</a>.</p>
 
 </div>
 </div>

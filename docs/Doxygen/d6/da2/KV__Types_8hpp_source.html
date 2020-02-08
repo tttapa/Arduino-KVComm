@@ -80,14 +80,14 @@ $(function() {
 <div class="contents">
 <a href="../../d6/da2/KV__Types_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span>  <span class="comment">// uint#_t</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span>  <span class="comment">// memcpy</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span> <span class="comment">// uint#_t</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span> <span class="comment">// memcpy</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="../../dd/d8d/structKV__Type.html">   43</a></span>&#160;<span class="keyword">struct </span><a class="code" href="../../dd/d8d/structKV__Type.html">KV_Type</a> {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">static</span> uint8_t <a class="code" href="../../dd/d8d/structKV__Type.html#ae530582ff25f50331aeb32ca88e6d201">getTypeID</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">size_t</span> <a class="code" href="../../dd/d8d/structKV__Type.html#a786498cd81def605f6a1ede78096c101">getLength</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    constexpr <span class="keyword">static</span> uint8_t <a class="code" href="../../dd/d8d/structKV__Type.html#a269c9b16a1aee779cb678faf81da3d8f">getTypeID</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    constexpr <span class="keyword">static</span> <span class="keywordtype">size_t</span> <a class="code" href="../../dd/d8d/structKV__Type.html#ab6889317fd538d272e36b9a543600c91">getLength</a>();</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="../../dd/d8d/structKV__Type.html#a8a2ecb29dd373d6cbc704a785a831621">writeToBuffer</a>(<span class="keyword">const</span> T &amp;, uint8_t *buffer);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">static</span> T <a class="code" href="../../dd/d8d/structKV__Type.html#a2ad8300cdaf7211caa317ed52f7c8a25">readFromBuffer</a>(<span class="keyword">const</span> uint8_t *buffer);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
@@ -96,8 +96,8 @@ $(function() {
 <div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="../../d6/da2/KV__Types_8hpp.html#a36cf4b9a5c5a66377730b346555fed2b">   53</a></span>&#160;<span class="preprocessor">#define KV_ADD_TRIVIAL_TYPE(type, typeid)                                      \</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">    template &lt;&gt;                                                                \</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">    struct KV_Type&lt;type&gt; {                                                     \</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">        inline static uint8_t getTypeID() { return typeid; }                   \</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">        inline static size_t getLength() { return sizeof(type); }              \</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">        constexpr inline static uint8_t getTypeID() { return typeid; }         \</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">        constexpr inline static size_t getLength() { return sizeof(type); }    \</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">        inline static void writeToBuffer(const type &amp;t, uint8_t *buffer) {     \</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">            memcpy(buffer, &amp;t, getLength());                                   \</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">        }                                                                      \</span></div>
@@ -127,11 +127,11 @@ $(function() {
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructKV__Type_html"><div class="ttname"><a href="../../dd/d8d/structKV__Type.html">KV_Type</a></div><div class="ttdoc">Template struct for making types serializable.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/da2/KV__Types_8hpp_source.html#l00043">KV_Types.hpp:43</a></div></div>
-<div class="ttc" id="astructKV__Type_html_a786498cd81def605f6a1ede78096c101"><div class="ttname"><a href="../../dd/d8d/structKV__Type.html#a786498cd81def605f6a1ede78096c101">KV_Type::getLength</a></div><div class="ttdeci">static size_t getLength()</div></div>
 <div class="ttc" id="astructKV__Type_html_a2ad8300cdaf7211caa317ed52f7c8a25"><div class="ttname"><a href="../../dd/d8d/structKV__Type.html#a2ad8300cdaf7211caa317ed52f7c8a25">KV_Type::readFromBuffer</a></div><div class="ttdeci">static T readFromBuffer(const uint8_t *buffer)</div></div>
-<div class="ttc" id="astructKV__Type_html_ae530582ff25f50331aeb32ca88e6d201"><div class="ttname"><a href="../../dd/d8d/structKV__Type.html#ae530582ff25f50331aeb32ca88e6d201">KV_Type::getTypeID</a></div><div class="ttdeci">static uint8_t getTypeID()</div></div>
+<div class="ttc" id="astructKV__Type_html_a269c9b16a1aee779cb678faf81da3d8f"><div class="ttname"><a href="../../dd/d8d/structKV__Type.html#a269c9b16a1aee779cb678faf81da3d8f">KV_Type::getTypeID</a></div><div class="ttdeci">constexpr static uint8_t getTypeID()</div></div>
 <div class="ttc" id="aKV__Types_8hpp_html_a36cf4b9a5c5a66377730b346555fed2b"><div class="ttname"><a href="../../d6/da2/KV__Types_8hpp.html#a36cf4b9a5c5a66377730b346555fed2b">KV_ADD_TRIVIAL_TYPE</a></div><div class="ttdeci">#define KV_ADD_TRIVIAL_TYPE(type, typeid)</div><div class="ttdoc">Add a KV_Type definition that can be (de)serialized by just memcpying.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/da2/KV__Types_8hpp_source.html#l00053">KV_Types.hpp:53</a></div></div>
 <div class="ttc" id="astructKV__Type_html_a8a2ecb29dd373d6cbc704a785a831621"><div class="ttname"><a href="../../dd/d8d/structKV__Type.html#a8a2ecb29dd373d6cbc704a785a831621">KV_Type::writeToBuffer</a></div><div class="ttdeci">static void writeToBuffer(const T &amp;, uint8_t *buffer)</div></div>
+<div class="ttc" id="astructKV__Type_html_ab6889317fd538d272e36b9a543600c91"><div class="ttname"><a href="../../dd/d8d/structKV__Type.html#ab6889317fd538d272e36b9a543600c91">KV_Type::getLength</a></div><div class="ttdeci">constexpr static size_t getLength()</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

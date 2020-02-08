@@ -90,10 +90,10 @@ Collaboration diagram for KV_Type&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ae530582ff25f50331aeb32ca88e6d201"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d8d/structKV__Type.html#ae530582ff25f50331aeb32ca88e6d201">getTypeID</a> ()</td></tr>
-<tr class="separator:ae530582ff25f50331aeb32ca88e6d201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a786498cd81def605f6a1ede78096c101"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d8d/structKV__Type.html#a786498cd81def605f6a1ede78096c101">getLength</a> ()</td></tr>
-<tr class="separator:a786498cd81def605f6a1ede78096c101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a269c9b16a1aee779cb678faf81da3d8f"><td class="memItemLeft" align="right" valign="top">constexpr static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d8d/structKV__Type.html#a269c9b16a1aee779cb678faf81da3d8f">getTypeID</a> ()</td></tr>
+<tr class="separator:a269c9b16a1aee779cb678faf81da3d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6889317fd538d272e36b9a543600c91"><td class="memItemLeft" align="right" valign="top">constexpr static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d8d/structKV__Type.html#ab6889317fd538d272e36b9a543600c91">getLength</a> ()</td></tr>
+<tr class="separator:ab6889317fd538d272e36b9a543600c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a2ecb29dd373d6cbc704a785a831621"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d8d/structKV__Type.html#a8a2ecb29dd373d6cbc704a785a831621">writeToBuffer</a> (const T &amp;, uint8_t *buffer)</td></tr>
 <tr class="separator:a8a2ecb29dd373d6cbc704a785a831621"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ad8300cdaf7211caa317ed52f7c8a25"><td class="memItemLeft" align="right" valign="top">static T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d8d/structKV__Type.html#a2ad8300cdaf7211caa317ed52f7c8a25">readFromBuffer</a> (const uint8_t *buffer)</td></tr>
@@ -105,15 +105,15 @@ struct KV_Type&lt; T &gt;</h3>
 
 <p>Template struct for making types serializable. </p>
 <p>Specializations should implement the following methods:</p><ul>
-<li><code>static uint8_t <a class="el" href="../../dd/d8d/structKV__Type.html#ae530582ff25f50331aeb32ca88e6d201">getTypeID()</a></code></li>
-<li><code>static size_t <a class="el" href="../../dd/d8d/structKV__Type.html#a786498cd81def605f6a1ede78096c101">getLength()</a></code></li>
+<li><code>static uint8_t <a class="el" href="../../dd/d8d/structKV__Type.html#a269c9b16a1aee779cb678faf81da3d8f">getTypeID()</a></code></li>
+<li><code>static size_t <a class="el" href="../../dd/d8d/structKV__Type.html#ab6889317fd538d272e36b9a543600c91">getLength()</a></code></li>
 <li><code>static void <a class="el" href="../../dd/d8d/structKV__Type.html#a8a2ecb29dd373d6cbc704a785a831621">writeToBuffer(const T &amp;, uint8_t *buffer)</a></code></li>
 <li><code>static T <a class="el" href="../../dd/d8d/structKV__Type.html#a2ad8300cdaf7211caa317ed52f7c8a25">readFromBuffer(const uint8_t *buffer)</a></code></li>
 </ul>
 <p><code>getTypeID</code> should return an arbitrary, unique identifier for the type. <br  />
  <code>getLength</code> returns the size of the type in bytes. <br  />
- <code>writeToBuffer</code> copies an object of the type into a byte buffer (it shouldn't write more than <code><a class="el" href="../../dd/d8d/structKV__Type.html#a786498cd81def605f6a1ede78096c101">getLength()</a></code> bytes). <br  />
- <code>readFromBuffer</code> converts a buffer of bytes into an object of the type (it shouldn't read more than <code><a class="el" href="../../dd/d8d/structKV__Type.html#a786498cd81def605f6a1ede78096c101">getLength()</a></code> bytes).</p>
+ <code>writeToBuffer</code> copies an object of the type into a byte buffer (it shouldn't write more than <code><a class="el" href="../../dd/d8d/structKV__Type.html#ab6889317fd538d272e36b9a543600c91">getLength()</a></code> bytes). <br  />
+ <code>readFromBuffer</code> converts a buffer of bytes into an object of the type (it shouldn't read more than <code><a class="el" href="../../dd/d8d/structKV__Type.html#ab6889317fd538d272e36b9a543600c91">getLength()</a></code> bytes).</p>
 <p>When copying data from and to the buffer, don't break the <a href="https://en.wikipedia.org/wiki/Pointer_aliasing">strict aliasing rule</a> and keep in mind that the compiler can add <a href="https://en.wikipedia.org/wiki/Data_structure_alignment">padding bytes</a> to structs.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -124,8 +124,8 @@ struct KV_Type&lt; T &gt;</h3>
 
 <p class="definition">Definition at line <a class="el" href="../../d6/da2/KV__Types_8hpp_source.html#l00043">43</a> of file <a class="el" href="../../d6/da2/KV__Types_8hpp_source.html">KV_Types.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae530582ff25f50331aeb32ca88e6d201"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae530582ff25f50331aeb32ca88e6d201">&#9670;&nbsp;</a></span>getTypeID()</h2>
+<a id="a269c9b16a1aee779cb678faf81da3d8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a269c9b16a1aee779cb678faf81da3d8f">&#9670;&nbsp;</a></span>getTypeID()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,7 +134,7 @@ struct KV_Type&lt; T &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static uint8_t getTypeID </td>
+          <td class="memname">constexpr static uint8_t getTypeID </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -142,15 +142,17 @@ struct KV_Type&lt; T &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../db/ddc/KVComm-Receive_8ino-example.html#a11">KVComm-Receive.ino</a>.</dd>
+</dl>
 
 </div>
 </div>
-<a id="a786498cd81def605f6a1ede78096c101"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a786498cd81def605f6a1ede78096c101">&#9670;&nbsp;</a></span>getLength()</h2>
+<a id="ab6889317fd538d272e36b9a543600c91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6889317fd538d272e36b9a543600c91">&#9670;&nbsp;</a></span>getLength()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -159,7 +161,7 @@ struct KV_Type&lt; T &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static size_t getLength </td>
+          <td class="memname">constexpr static size_t getLength </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -167,7 +169,7 @@ struct KV_Type&lt; T &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

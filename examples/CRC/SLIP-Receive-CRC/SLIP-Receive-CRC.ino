@@ -1,11 +1,13 @@
 /**
-   Receives SLIP packages with a CRC checksum over Serial.
-
-   @see     @ref SLIP-Send-CRC.ino
-
-   Written by PieterP, 2020-02-06
-   https://github.com/tttapa/Arduino-KVComm
-*/
+ * Receives SLIP packages with a CRC checksum over Serial.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ *
+ * @see     @ref SLIP-Send-CRC.ino
+ *
+ * Written by PieterP, 2020-02-06  
+ * https://github.com/tttapa/Arduino-KVComm
+ */
 
 #include <KVComm.h>
 
@@ -18,7 +20,7 @@ using CRC = boost::crc_optimal<16, 0x1021, 0xFFFF, 0, false, false>;
 // Buffer for saving the incoming packets
 uint8_t slipbuffer[256];
 
-// The actual SLIP Stream: it sends and receives packets, adds framing 
+// The actual SLIP Stream: it sends and receives packets, adds framing
 // bytes, and computes a checksum using the CRC specified above.
 SLIPStreamCRC<CRC> slip = {
   Serial,     // stream
@@ -37,12 +39,10 @@ void loop() {
     Serial.print("Received packet: ");
     Serial.write(slipbuffer, packetSize);
     Serial.println();
-    Serial.println(slip.wasTruncated() 
-                    ? "Size:            Truncated" 
-                    : "Size:            OK");
-    Serial.println(slip.checksum() != 0 
-                    ? "Checksum:        Mismatch" 
-                    : "Checksum:        OK");
+    Serial.println(slip.wasTruncated() ? "Size:            Truncated"
+                                       : "Size:            OK");
+    Serial.println(slip.checksum() != 0 ? "Checksum:        Mismatch"
+                                        : "Checksum:        OK");
     Serial.println();
   }
 }

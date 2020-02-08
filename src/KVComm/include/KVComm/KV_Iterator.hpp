@@ -67,6 +67,12 @@ class KV_Iterator {
         /// Check if the key-value pair is valid.
         explicit operator bool() const { return buffer != nullptr; }
 
+        /// Get the number of elements in the array of data.
+        template <class T>
+        uint16_t getArraySize() const {
+            return getDataLength() / KV_Type<T>::getLength();
+        }
+
         /**
          * @brief   Get the data as the given type.
          * 

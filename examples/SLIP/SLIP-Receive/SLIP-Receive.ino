@@ -1,6 +1,8 @@
 /**
  * Receives SLIP packages over Serial.
  * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * 
  * @see     @ref SLIP-Send.ino
  * 
  * Written by PieterP, 2020-02-06  

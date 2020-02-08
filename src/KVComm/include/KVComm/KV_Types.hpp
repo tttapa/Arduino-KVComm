@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdint.h>  // uint#_t
-#include <string.h>  // memcpy
+#include <stdint.h> // uint#_t
+#include <string.h> // memcpy
 
 /// @addtogroup KVComm
 /// @{
@@ -41,8 +41,8 @@
  */
 template <class T>
 struct KV_Type {
-    static uint8_t getTypeID();
-    static size_t getLength();
+    constexpr static uint8_t getTypeID();
+    constexpr static size_t getLength();
     static void writeToBuffer(const T &, uint8_t *buffer);
     static T readFromBuffer(const uint8_t *buffer);
 };
@@ -53,8 +53,8 @@ struct KV_Type {
 #define KV_ADD_TRIVIAL_TYPE(type, typeid)                                      \
     template <>                                                                \
     struct KV_Type<type> {                                                     \
-        inline static uint8_t getTypeID() { return typeid; }                   \
-        inline static size_t getLength() { return sizeof(type); }              \
+        constexpr inline static uint8_t getTypeID() { return typeid; }         \
+        constexpr inline static size_t getLength() { return sizeof(type); }    \
         inline static void writeToBuffer(const type &t, uint8_t *buffer) {     \
             memcpy(buffer, &t, getLength());                                   \
         }                                                                      \

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3.8
 """
 Script that gathers all keywords from the keywords.yml files in the src 
 directory into the main keywords.txt file in the root folder.

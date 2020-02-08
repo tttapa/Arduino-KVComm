@@ -12,6 +12,56 @@
 Arduino_Helpers	KEYWORD1
 AH	KEYWORD1
 
+# KVComm
+########
+
+KV_Builder	KEYWORD1
+Static_KV_Builder	KEYWORD1
+KV_Iterator	KEYWORD1
+KV	KEYWORD1
+KV_Type	KEYWORD1
+
+add	KEYWORD2
+clear	KEYWORD2
+print	KEYWORD2
+printPython	KEYWORD2
+getBuffer	KEYWORD2
+getBufferSize	KEYWORD2
+getLength	KEYWORD2
+changeBuffer	KEYWORD2
+find	KEYWORD2
+nextWord	KEYWORD2
+roundUpToWordSizeMultiple	KEYWORD2
+getTypeID	KEYWORD2
+getIDLength	KEYWORD2
+getDataLength	KEYWORD2
+getBuffer	KEYWORD2
+getID	KEYWORD2
+getData	KEYWORD2
+getArraySize	KEYWORD2
+get	KEYWORD2
+getAs	KEYWORD2
+getVector	KEYWORD2
+getArray	KEYWORD2
+getString	KEYWORD2
+hasType	KEYWORD2
+begin	KEYWORD2
+end	KEYWORD2
+find	KEYWORD2
+getTypeID	KEYWORD2
+getLength	KEYWORD2
+writeToBuffer	KEYWORD2
+readFromBuffer	KEYWORD2
+
+ADD_VAR	LITERAL1
+KV_ERROR	LITERAL1
+KV_ADD_TRIVIAL_TYPE	LITERAL1
+
+# boost
+#######
+
+boost	KEYWORD1
+
 # AH/Math
 #########
 
@@ -218,4 +268,31 @@ Hysteresis	KEYWORD1
 filter	KEYWORD2
 update	KEYWORD2
 getValue	KEYWORD2
+
+# SLIPStream
+############
+
+SLIP_Constants	KEYWORD1
+SLIPParser	KEYWORD1
+SLIPParserCRC	KEYWORD1
+checksum_t	KEYWORD1
+SLIPSender	KEYWORD1
+SLIPSenderCRC	KEYWORD1
+SLIPStream	KEYWORD1
+SLIPStreamCRC	KEYWORD1
+
+parse	KEYWORD2
+wasTruncated	KEYWORD2
+numTruncated	KEYWORD2
+checksum	KEYWORD2
+beginPacket	KEYWORD2
+endPacket	KEYWORD2
+write	KEYWORD2
+writePacket	KEYWORD2
+readPacket	KEYWORD2
+
+END	LITERAL1
+ESC	LITERAL1
+ESC_END	LITERAL1
+ESC_ESC	LITERAL1
 

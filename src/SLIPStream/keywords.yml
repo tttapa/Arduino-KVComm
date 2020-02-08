@@ -1,0 +1,29 @@
+keyword1:
+  - SLIP_Constants
+  - SLIPParser
+  - SLIPParserCRC
+  - checksum_t
+  - SLIPSender
+  - SLIPSenderCRC
+  - SLIPStream
+  - SLIPStreamCRC
+
+keyword2:
+  # SLIPParser
+  - parse
+  - wasTruncated
+  - numTruncated
+  - checksum
+  # SLIPSender
+  - beginPacket
+  - endPacket
+  - write
+  # SLIPStream
+  - writePacket
+  - readPacket
+
+literal1:
+  - END
+  - ESC
+  - ESC_END
+  - ESC_ESC

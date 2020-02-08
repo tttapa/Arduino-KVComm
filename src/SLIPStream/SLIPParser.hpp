@@ -98,7 +98,8 @@ class SLIPParser {
      * 
      * @retval  true
      *          The previous packet didn't fit the buffer. The size returned by
-     *          @ref parse was smaller than the actual size of the packet.
+     *          @ref SLIPParser::parse was smaller than the actual size of the 
+     *          packet.
      * @retval  false 
      *          The buffer was large enough to store the previous packet.
      */
@@ -183,7 +184,8 @@ class SLIPParserCRC {
      * 
      * @retval  true
      *          The previous packet didn't fit the buffer. The size returned by
-     *          @ref parse was smaller than the actual size of the packet.
+     *          @ref SLIPParser::parse was smaller than the actual size of the 
+     *          packet.
      * @retval  false 
      *          The buffer was large enough to store the previous packet.
      */

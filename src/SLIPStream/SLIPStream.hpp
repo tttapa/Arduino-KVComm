@@ -14,6 +14,15 @@
  */
 class SLIPStream {
   public:
+    /// Functor that sends bytes over an Arduino Stream.
+    struct StreamSender {
+        StreamSender(Stream &stream) : stream(&stream) {}
+        StreamSender(Stream *stream) : stream(stream) {}
+        size_t operator()(uint8_t c) const { return stream->write(c); }
+        Stream *stream;
+    };
+
+  public:
     SLIPStream(Stream &stream, const SLIPParser &parser)
         : stream(&stream), parser(parser) {}
     SLIPStream(Stream &stream) : stream(&stream), parser(nullptr, 0) {}
@@ -31,6 +40,13 @@ class SLIPStream {
      */
     size_t writePacket(const uint8_t *data, size_t len);
 
+    /// @copydoc    SLIPSender::beginPacket
+    size_t beginPacket();
+    /// @copydoc    SLIPSender::write
+    size_t write(const uint8_t *data, size_t len);
+    /// @copydoc    SLIPSender::endPacket
+    size_t endPacket();
+
     /**
      * @brief   Receives a packet into the read buffer.
      * 
@@ -40,10 +56,11 @@ class SLIPStream {
      */
     size_t readPacket();
 
-    /**
-     * @brief   Check if the received packet was truncated
-     */
+    /// @copydoc    SLIPParser::wasTruncated
     bool wasTruncated() const { return parser.wasTruncated(); }
+
+    /// @copydoc    SLIPParser::numTruncated
+    size_t numTruncated() const { return parser.numTruncated(); }
 
   private:
     Stream *stream;
@@ -66,13 +83,7 @@ class SLIPStream {
 template <class CRC>
 class SLIPStreamCRC {
   public:
-    /// Functor that sends bytes over an Arduino Stream.
-    struct StreamSender {
-        StreamSender(Stream &stream) : stream(&stream) {}
-        size_t operator()(uint8_t c) const { return stream->write(c); }
-
-        Stream *stream;
-    };
+    using StreamSender = SLIPStream::StreamSender;
 
     SLIPStreamCRC(Stream &stream, CRC &&senderCRC, const SLIPParser &parser,
                   CRC &&parserCRC)
@@ -91,6 +102,13 @@ class SLIPStreamCRC {
      *          of the delimiters, checksums and stuffing bytes.
      */
     size_t writePacket(const uint8_t *data, size_t len);
+
+    /// @copydoc    SLIPSenderCRC::beginPacket
+    size_t beginPacket();
+    /// @copydoc    SLIPSenderCRC::write
+    size_t write(const uint8_t *data, size_t len);
+    /// @copydoc    SLIPSenderCRC::endPacket
+    size_t endPacket();
 
     /// @copydoc    SLIPStream::readPacket
     size_t readPacket();

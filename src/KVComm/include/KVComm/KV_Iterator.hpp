@@ -247,7 +247,7 @@ class KV_Iterator {
             return this->getTypeID() == KV_Type<T>::getTypeID();
         }
 
-      private:
+      protected:
         /// Assert that the type of this entry matches the given type `T`.
         template <class T>
         bool checkType() const {
@@ -298,7 +298,7 @@ class KV_Iterator {
         using reference         = KV &;
         using iterator_category = std::input_iterator_tag;
 
-      private:
+      protected:
         void checkLength();
 
       private:

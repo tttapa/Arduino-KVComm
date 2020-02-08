@@ -3,15 +3,23 @@
 #include <SLIPStream/SLIPSender.hpp>
 
 size_t SLIPStream::writePacket(const uint8_t *data, size_t len) {
-    auto sendfn = [this](uint8_t c) { return stream->write(c); };
-    SLIPSender<decltype(sendfn)> sender = std::move(sendfn);
-
     size_t sent = 0;
-    sent += sender.beginPacket();
-    sent += sender.write(data, len);
-    sent += sender.endPacket();
-
+    sent += beginPacket();
+    sent += write(data, len);
+    sent += endPacket();
     return sent;
+}
+
+size_t SLIPStream::write(const uint8_t *data, size_t len) {
+    return SLIPSender<StreamSender>(stream).write(data, len);
+}
+
+size_t SLIPStream::beginPacket() {
+    return SLIPSender<StreamSender>(stream).beginPacket();
+}
+
+size_t SLIPStream::endPacket() {
+    return SLIPSender<StreamSender>(stream).endPacket();
 }
 
 size_t SLIPStream::readPacket() {

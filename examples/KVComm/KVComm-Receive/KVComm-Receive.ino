@@ -32,6 +32,7 @@ SLIPStreamCRC<CRC> slip = {
 
 void setup() {
   Serial.begin(115200);
+  CRC()(0); // initialize the CRC lookup table (see footnote below)
 }
 
 // Function that is called when a new packet is received
@@ -85,3 +86,21 @@ void handlePacket(const uint8_t *data, size_t length) {
   Serial.println("====================");
   Serial.println();
 }
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
+// On initializing the CRC
+// -----------------------
+// 
+// The Boost::CRC library uses a lookup table to speed up the CRC calculations.
+// This table is created the first time the CRC is used, and this process takes 
+// a significant amount of time.
+// This is a problem when receiving large packets: when the first byte of the
+// packet arrives, the CRC is used for the first time, and it starts generating
+// the lookup table. But in the meantime, more bytes from the packet keep coming
+// in. These bytes cannot be read while the lookup table is being created, so 
+// they quickly fill up the input buffer, until it overflows. When this happens,
+// bytes are dropped, and data is lost.
+//
+// The solution is simple: use the CRC once in the setup, so the lookup table
+// is created before the program starts receiving data.

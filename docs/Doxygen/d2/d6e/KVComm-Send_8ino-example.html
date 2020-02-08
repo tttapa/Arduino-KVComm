@@ -88,7 +88,7 @@ KVComm-Send</h1>
 <hr  />
 <p>abc: 1, 2, 3</p>
 <p>password: qwerty123</p>
-<p>analog0: 777</p>
+<p>analog 0: 777</p>
 <p>seconds: 12.07</p>
 <hr  />
 <p>For boards where <code>Serial</code> is not a hardware UART, use <code>Serial1</code> as the stream for the <a class="el" href="../../d1/d3f/classSLIPStream.html" title="Class that implements SLIP, a simple packet framing protocol.">SLIPStream</a>.</p>
@@ -124,7 +124,7 @@ KVComm-Send</h1>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line">  <span class="comment">// The following will be overwritten on each iteration.</span></div>
-<div class="line">  dict.<a class="code" href="../../d3/d45/classKV__Builder.html#aca39088b45e7dbdd7b4b8f97ae5274cf">add</a>(<span class="stringliteral">&quot;analog0&quot;</span>, <a name="a3"></a><a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aa9e5896aa520b8b2d65e1828032ee6a2">analogRead</a>(A0));</div>
+<div class="line">  dict.<a class="code" href="../../d3/d45/classKV__Builder.html#aca39088b45e7dbdd7b4b8f97ae5274cf">add</a>(<span class="stringliteral">&quot;analog 0&quot;</span>, <a name="a3"></a><a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aa9e5896aa520b8b2d65e1828032ee6a2">analogRead</a>(A0));</div>
 <div class="line">  dict.<a class="code" href="../../d3/d45/classKV__Builder.html#aca39088b45e7dbdd7b4b8f97ae5274cf">add</a>(<span class="stringliteral">&quot;seconds&quot;</span>, millis() / 1000.0);</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Send the buffer over the SLIPStream</span></div>

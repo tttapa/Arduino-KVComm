@@ -84,7 +84,7 @@
  *     password:
  *       qwerty123
  *     
- *     analog0:
+ *     analog 0:
  *       777
  *     
  *     seconds:

@@ -19,7 +19,7 @@
  *     password:
  *       qwerty123
  *     
- *     analog0:
+ *     analog 0:
  *       777
  *     
  *     seconds:
@@ -63,7 +63,7 @@ void setup() {
 
 void loop() {
   // The following will be overwritten on each iteration.
-  dict.add("analog0", analogRead(A0));
+  dict.add("analog 0", analogRead(A0));
   dict.add("seconds", millis() / 1000.0);
 
   // Send the buffer over the SLIPStream

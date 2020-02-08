@@ -14,7 +14,7 @@ If you want to keep up to date with the latest developments, or if you want an
 easy way to update, the Git install is recommended. Otherwise, the installation
 without Git will be fine as well.
 
-## Installation without Git
+## Installation of the Arduino library without Git
 
 ### 1. Download
 
@@ -33,7 +33,7 @@ Then navigate to your downloads directory where you just downloaded the
 library.  
 Select it, and click _Ok_.
 
-## Installation with Git
+## Installation of the Arduino library using Git
 
 ### 0. Install Git
 
@@ -70,7 +70,7 @@ To update to the latest `master` version:
 git pull
 ```
 
-## Installing the C++ library
+## Installation of the C++ library
 
 After installing the Arduino library, you can also install the C++ library for
 your computer.
@@ -79,8 +79,8 @@ Open the `Arduino-KVComm/build` folder in a terminal, and run the following
 commands to build, test, and install the library:
 
 ```sh
-cmake ..
-make -j$(nproc)
+cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo
+make -j$(($(nproc) * 2))
 make test
 sudo make install
 ```
@@ -89,8 +89,8 @@ If you don't have `sudo` access, you can install it for your user only, instead
 of system wide:
 
 ```sh
-cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local
-make -j$(nproc)
+cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$HOME/.local
+make -j$(($(nproc) * 2))
 make test
 make install
 ```

@@ -53,13 +53,13 @@ export(TARGETS kvcomm
 # (this registers the build-tree with a global CMake-registry)
 export(PACKAGE kvcomm)
 
-configure_file(FooBarConfigVersion.cmake.in
-    "${PROJECT_BINARY_DIR}/FooBarConfigVersion.cmake" @ONLY)
+configure_file(KVCommConfigVersion.cmake.in
+    "${PROJECT_BINARY_DIR}/KVCommConfigVersion.cmake" @ONLY)
 
 # Install the KVCommConfig.cmake and KVCommConfigVersion.cmake
 install(FILES
     "${PROJECT_SOURCE_DIR}${CMAKE_FILES_DIRECTORY}/KVCommConfig.cmake"
-    "${PROJECT_BINARY_DIR}/FooBarConfigVersion.cmake"
+    "${PROJECT_BINARY_DIR}/KVCommConfigVersion.cmake"
     DESTINATION "${INSTALL_CMAKE_DIR}" COMPONENT dev)
 
 # Install the export set for use with the install-tree

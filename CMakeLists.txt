@@ -55,28 +55,29 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
     -Wall -Wextra -Werror")
 
-set(CMAKE_CXX_FLAGS_DEBUG 
-    "-ggdb3 -O0 -fno-inline-functions -fsanitize=address")
-set(CMAKE_C_FLAGS_DEBUG
-    "-ggdb3 -O0 -fno-inline-functions -fsanitize=address")
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+        -Winconsistent-missing-override")
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+        -Wsuggest-override")
+endif()
 
+# Debug
+set(CMAKE_CXX_FLAGS_DEBUG "-ggdb3 -O0 -fno-inline-functions")
+set(CMAKE_C_FLAGS_DEBUG "-ggdb3 -O0 -fno-inline-functions")
+
+# Address sanitizer
+set(CMAKE_CXX_FLAGS_ASAN "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address")
+set(CMAKE_C_FLAGS_ASAN "${CMAKE_C_FLAGS_DEBUG} -fsanitize=address")
+
+# Release
 set(CMAKE_CXX_FLAGS_RELEASE "-Os")
 set(CMAKE_C_FLAGS_RELEASE "-Os")
 
+# Release with debug info
 set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-Os -g3 -ggdb")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "-Os -g3 -ggdb")
-
-if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-        -Winconsistent-missing-override")
-    
-else()
-
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-        -Wsuggest-override")
-
-endif()
 
 # set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
 

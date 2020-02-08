@@ -211,14 +211,32 @@ class KV_Iterator {
             return result;
         }
 
-#if !defined(ARDUINO) || defined(DOXYGEN)
+// #if !defined(ARDUINO) || defined(DOXYGEN)
+//         /**
+//          * @brief   Get the character array as an std::string.
+//          * 
+//          * @return  The character array as a string.
+//          * 
+//          * @note    Returns an Arduino `String` instead of an `std::string` on 
+//          *          Arduino.
+//          * 
+//          * @throw   0x7566
+//          *          Trying to extract data from non-existent entry.
+//          * @throw   0x7563
+//          *          Type mismatch: The dynamic type ID doesn't match the type ID
+//          *          of `char`.
+//          */
+//         std::string getString() const;
+// #else
+//         String getString() const;
+// #endif
+// 
+//         const char *getCString() const;
+
         /**
-         * @brief   Get the character array as an std::string.
+         * @brief   Get the character array as a null-terminated C-string.
          * 
          * @return  The character array as a string.
-         * 
-         * @note    Returns an Arduino `String` instead of an `std::string` on 
-         *          Arduino.
          * 
          * @throw   0x7566
          *          Trying to extract data from non-existent entry.
@@ -226,10 +244,7 @@ class KV_Iterator {
          *          Type mismatch: The dynamic type ID doesn't match the type ID
          *          of `char`.
          */
-        std::string getString() const;
-#else
-        String getString() const;
-#endif
+        const char *getString() const;
 
         /**
          * @brief   Check if the type of this element is the same as the given 

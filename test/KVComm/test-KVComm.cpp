@@ -63,8 +63,8 @@ TEST(KV_Builder, logValue) {
     EXPECT_EQ(parsed["value1"].getAs<uint32_t>(), 0xDEADBEEF);
     EXPECT_EQ(parsed["value2"].getAs<uint8_t>(), 0x3C);
     EXPECT_EQ(parsed["value3"].getAs<float>(), 3.14f);
-    EXPECT_EQ(parsed["key"].getString(), "value");
-    EXPECT_EQ(parsed["🔑"].getString(), "λ");
+    EXPECT_STREQ(parsed["key"].getString(), "value");
+    EXPECT_STREQ(parsed["🔑"].getString(), "λ");
     EXPECT_EQ(parsed["bool"].getAs<bool>(), true);
 }
 
@@ -85,8 +85,8 @@ TEST(KV_Builder, logValueParseBufferLongerThanData) {
     EXPECT_EQ(parsed["value1"].getAs<uint32_t>(), 0xDEADBEEF);
     EXPECT_EQ(parsed["value2"].getAs<uint8_t>(), 0x3C);
     EXPECT_EQ(parsed["value3"].getAs<float>(), 3.14f);
-    EXPECT_EQ(parsed["key"].getString(), "value");
-    EXPECT_EQ(parsed["🔑"].getString(), "λ");
+    EXPECT_STREQ(parsed["key"].getString(), "value");
+    EXPECT_STREQ(parsed["🔑"].getString(), "λ");
     EXPECT_EQ(parsed["bool"].getAs<bool>(), true);
 }
 
@@ -278,8 +278,8 @@ TEST(KV_Builder, clearAndReuse) {
     EXPECT_FALSE(parsed.contains("value1"));
     EXPECT_FALSE(parsed.contains("value2"));
     EXPECT_FALSE(parsed.contains("value3"));
-    EXPECT_EQ(parsed["key"].getString(), "value");
-    EXPECT_EQ(parsed["🔑"].getString(), "λ");
+    EXPECT_STREQ(parsed["key"].getString(), "value");
+    EXPECT_STREQ(parsed["🔑"].getString(), "λ");
 }
 
 TEST(KV_Builder, logValueIntLongShort) {

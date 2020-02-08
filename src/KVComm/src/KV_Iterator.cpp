@@ -53,24 +53,55 @@ void KV_Iterator::iterator::checkLength() {
     }
 }
 
-#if !defined(ARDUINO) || defined(DOXYGEN)
-std::string KV_Iterator::KV::getString() const {
-    if (!checkType<char>())
-        return nullptr; // LCOV_EXCL_LINE
-    return std::string(getData(), getData() + getDataLength() - 1);
-    // -1 because getDataLength() includes null terminator
-}
-#else
-String KV_Iterator::KV::getString() const {
+// #if !defined(ARDUINO) || defined(DOXYGEN)
+// std::string KV_Iterator::KV::getString() const {
+//     if (!*this) {
+//         KV_ERROR(F("Trying to extract data from non-existent entry"),
+//                     0x7566);
+//         return {}; // LCOV_EXCL_LINE
+//     }
+//     if (!checkType<char>())
+//         return nullptr; // LCOV_EXCL_LINE
+//     return std::string(getData(), getData() + getDataLength() - 1);
+//     // -1 because getDataLength() includes null terminator
+// }
+// #else
+// String KV_Iterator::KV::getString() const {
+//     if (!*this) {
+//         KV_ERROR(F("Trying to extract data from non-existent entry"),
+//                     0x7566);
+//         return {}; // LCOV_EXCL_LINE
+//     }
+//     if (!checkType<char>())
+//         return static_cast<const char *>(nullptr); // LCOV_EXCL_LINE
+//     struct S : public String {
+//         using String::copy;
+//     } s;
+//     s.copy(reinterpret_cast<const char *>(getData()), getDataLength() - 1);
+//     return s;
+// }
+// #endif
+//
+// const char *KV_Iterator::KV::getCString() const {
+//     if (!*this) {
+//         KV_ERROR(F("Trying to extract data from non-existent entry"),
+//                     0x7566);
+//         return {}; // LCOV_EXCL_LINE
+//     }
+//     if (!checkType<char>())
+//         return static_cast<const char *>(nullptr); // LCOV_EXCL_LINE
+//     return reinterpret_cast<const char *>(getData());
+// }
+
+const char *KV_Iterator::KV::getString() const {
+    if (!*this) {
+        KV_ERROR(F("Trying to extract data from non-existent entry"), 0x7566);
+        return {}; // LCOV_EXCL_LINE
+    }
     if (!checkType<char>())
         return static_cast<const char *>(nullptr); // LCOV_EXCL_LINE
-    struct S : public String {
-        using String::copy;
-    } s;
-    s.copy(reinterpret_cast<const char *>(getData()), getDataLength() - 1);
-    return s;
+    return reinterpret_cast<const char *>(getData());
 }
-#endif
 
 KV_Iterator::iterator KV_Iterator::find(const char *key) const {
     return std::find_if(begin(), end(), [key](KV_Iterator::KV kv) {

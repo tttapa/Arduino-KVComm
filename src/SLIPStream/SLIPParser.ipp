@@ -51,13 +51,13 @@ size_t SLIPParser::parse(uint8_t c, Callback callback) {
                 switch (c) {
                     case ESC_END: c = END; break;
                     case ESC_ESC: c = ESC; break;
-                    default: break; // LCOV_EXCL_LINE
+                    default: break; // LCOV_EXCL_LINE (protocol violation)
                 }
                 escape = false;
             }
             auto writeSize = reinterpret_cast<uintptr_t>(write) -
                              reinterpret_cast<uintptr_t>(buffer);
-            callback(c, writeSize);
+            callback(c, writeSize + truncated);
             if (writeSize == 0) // first byte of packet
                 truncated = 0;
             if (writeSize < bufferSize) {

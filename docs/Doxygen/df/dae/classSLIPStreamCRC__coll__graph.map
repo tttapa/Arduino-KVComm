@@ -1,7 +1,7 @@
 <map id="SLIPStreamCRC&lt; CRC &gt;" name="SLIPStreamCRC&lt; CRC &gt;">
-<area shape="rect" id="node1" title="Class that implements SLIP, a simple packet framing protocol, and that uses cyclic redundancy checks ..." alt="" coords="19,616,197,781"/>
-<area shape="rect" id="node2" href="$d0/dd8/classSLIPSenderCRC.html" title=" " alt="" coords="5,373,211,553"/>
-<area shape="rect" id="node3" title=" " alt="" coords="30,197,82,274"/>
-<area shape="rect" id="node4" href="$d0/dc9/classSLIPSender.html" title=" " alt="" coords="107,160,312,311"/>
-<area shape="rect" id="node5" href="$db/d98/structSLIPStreamCRC_1_1StreamSender.html" title="Functor that sends bytes over an Arduino Stream." alt="" coords="147,5,272,97"/>
+<area shape="rect" id="node1" title="Class that implements SLIP, a simple packet framing protocol, and that uses cyclic redundancy checks ..." alt="" coords="19,631,197,840"/>
+<area shape="rect" id="node2" href="$d0/dd8/classSLIPSenderCRC.html" title=" " alt="" coords="5,388,211,568"/>
+<area shape="rect" id="node3" title=" " alt="" coords="34,211,86,289"/>
+<area shape="rect" id="node4" href="$d0/dc9/classSLIPSender.html" title=" " alt="" coords="110,175,285,325"/>
+<area shape="rect" id="node5" href="$df/dfa/structSLIPStream_1_1StreamSender.html" title="Functor that sends bytes over an Arduino Stream." alt="" coords="135,5,260,112"/>
 </map>

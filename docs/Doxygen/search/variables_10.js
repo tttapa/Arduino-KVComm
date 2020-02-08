@@ -9,5 +9,5 @@ var searchData=
   ['spi_5fmax_5fspeed_1149',['SPI_MAX_SPEED',['../dc/d69/namespaceAH.html#a5b86686a1a39f3bd4c50998dc17706e6',1,'AH']]],
   ['start_1150',['start',['../d2/dda/classAH_1_1ExtendedIOElement.html#a72d639edb9fa3781645cab09c2ee3dd3',1,'AH::ExtendedIOElement']]],
   ['state_1151',['state',['../d7/d83/classAH_1_1IncrementButton.html#a876b486d3a5241a126bd5751c5f70f79',1,'AH::IncrementButton::state()'],['../df/dc6/classAH_1_1IncrementDecrementButtons.html#a876b486d3a5241a126bd5751c5f70f79',1,'AH::IncrementDecrementButtons::state()']]],
-  ['stream_1152',['stream',['../d1/d3f/classSLIPStream.html#aa389239b291c04103f4a5bece3539cad',1,'SLIPStream::stream()'],['../db/d98/structSLIPStreamCRC_1_1StreamSender.html#aa389239b291c04103f4a5bece3539cad',1,'SLIPStreamCRC::StreamSender::stream()'],['../df/d37/classSLIPStreamCRC.html#aa389239b291c04103f4a5bece3539cad',1,'SLIPStreamCRC::stream()']]]
+  ['stream_1152',['stream',['../df/dfa/structSLIPStream_1_1StreamSender.html#aa389239b291c04103f4a5bece3539cad',1,'SLIPStream::StreamSender::stream()'],['../d1/d3f/classSLIPStream.html#aa389239b291c04103f4a5bece3539cad',1,'SLIPStream::stream()'],['../df/d37/classSLIPStreamCRC.html#aa389239b291c04103f4a5bece3539cad',1,'SLIPStreamCRC::stream()']]]
 ];

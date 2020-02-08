@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 12f5c1acc4f9b0b0dc814a7136999ef5f852e773 - src/SLIPStream/SLIPStream.hpp</title>
+  <title>LCOV - a50220e856a3e6a640349bc2a11ab5c9f66053af - src/SLIPStream/SLIPStream.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,20 +28,20 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">12f5c1acc4f9b0b0dc814a7136999ef5f852e773</td>
+            <td class="headerValue">a50220e856a3e6a640349bc2a11ab5c9f66053af</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">12</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-02-08 15:05:09</td>
+            <td class="headerValue">2020-02-08 16:55:39</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">8</td>
-            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">9</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -84,107 +84,125 @@
 <a name="14"><span class="lineNum">      14 </span>            :  */</a>
 <a name="15"><span class="lineNum">      15 </span>            : class SLIPStream {</a>
 <a name="16"><span class="lineNum">      16 </span>            :   public:</a>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          4 :     SLIPStream(Stream &amp;stream, const SLIPParser &amp;parser)</span></a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          4 :         : stream(&amp;stream), parser(parser) {}</span></a>
-<a name="19"><span class="lineNum">      19 </span>            :     SLIPStream(Stream &amp;stream) : stream(&amp;stream), parser(nullptr, 0) {}</a>
-<a name="20"><span class="lineNum">      20 </span>            : </a>
-<a name="21"><span class="lineNum">      21 </span>            :     /**</a>
-<a name="22"><span class="lineNum">      22 </span>            :      * @brief   Sends a packet.</a>
-<a name="23"><span class="lineNum">      23 </span>            :      * </a>
-<a name="24"><span class="lineNum">      24 </span>            :      * @param   data</a>
-<a name="25"><span class="lineNum">      25 </span>            :      *          A pointer to the start of the data.</a>
-<a name="26"><span class="lineNum">      26 </span>            :      * @param   len</a>
-<a name="27"><span class="lineNum">      27 </span>            :      *          The length of the data.</a>
-<a name="28"><span class="lineNum">      28 </span>            :      * @return  The number of bytes transmitted over the Stream. If no write </a>
-<a name="29"><span class="lineNum">      29 </span>            :      *          errors occur, this number will be larger than @p len, because</a>
-<a name="30"><span class="lineNum">      30 </span>            :      *          of the delimiters and stuffing bytes.</a>
-<a name="31"><span class="lineNum">      31 </span>            :      */</a>
-<a name="32"><span class="lineNum">      32 </span>            :     size_t writePacket(const uint8_t *data, size_t len);</a>
-<a name="33"><span class="lineNum">      33 </span>            : </a>
-<a name="34"><span class="lineNum">      34 </span>            :     /**</a>
-<a name="35"><span class="lineNum">      35 </span>            :      * @brief   Receives a packet into the read buffer.</a>
-<a name="36"><span class="lineNum">      36 </span>            :      * </a>
-<a name="37"><span class="lineNum">      37 </span>            :      * If more than len bytes are received, the packet will be truncated.</a>
-<a name="38"><span class="lineNum">      38 </span>            :      * </a>
-<a name="39"><span class="lineNum">      39 </span>            :      * @return  The number of bytes stored in the buffer.</a>
+<a name="17"><span class="lineNum">      17 </span>            :     /// Functor that sends bytes over an Arduino Stream.</a>
+<a name="18"><span class="lineNum">      18 </span>            :     struct StreamSender {</a>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">          9 :         StreamSender(Stream &amp;stream) : stream(&amp;stream) {}</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          3 :         StreamSender(Stream *stream) : stream(stream) {}</span></a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">         57 :         size_t operator()(uint8_t c) const { return stream-&gt;write(c); }</span></a>
+<a name="22"><span class="lineNum">      22 </span>            :         Stream *stream;</a>
+<a name="23"><span class="lineNum">      23 </span>            :     };</a>
+<a name="24"><span class="lineNum">      24 </span>            : </a>
+<a name="25"><span class="lineNum">      25 </span>            :   public:</a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          4 :     SLIPStream(Stream &amp;stream, const SLIPParser &amp;parser)</span></a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">          4 :         : stream(&amp;stream), parser(parser) {}</span></a>
+<a name="28"><span class="lineNum">      28 </span>            :     SLIPStream(Stream &amp;stream) : stream(&amp;stream), parser(nullptr, 0) {}</a>
+<a name="29"><span class="lineNum">      29 </span>            : </a>
+<a name="30"><span class="lineNum">      30 </span>            :     /**</a>
+<a name="31"><span class="lineNum">      31 </span>            :      * @brief   Sends a packet.</a>
+<a name="32"><span class="lineNum">      32 </span>            :      * </a>
+<a name="33"><span class="lineNum">      33 </span>            :      * @param   data</a>
+<a name="34"><span class="lineNum">      34 </span>            :      *          A pointer to the start of the data.</a>
+<a name="35"><span class="lineNum">      35 </span>            :      * @param   len</a>
+<a name="36"><span class="lineNum">      36 </span>            :      *          The length of the data.</a>
+<a name="37"><span class="lineNum">      37 </span>            :      * @return  The number of bytes transmitted over the Stream. If no write </a>
+<a name="38"><span class="lineNum">      38 </span>            :      *          errors occur, this number will be larger than @p len, because</a>
+<a name="39"><span class="lineNum">      39 </span>            :      *          of the delimiters and stuffing bytes.</a>
 <a name="40"><span class="lineNum">      40 </span>            :      */</a>
-<a name="41"><span class="lineNum">      41 </span>            :     size_t readPacket();</a>
+<a name="41"><span class="lineNum">      41 </span>            :     size_t writePacket(const uint8_t *data, size_t len);</a>
 <a name="42"><span class="lineNum">      42 </span>            : </a>
-<a name="43"><span class="lineNum">      43 </span>            :     /**</a>
-<a name="44"><span class="lineNum">      44 </span>            :      * @brief   Check if the received packet was truncated</a>
-<a name="45"><span class="lineNum">      45 </span>            :      */</a>
-<a name="46"><span class="lineNum">      46 </span><span class="lineCov">          4 :     bool wasTruncated() const { return parser.wasTruncated(); }</span></a>
-<a name="47"><span class="lineNum">      47 </span>            : </a>
-<a name="48"><span class="lineNum">      48 </span>            :   private:</a>
-<a name="49"><span class="lineNum">      49 </span>            :     Stream *stream;</a>
-<a name="50"><span class="lineNum">      50 </span>            :     SLIPParser parser;</a>
-<a name="51"><span class="lineNum">      51 </span>            : };</a>
-<a name="52"><span class="lineNum">      52 </span>            : </a>
-<a name="53"><span class="lineNum">      53 </span>            : /// @}</a>
-<a name="54"><span class="lineNum">      54 </span>            : </a>
-<a name="55"><span class="lineNum">      55 </span>            : /// @addtogroup CRC</a>
-<a name="56"><span class="lineNum">      56 </span>            : /// @{</a>
-<a name="57"><span class="lineNum">      57 </span>            : </a>
-<a name="58"><span class="lineNum">      58 </span>            : /**</a>
-<a name="59"><span class="lineNum">      59 </span>            :  * @brief   Class that implements SLIP, a simple packet framing protocol, and </a>
-<a name="60"><span class="lineNum">      60 </span>            :  *          that uses cyclic redundancy checks (CRCs) on transmitted and </a>
-<a name="61"><span class="lineNum">      61 </span>            :  *          received packets.</a>
-<a name="62"><span class="lineNum">      62 </span>            :  * </a>
-<a name="63"><span class="lineNum">      63 </span>            :  * @see [**RFC 1055**](https://tools.ietf.org/html/rfc1055)</a>
-<a name="64"><span class="lineNum">      64 </span>            :  * @see [**Boost::CRC**](https://www.boost.org/doc/libs/1_72_0/doc/html/crc.html)</a>
-<a name="65"><span class="lineNum">      65 </span>            :  */</a>
-<a name="66"><span class="lineNum">      66 </span>            : template &lt;class CRC&gt;</a>
-<a name="67"><span class="lineNum">      67 </span>            : class SLIPStreamCRC {</a>
-<a name="68"><span class="lineNum">      68 </span>            :   public:</a>
-<a name="69"><span class="lineNum">      69 </span>            :     /// Functor that sends bytes over an Arduino Stream.</a>
-<a name="70"><span class="lineNum">      70 </span>            :     struct StreamSender {</a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          9 :         StreamSender(Stream &amp;stream) : stream(&amp;stream) {}</span></a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">         17 :         size_t operator()(uint8_t c) const { return stream-&gt;write(c); }</span></a>
-<a name="73"><span class="lineNum">      73 </span>            : </a>
-<a name="74"><span class="lineNum">      74 </span>            :         Stream *stream;</a>
-<a name="75"><span class="lineNum">      75 </span>            :     };</a>
-<a name="76"><span class="lineNum">      76 </span>            : </a>
-<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          9 :     SLIPStreamCRC(Stream &amp;stream, CRC &amp;&amp;senderCRC, const SLIPParser &amp;parser,</span></a>
-<a name="78"><span class="lineNum">      78 </span>            :                   CRC &amp;&amp;parserCRC)</a>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          9 :         : stream(&amp;stream), sender(stream, std::forward&lt;CRC&gt;(senderCRC)),</span></a>
-<a name="80"><span class="lineNum">      80 </span><span class="lineCov">          9 :           parser(parser, std::forward&lt;CRC&gt;(parserCRC)) {}</span></a>
-<a name="81"><span class="lineNum">      81 </span>            : </a>
-<a name="82"><span class="lineNum">      82 </span>            :     /**</a>
-<a name="83"><span class="lineNum">      83 </span>            :      * @brief   Sends a packet.</a>
-<a name="84"><span class="lineNum">      84 </span>            :      * </a>
-<a name="85"><span class="lineNum">      85 </span>            :      * @param   data</a>
-<a name="86"><span class="lineNum">      86 </span>            :      *          A pointer to the start of the data.</a>
-<a name="87"><span class="lineNum">      87 </span>            :      * @param   len</a>
-<a name="88"><span class="lineNum">      88 </span>            :      *          The length of the data.</a>
-<a name="89"><span class="lineNum">      89 </span>            :      * @return  The number of bytes transmitted over the Stream. If no write </a>
-<a name="90"><span class="lineNum">      90 </span>            :      *          errors occur, this number will be larger than @p len, because</a>
-<a name="91"><span class="lineNum">      91 </span>            :      *          of the delimiters, checksums and stuffing bytes.</a>
-<a name="92"><span class="lineNum">      92 </span>            :      */</a>
-<a name="93"><span class="lineNum">      93 </span>            :     size_t writePacket(const uint8_t *data, size_t len);</a>
-<a name="94"><span class="lineNum">      94 </span>            : </a>
-<a name="95"><span class="lineNum">      95 </span>            :     /// @copydoc    SLIPStream::readPacket</a>
-<a name="96"><span class="lineNum">      96 </span>            :     size_t readPacket();</a>
-<a name="97"><span class="lineNum">      97 </span>            : </a>
-<a name="98"><span class="lineNum">      98 </span>            :     /// @copydoc    SLIPParserCRC::wasTruncated</a>
-<a name="99"><span class="lineNum">      99 </span><span class="lineCov">         10 :     bool wasTruncated() const { return parser.wasTruncated(); }</span></a>
-<a name="100"><span class="lineNum">     100 </span>            :     /// @copydoc    SLIPParserCRC::numTruncated</a>
-<a name="101"><span class="lineNum">     101 </span><span class="lineCov">          5 :     size_t numTruncated() const { return parser.numTruncated(); }</span></a>
-<a name="102"><span class="lineNum">     102 </span>            : </a>
-<a name="103"><span class="lineNum">     103 </span>            :     /// @copydoc    SLIPParserCRC::checksum_t</a>
-<a name="104"><span class="lineNum">     104 </span>            :     using checksum_t = typename SLIPParserCRC&lt;CRC&gt;::checksum_t;</a>
+<a name="43"><span class="lineNum">      43 </span>            :     /// @copydoc    SLIPSender::beginPacket</a>
+<a name="44"><span class="lineNum">      44 </span>            :     size_t beginPacket();</a>
+<a name="45"><span class="lineNum">      45 </span>            :     /// @copydoc    SLIPSender::write</a>
+<a name="46"><span class="lineNum">      46 </span>            :     size_t write(const uint8_t *data, size_t len);</a>
+<a name="47"><span class="lineNum">      47 </span>            :     /// @copydoc    SLIPSender::endPacket</a>
+<a name="48"><span class="lineNum">      48 </span>            :     size_t endPacket();</a>
+<a name="49"><span class="lineNum">      49 </span>            : </a>
+<a name="50"><span class="lineNum">      50 </span>            :     /**</a>
+<a name="51"><span class="lineNum">      51 </span>            :      * @brief   Receives a packet into the read buffer.</a>
+<a name="52"><span class="lineNum">      52 </span>            :      * </a>
+<a name="53"><span class="lineNum">      53 </span>            :      * If more than len bytes are received, the packet will be truncated.</a>
+<a name="54"><span class="lineNum">      54 </span>            :      * </a>
+<a name="55"><span class="lineNum">      55 </span>            :      * @return  The number of bytes stored in the buffer.</a>
+<a name="56"><span class="lineNum">      56 </span>            :      */</a>
+<a name="57"><span class="lineNum">      57 </span>            :     size_t readPacket();</a>
+<a name="58"><span class="lineNum">      58 </span>            : </a>
+<a name="59"><span class="lineNum">      59 </span>            :     /// @copydoc    SLIPParser::wasTruncated</a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          4 :     bool wasTruncated() const { return parser.wasTruncated(); }</span></a>
+<a name="61"><span class="lineNum">      61 </span>            : </a>
+<a name="62"><span class="lineNum">      62 </span>            :     /// @copydoc    SLIPParser::numTruncated</a>
+<a name="63"><span class="lineNum">      63 </span>            :     size_t numTruncated() const { return parser.numTruncated(); }</a>
+<a name="64"><span class="lineNum">      64 </span>            : </a>
+<a name="65"><span class="lineNum">      65 </span>            :   private:</a>
+<a name="66"><span class="lineNum">      66 </span>            :     Stream *stream;</a>
+<a name="67"><span class="lineNum">      67 </span>            :     SLIPParser parser;</a>
+<a name="68"><span class="lineNum">      68 </span>            : };</a>
+<a name="69"><span class="lineNum">      69 </span>            : </a>
+<a name="70"><span class="lineNum">      70 </span>            : /// @}</a>
+<a name="71"><span class="lineNum">      71 </span>            : </a>
+<a name="72"><span class="lineNum">      72 </span>            : /// @addtogroup CRC</a>
+<a name="73"><span class="lineNum">      73 </span>            : /// @{</a>
+<a name="74"><span class="lineNum">      74 </span>            : </a>
+<a name="75"><span class="lineNum">      75 </span>            : /**</a>
+<a name="76"><span class="lineNum">      76 </span>            :  * @brief   Class that implements SLIP, a simple packet framing protocol, and </a>
+<a name="77"><span class="lineNum">      77 </span>            :  *          that uses cyclic redundancy checks (CRCs) on transmitted and </a>
+<a name="78"><span class="lineNum">      78 </span>            :  *          received packets.</a>
+<a name="79"><span class="lineNum">      79 </span>            :  * </a>
+<a name="80"><span class="lineNum">      80 </span>            :  * @see [**RFC 1055**](https://tools.ietf.org/html/rfc1055)</a>
+<a name="81"><span class="lineNum">      81 </span>            :  * @see [**Boost::CRC**](https://www.boost.org/doc/libs/1_72_0/doc/html/crc.html)</a>
+<a name="82"><span class="lineNum">      82 </span>            :  */</a>
+<a name="83"><span class="lineNum">      83 </span>            : template &lt;class CRC&gt;</a>
+<a name="84"><span class="lineNum">      84 </span>            : class SLIPStreamCRC {</a>
+<a name="85"><span class="lineNum">      85 </span>            :   public:</a>
+<a name="86"><span class="lineNum">      86 </span>            :     using StreamSender = SLIPStream::StreamSender;</a>
+<a name="87"><span class="lineNum">      87 </span>            : </a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">          9 :     SLIPStreamCRC(Stream &amp;stream, CRC &amp;&amp;senderCRC, const SLIPParser &amp;parser,</span></a>
+<a name="89"><span class="lineNum">      89 </span>            :                   CRC &amp;&amp;parserCRC)</a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">          9 :         : stream(&amp;stream), sender(stream, std::forward&lt;CRC&gt;(senderCRC)),</span></a>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">          9 :           parser(parser, std::forward&lt;CRC&gt;(parserCRC)) {}</span></a>
+<a name="92"><span class="lineNum">      92 </span>            : </a>
+<a name="93"><span class="lineNum">      93 </span>            :     /**</a>
+<a name="94"><span class="lineNum">      94 </span>            :      * @brief   Sends a packet.</a>
+<a name="95"><span class="lineNum">      95 </span>            :      * </a>
+<a name="96"><span class="lineNum">      96 </span>            :      * @param   data</a>
+<a name="97"><span class="lineNum">      97 </span>            :      *          A pointer to the start of the data.</a>
+<a name="98"><span class="lineNum">      98 </span>            :      * @param   len</a>
+<a name="99"><span class="lineNum">      99 </span>            :      *          The length of the data.</a>
+<a name="100"><span class="lineNum">     100 </span>            :      * @return  The number of bytes transmitted over the Stream. If no write </a>
+<a name="101"><span class="lineNum">     101 </span>            :      *          errors occur, this number will be larger than @p len, because</a>
+<a name="102"><span class="lineNum">     102 </span>            :      *          of the delimiters, checksums and stuffing bytes.</a>
+<a name="103"><span class="lineNum">     103 </span>            :      */</a>
+<a name="104"><span class="lineNum">     104 </span>            :     size_t writePacket(const uint8_t *data, size_t len);</a>
 <a name="105"><span class="lineNum">     105 </span>            : </a>
-<a name="106"><span class="lineNum">     106 </span>            :     /// @copydoc    SLIPParserCRC::checksum</a>
-<a name="107"><span class="lineNum">     107 </span><span class="lineCov">         10 :     checksum_t checksum() const { return parser.checksum(); }</span></a>
-<a name="108"><span class="lineNum">     108 </span>            : </a>
-<a name="109"><span class="lineNum">     109 </span>            :   private:</a>
-<a name="110"><span class="lineNum">     110 </span>            :     Stream *stream;</a>
-<a name="111"><span class="lineNum">     111 </span>            :     SLIPSenderCRC&lt;StreamSender, CRC&gt; sender;</a>
-<a name="112"><span class="lineNum">     112 </span>            :     SLIPParserCRC&lt;CRC&gt; parser;</a>
-<a name="113"><span class="lineNum">     113 </span>            : };</a>
-<a name="114"><span class="lineNum">     114 </span>            : </a>
-<a name="115"><span class="lineNum">     115 </span>            : /// @}</a>
-<a name="116"><span class="lineNum">     116 </span>            : </a>
-<a name="117"><span class="lineNum">     117 </span>            : #include &quot;SLIPStream.ipp&quot;</a>
+<a name="106"><span class="lineNum">     106 </span>            :     /// @copydoc    SLIPSenderCRC::beginPacket</a>
+<a name="107"><span class="lineNum">     107 </span>            :     size_t beginPacket();</a>
+<a name="108"><span class="lineNum">     108 </span>            :     /// @copydoc    SLIPSenderCRC::write</a>
+<a name="109"><span class="lineNum">     109 </span>            :     size_t write(const uint8_t *data, size_t len);</a>
+<a name="110"><span class="lineNum">     110 </span>            :     /// @copydoc    SLIPSenderCRC::endPacket</a>
+<a name="111"><span class="lineNum">     111 </span>            :     size_t endPacket();</a>
+<a name="112"><span class="lineNum">     112 </span>            : </a>
+<a name="113"><span class="lineNum">     113 </span>            :     /// @copydoc    SLIPStream::readPacket</a>
+<a name="114"><span class="lineNum">     114 </span>            :     size_t readPacket();</a>
+<a name="115"><span class="lineNum">     115 </span>            : </a>
+<a name="116"><span class="lineNum">     116 </span>            :     /// @copydoc    SLIPParserCRC::wasTruncated</a>
+<a name="117"><span class="lineNum">     117 </span><span class="lineCov">         10 :     bool wasTruncated() const { return parser.wasTruncated(); }</span></a>
+<a name="118"><span class="lineNum">     118 </span>            :     /// @copydoc    SLIPParserCRC::numTruncated</a>
+<a name="119"><span class="lineNum">     119 </span><span class="lineCov">          5 :     size_t numTruncated() const { return parser.numTruncated(); }</span></a>
+<a name="120"><span class="lineNum">     120 </span>            : </a>
+<a name="121"><span class="lineNum">     121 </span>            :     /// @copydoc    SLIPParserCRC::checksum_t</a>
+<a name="122"><span class="lineNum">     122 </span>            :     using checksum_t = typename SLIPParserCRC&lt;CRC&gt;::checksum_t;</a>
+<a name="123"><span class="lineNum">     123 </span>            : </a>
+<a name="124"><span class="lineNum">     124 </span>            :     /// @copydoc    SLIPParserCRC::checksum</a>
+<a name="125"><span class="lineNum">     125 </span><span class="lineCov">         10 :     checksum_t checksum() const { return parser.checksum(); }</span></a>
+<a name="126"><span class="lineNum">     126 </span>            : </a>
+<a name="127"><span class="lineNum">     127 </span>            :   private:</a>
+<a name="128"><span class="lineNum">     128 </span>            :     Stream *stream;</a>
+<a name="129"><span class="lineNum">     129 </span>            :     SLIPSenderCRC&lt;StreamSender, CRC&gt; sender;</a>
+<a name="130"><span class="lineNum">     130 </span>            :     SLIPParserCRC&lt;CRC&gt; parser;</a>
+<a name="131"><span class="lineNum">     131 </span>            : };</a>
+<a name="132"><span class="lineNum">     132 </span>            : </a>
+<a name="133"><span class="lineNum">     133 </span>            : /// @}</a>
+<a name="134"><span class="lineNum">     134 </span>            : </a>
+<a name="135"><span class="lineNum">     135 </span>            : #include &quot;SLIPStream.ipp&quot;</a>
 </pre>
       </td>
     </tr>

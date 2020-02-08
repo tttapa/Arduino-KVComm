@@ -85,25 +85,41 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> CRC&gt;</div>
 <div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../df/d37/classSLIPStreamCRC.html#a89708f58d0f7bf9f867dba87293cbcaa">    6</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../df/d37/classSLIPStreamCRC.html#a89708f58d0f7bf9f867dba87293cbcaa">SLIPStreamCRC&lt;CRC&gt;::writePacket</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keywordtype">size_t</span> sent = 0;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    sent += sender.beginPacket();</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    sent += sender.write(data, len);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    sent += sender.endPacket();</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordflow">return</span> sent;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> CRC&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../df/d37/classSLIPStreamCRC.html#a6bca5c25d84fd3e51510ed74d724088c">   17</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../df/d37/classSLIPStreamCRC.html#a6bca5c25d84fd3e51510ed74d724088c">SLIPStreamCRC&lt;CRC&gt;::readPacket</a>() {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">while</span> (stream-&gt;available()) {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordtype">size_t</span> packetSize = parser.parse(stream-&gt;read());</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordflow">if</span> (packetSize &gt; 0)</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keywordflow">return</span> packetSize;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    sent += beginPacket();</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    sent += write(data, len);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    sent += endPacket();</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordflow">return</span> sent;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> CRC&gt;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="../../df/d37/classSLIPStreamCRC.html#afd7270e10d851383ff7b53c1241f6ba1">   15</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../df/d37/classSLIPStreamCRC.html#afd7270e10d851383ff7b53c1241f6ba1">SLIPStreamCRC&lt;CRC&gt;::write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordflow">return</span> sender.write(data, len);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> CRC&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="../../df/d37/classSLIPStreamCRC.html#abad41798b7fd12bb34232e382a69e410">   20</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../df/d37/classSLIPStreamCRC.html#abad41798b7fd12bb34232e382a69e410">SLIPStreamCRC&lt;CRC&gt;::beginPacket</a>() {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">return</span> sender.beginPacket();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> CRC&gt;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="../../df/d37/classSLIPStreamCRC.html#a5e7be4f27c43d9aec6a5dcacc6ddd33f">   25</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../df/d37/classSLIPStreamCRC.html#a5e7be4f27c43d9aec6a5dcacc6ddd33f">SLIPStreamCRC&lt;CRC&gt;::endPacket</a>() {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">return</span> sender.endPacket();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> CRC&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="../../df/d37/classSLIPStreamCRC.html#a6bca5c25d84fd3e51510ed74d724088c">   30</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../df/d37/classSLIPStreamCRC.html#a6bca5c25d84fd3e51510ed74d724088c">SLIPStreamCRC&lt;CRC&gt;::readPacket</a>() {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">while</span> (stream-&gt;available()) {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordtype">size_t</span> packetSize = parser.parse(stream-&gt;read());</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">if</span> (packetSize &gt; 0)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordflow">return</span> packetSize;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassSLIPStreamCRC_html_a6bca5c25d84fd3e51510ed74d724088c"><div class="ttname"><a href="../../df/d37/classSLIPStreamCRC.html#a6bca5c25d84fd3e51510ed74d724088c">SLIPStreamCRC::readPacket</a></div><div class="ttdeci">size_t readPacket()</div><div class="ttdoc">Receives a packet into the read buffer.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d61/SLIPStream_8ipp_source.html#l00017">SLIPStream.ipp:17</a></div></div>
+<div class="ttc" id="aclassSLIPStreamCRC_html_a5e7be4f27c43d9aec6a5dcacc6ddd33f"><div class="ttname"><a href="../../df/d37/classSLIPStreamCRC.html#a5e7be4f27c43d9aec6a5dcacc6ddd33f">SLIPStreamCRC::endPacket</a></div><div class="ttdeci">size_t endPacket()</div><div class="ttdoc">Finish the packet.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d61/SLIPStream_8ipp_source.html#l00025">SLIPStream.ipp:25</a></div></div>
+<div class="ttc" id="aclassSLIPStreamCRC_html_a6bca5c25d84fd3e51510ed74d724088c"><div class="ttname"><a href="../../df/d37/classSLIPStreamCRC.html#a6bca5c25d84fd3e51510ed74d724088c">SLIPStreamCRC::readPacket</a></div><div class="ttdeci">size_t readPacket()</div><div class="ttdoc">Receives a packet into the read buffer.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d61/SLIPStream_8ipp_source.html#l00030">SLIPStream.ipp:30</a></div></div>
+<div class="ttc" id="aclassSLIPStreamCRC_html_abad41798b7fd12bb34232e382a69e410"><div class="ttname"><a href="../../df/d37/classSLIPStreamCRC.html#abad41798b7fd12bb34232e382a69e410">SLIPStreamCRC::beginPacket</a></div><div class="ttdeci">size_t beginPacket()</div><div class="ttdoc">Start a packet.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d61/SLIPStream_8ipp_source.html#l00020">SLIPStream.ipp:20</a></div></div>
+<div class="ttc" id="aclassSLIPStreamCRC_html_afd7270e10d851383ff7b53c1241f6ba1"><div class="ttname"><a href="../../df/d37/classSLIPStreamCRC.html#afd7270e10d851383ff7b53c1241f6ba1">SLIPStreamCRC::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">Write some data as the body of a packet.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d61/SLIPStream_8ipp_source.html#l00015">SLIPStream.ipp:15</a></div></div>
 <div class="ttc" id="aSLIPSender_8hpp_html"><div class="ttname"><a href="../../d5/ddb/SLIPSender_8hpp.html">SLIPSender.hpp</a></div></div>
 <div class="ttc" id="aSLIPStream_8hpp_html"><div class="ttname"><a href="../../da/dd2/SLIPStream_8hpp.html">SLIPStream.hpp</a></div></div>
 <div class="ttc" id="aclassSLIPStreamCRC_html_a89708f58d0f7bf9f867dba87293cbcaa"><div class="ttname"><a href="../../df/d37/classSLIPStreamCRC.html#a89708f58d0f7bf9f867dba87293cbcaa">SLIPStreamCRC::writePacket</a></div><div class="ttdeci">size_t writePacket(const uint8_t *data, size_t len)</div><div class="ttdoc">Sends a packet.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d61/SLIPStream_8ipp_source.html#l00006">SLIPStream.ipp:6</a></div></div>

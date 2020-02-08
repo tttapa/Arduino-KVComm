@@ -71,7 +71,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
@@ -88,17 +87,13 @@ $(function() {
 <div class="dynheader">
 Collaboration diagram for SLIPStreamCRC&lt; CRC &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../df/dae/classSLIPStreamCRC__coll__graph.svg" width="318" height="787"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../df/dae/classSLIPStreamCRC__coll__graph.svg" width="291" height="846"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d98/structSLIPStreamCRC_1_1StreamSender.html">StreamSender</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functor that sends bytes over an Arduino Stream.  <a href="../../db/d98/structSLIPStreamCRC_1_1StreamSender.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr class="memitem:a0a00868c7b6bb56a22364bef1f1f6468"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#a0a00868c7b6bb56a22364bef1f1f6468">StreamSender</a> = <a class="el" href="../../df/dfa/structSLIPStream_1_1StreamSender.html">SLIPStream::StreamSender</a></td></tr>
+<tr class="separator:a0a00868c7b6bb56a22364bef1f1f6468"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23de3de2aba58d8873e774862a945ad5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#a23de3de2aba58d8873e774862a945ad5">checksum_t</a> = typename <a class="el" href="../../d8/d09/classSLIPParserCRC.html">SLIPParserCRC</a>&lt; CRC &gt;::<a class="el" href="../../df/d37/classSLIPStreamCRC.html#a23de3de2aba58d8873e774862a945ad5">checksum_t</a></td></tr>
 <tr class="memdesc:a23de3de2aba58d8873e774862a945ad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The integer type of the checksum.  <a href="../../df/d37/classSLIPStreamCRC.html#a23de3de2aba58d8873e774862a945ad5">More...</a><br /></td></tr>
 <tr class="separator:a23de3de2aba58d8873e774862a945ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,6 +105,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a89708f58d0f7bf9f867dba87293cbcaa"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#a89708f58d0f7bf9f867dba87293cbcaa">writePacket</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:a89708f58d0f7bf9f867dba87293cbcaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a packet.  <a href="../../df/d37/classSLIPStreamCRC.html#a89708f58d0f7bf9f867dba87293cbcaa">More...</a><br /></td></tr>
 <tr class="separator:a89708f58d0f7bf9f867dba87293cbcaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abad41798b7fd12bb34232e382a69e410"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#abad41798b7fd12bb34232e382a69e410">beginPacket</a> ()</td></tr>
+<tr class="memdesc:abad41798b7fd12bb34232e382a69e410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a packet.  <a href="../../df/d37/classSLIPStreamCRC.html#abad41798b7fd12bb34232e382a69e410">More...</a><br /></td></tr>
+<tr class="separator:abad41798b7fd12bb34232e382a69e410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd7270e10d851383ff7b53c1241f6ba1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:afd7270e10d851383ff7b53c1241f6ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write some data as the body of a packet.  <a href="../../df/d37/classSLIPStreamCRC.html#afd7270e10d851383ff7b53c1241f6ba1">More...</a><br /></td></tr>
+<tr class="separator:afd7270e10d851383ff7b53c1241f6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e7be4f27c43d9aec6a5dcacc6ddd33f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#a5e7be4f27c43d9aec6a5dcacc6ddd33f">endPacket</a> ()</td></tr>
+<tr class="memdesc:a5e7be4f27c43d9aec6a5dcacc6ddd33f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finish the packet.  <a href="../../df/d37/classSLIPStreamCRC.html#a5e7be4f27c43d9aec6a5dcacc6ddd33f">More...</a><br /></td></tr>
+<tr class="separator:a5e7be4f27c43d9aec6a5dcacc6ddd33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bca5c25d84fd3e51510ed74d724088c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#a6bca5c25d84fd3e51510ed74d724088c">readPacket</a> ()</td></tr>
 <tr class="memdesc:a6bca5c25d84fd3e51510ed74d724088c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives a packet into the read buffer.  <a href="../../df/d37/classSLIPStreamCRC.html#a6bca5c25d84fd3e51510ed74d724088c">More...</a><br /></td></tr>
 <tr class="separator:a6bca5c25d84fd3e51510ed74d724088c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,7 +131,7 @@ Public Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:aa389239b291c04103f4a5bece3539cad"><td class="memItemLeft" align="right" valign="top">Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#aa389239b291c04103f4a5bece3539cad">stream</a></td></tr>
 <tr class="separator:aa389239b291c04103f4a5bece3539cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6415111264b1feb1e0f6e9202e53496"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/dd8/classSLIPSenderCRC.html">SLIPSenderCRC</a>&lt; <a class="el" href="../../db/d98/structSLIPStreamCRC_1_1StreamSender.html">StreamSender</a>, CRC &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#ad6415111264b1feb1e0f6e9202e53496">sender</a></td></tr>
+<tr class="memitem:ad6415111264b1feb1e0f6e9202e53496"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/dd8/classSLIPSenderCRC.html">SLIPSenderCRC</a>&lt; <a class="el" href="../../df/d37/classSLIPStreamCRC.html#a0a00868c7b6bb56a22364bef1f1f6468">StreamSender</a>, CRC &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#ad6415111264b1feb1e0f6e9202e53496">sender</a></td></tr>
 <tr class="separator:ad6415111264b1feb1e0f6e9202e53496"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bc9fe5694a4d7fc4bca791688dfde99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d09/classSLIPParserCRC.html">SLIPParserCRC</a>&lt; CRC &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d37/classSLIPStreamCRC.html#a1bc9fe5694a4d7fc4bca791688dfde99">parser</a></td></tr>
 <tr class="separator:a1bc9fe5694a4d7fc4bca791688dfde99"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,8 +147,24 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../db/ddc/KVComm-Receive_8ino-example.html#_a0">KVComm-Receive.ino</a>, <a class="el" href="../../d2/d6e/KVComm-Send_8ino-example.html#_a0">KVComm-Send.ino</a>, <a class="el" href="../../d3/d52/SLIP-Receive-CRC_8ino-example.html#_a0">SLIP-Receive-CRC.ino</a>, and <a class="el" href="../../da/d44/SLIP-Send-CRC_8ino-example.html#_a0">SLIP-Send-CRC.ino</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00067">67</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00084">84</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a0a00868c7b6bb56a22364bef1f1f6468"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a00868c7b6bb56a22364bef1f1f6468">&#9670;&nbsp;</a></span>StreamSender</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="../../df/d37/classSLIPStreamCRC.html#a0a00868c7b6bb56a22364bef1f1f6468">StreamSender</a> =  <a class="el" href="../../df/dfa/structSLIPStream_1_1StreamSender.html">SLIPStream::StreamSender</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00086">86</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a23de3de2aba58d8873e774862a945ad5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a23de3de2aba58d8873e774862a945ad5">&#9670;&nbsp;</a></span>checksum_t</h2>
 
@@ -159,7 +179,7 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 
 <p>The integer type of the checksum. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00104">104</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00122">122</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
 
 </div>
 </div>
@@ -210,7 +230,7 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00077">77</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00088">88</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
 
 </div>
 </div>
@@ -255,6 +275,93 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 
 </div>
 </div>
+<a id="abad41798b7fd12bb34232e382a69e410"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abad41798b7fd12bb34232e382a69e410">&#9670;&nbsp;</a></span>beginPacket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t beginPacket </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start a packet. </p>
+<p>Sends a SLIP <a class="el" href="../../d8/db6/namespaceSLIP__Constants.html#a0a4b6c6ba55feababb4c5734d77466f7">END</a> character to flush the buffer of the receiver.</p>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes sent by the Sender. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d61/SLIPStream_8ipp_source.html#l00020">20</a> of file <a class="el" href="../../d3/d61/SLIPStream_8ipp_source.html">SLIPStream.ipp</a>.</p>
+
+</div>
+</div>
+<a id="afd7270e10d851383ff7b53c1241f6ba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd7270e10d851383ff7b53c1241f6ba1">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t write </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write some data as the body of a packet. </p>
+<p>The data is encoded by SLIP before sending, so arbitrary binary data can be sent.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>A pointer to the data to send. </td></tr>
+    <tr><td class="paramname">len</td><td>The number of bytes to send. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes sent by the Sender. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d61/SLIPStream_8ipp_source.html#l00015">15</a> of file <a class="el" href="../../d3/d61/SLIPStream_8ipp_source.html">SLIPStream.ipp</a>.</p>
+
+</div>
+</div>
+<a id="a5e7be4f27c43d9aec6a5dcacc6ddd33f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e7be4f27c43d9aec6a5dcacc6ddd33f">&#9670;&nbsp;</a></span>endPacket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t endPacket </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finish the packet. </p>
+<p>Encodes and sends the checksum of all data sent using the <a class="el" href="../../df/d37/classSLIPStreamCRC.html#afd7270e10d851383ff7b53c1241f6ba1">write</a> function, followed by a SLIP <a class="el" href="../../d8/db6/namespaceSLIP__Constants.html#a0a4b6c6ba55feababb4c5734d77466f7">END</a> character.</p>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes sent by the Sender. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d61/SLIPStream_8ipp_source.html#l00025">25</a> of file <a class="el" href="../../d3/d61/SLIPStream_8ipp_source.html">SLIPStream.ipp</a>.</p>
+
+</div>
+</div>
 <a id="a6bca5c25d84fd3e51510ed74d724088c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6bca5c25d84fd3e51510ed74d724088c">&#9670;&nbsp;</a></span>readPacket()</h2>
 
@@ -274,7 +381,7 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 <p>If more than len bytes are received, the packet will be truncated.</p>
 <dl class="section return"><dt>Returns</dt><dd>The number of bytes stored in the buffer. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d61/SLIPStream_8ipp_source.html#l00017">17</a> of file <a class="el" href="../../d3/d61/SLIPStream_8ipp_source.html">SLIPStream.ipp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d61/SLIPStream_8ipp_source.html#l00030">30</a> of file <a class="el" href="../../d3/d61/SLIPStream_8ipp_source.html">SLIPStream.ipp</a>.</p>
 
 </div>
 </div>
@@ -304,13 +411,13 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 <p>Check if the previous packet was truncated. </p>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">true</td><td>The previous packet didn't fit the buffer. The size returned by parse was smaller than the actual size of the packet. </td></tr>
+    <tr><td class="paramname">true</td><td>The previous packet didn't fit the buffer. The size returned by <a class="el" href="../../d9/db2/classSLIPParser.html#a7e80ca72418c424d5599c5c6b9e8526a">SLIPParser::parse</a> was smaller than the actual size of the packet. </td></tr>
     <tr><td class="paramname">false</td><td>The buffer was large enough to store the previous packet. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00099">99</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00117">117</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
 
 </div>
 </div>
@@ -339,7 +446,7 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 
 <p>Get the number of bytes that were truncated due to the previous packet being too large for the buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00101">101</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00119">119</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
 
 </div>
 </div>
@@ -369,7 +476,7 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 <p>Get the checksum of the previous packet. </p>
 <p>A checksum of zero indicates that the packet was received correctly. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00107">107</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00125">125</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
 
 </div>
 </div>
@@ -394,7 +501,7 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00110">110</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00128">128</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
 
 </div>
 </div>
@@ -408,7 +515,7 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d0/dd8/classSLIPSenderCRC.html">SLIPSenderCRC</a>&lt;<a class="el" href="../../db/d98/structSLIPStreamCRC_1_1StreamSender.html">StreamSender</a>, CRC&gt; sender</td>
+          <td class="memname"><a class="el" href="../../d0/dd8/classSLIPSenderCRC.html">SLIPSenderCRC</a>&lt;<a class="el" href="../../df/d37/classSLIPStreamCRC.html#a0a00868c7b6bb56a22364bef1f1f6468">StreamSender</a>, CRC&gt; sender</td>
         </tr>
       </table>
   </td>
@@ -418,7 +525,7 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00111">111</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00129">129</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
 
 </div>
 </div>
@@ -442,7 +549,7 @@ class SLIPStreamCRC&lt; CRC &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00112">112</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html#l00130">130</a> of file <a class="el" href="../../da/dd2/SLIPStream_8hpp_source.html">SLIPStream.hpp</a>.</p>
 
 </div>
 </div>

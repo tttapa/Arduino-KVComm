@@ -29,5 +29,5 @@ var searchData=
   ['stabletime_1019',['stableTime',['../de/d0d/classAH_1_1Button.html#a1cbdae7abfef90d54889e98b100f4d53',1,'AH::Button::stableTime(unsigned long now) const'],['../de/d0d/classAH_1_1Button.html#adcebb54d1e901596c7ca14ac14aac43c',1,'AH::Button::stableTime() const']]],
   ['static_5fkv_5fbuilder_1020',['Static_KV_Builder',['../df/d12/classStatic__KV__Builder.html#af8b4af59cfdda96a8a16227e55cbd53c',1,'Static_KV_Builder']]],
   ['staticsizeextendedioelement_1021',['StaticSizeExtendedIOElement',['../d6/d57/classAH_1_1StaticSizeExtendedIOElement.html#abbbe5298f26889e0bffc0ab09e887aa4',1,'AH::StaticSizeExtendedIOElement']]],
-  ['streamsender_1022',['StreamSender',['../db/d98/structSLIPStreamCRC_1_1StreamSender.html#a863b10c7e893b159c444fefb97d1f48d',1,'SLIPStreamCRC::StreamSender']]]
+  ['streamsender_1022',['StreamSender',['../df/dfa/structSLIPStream_1_1StreamSender.html#a863b10c7e893b159c444fefb97d1f48d',1,'SLIPStream::StreamSender::StreamSender(Stream &amp;stream)'],['../df/dfa/structSLIPStream_1_1StreamSender.html#a2b1445a5ccd390fe2403739cd865e240',1,'SLIPStream::StreamSender::StreamSender(Stream *stream)']]]
 ];

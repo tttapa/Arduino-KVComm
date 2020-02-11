@@ -96,9 +96,9 @@ void setup() {
 // Function that is called when a new packet is received
 void handlePacket(const uint8_t *data, size_t length) {
     KV_Iterator dict = {data, length};
-    auto password = dict.find("password");
-    if (password)
-        Serial.println(password->getString());
+    auto password = dict.find("password");     // lookup the key "password"
+    if (password)                              // if the key exists
+        Serial.println(password->getString()); // print the value as a string
 }
 
 void loop() {
